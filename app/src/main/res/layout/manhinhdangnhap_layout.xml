@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:theme="@style/ColorBlack"
+    tools:context="com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangNhapActivity">
+
+    <ImageView
+        android:id="@+id/imgMoKiDangNhap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moki"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/edtSoDT"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/custom_edt"
+        android:drawableLeft="@drawable/phone"
+        android:ems="10"
+        android:hint="Số điện thoại"
+        android:drawablePadding="10dp"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:digits="0123456789"
+        android:layout_below="@+id/imgMoKiDangNhap"
+        />
+
+    <EditText
+        android:id="@+id/edtMatKhau"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/custom_edt"
+        android:drawableLeft="@drawable/lock"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:drawablePadding="10dp"
+        android:inputType="textPassword"
+        android:digits="@string/LetterOrDigit"
+        android:layout_below="@id/edtSoDT"
+
+        />
+
+    <Button
+        android:id="@+id/btnDangNhap"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/custom_button_dangnhap"
+        android:text="Đăng nhập"
+        android:layout_below="@id/edtMatKhau"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_below="@+id/btnDangNhap"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btnDangKy"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_bottom_login"
+            android:text="Đăng ký"
+            android:textAllCaps="false"
+            android:textColor="@color/colorRed"
+            android:textSize="13sp"
+            />
+
+        <Button
+            android:id="@+id/btnBoQua"
+            android:textColor="@color/colorRed"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/custom_button_bottom_login"
+            android:text="Bỏ qua"
+            android:textSize="13sp"
+            android:textAllCaps="false"
+            android:layout_alignParentRight="true"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtQuenMK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quenMK"
+        android:textSize="13sp"
+        android:textStyle="italic"
+        android:textColor="@color/colorBlack"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        />
+
+</RelativeLayout>

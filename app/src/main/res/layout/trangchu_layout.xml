@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:openDrawer="start"
+    android:theme="@style/CustomDrawerToggle"
+    >
+
+    <FrameLayout
+        android:id="@+id/themFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/colorWhite"
+                android:fitsSystemWindows="true"
+                >
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    android:theme="@style/CustomDrawerToggle"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    app:logo="@drawable/moki_label"
+                    >
+
+                </android.support.v7.widget.Toolbar>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorRed"/>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                    app:tabMode="scrollable"
+                    app:tabTextColor="@color/colorBlack">
+
+                </android.support.design.widget.TabLayout>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:fillViewport="true"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ViewFlipper
+                        android:id="@+id/viewFlipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/background1" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/background2" />
+
+                    </ViewFlipper>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorWhite"
+                        >
+
+                        <Button
+                            android:id="@+id/btnSapXep"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Sắp xếp"
+                            android:textAllCaps="false"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorBlack"
+                            android:background="@color/colorWhite"
+                            android:drawableLeft="@drawable/sort"
+                            android:layout_marginHorizontal="12dp"
+                            />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBlack"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            />
+
+                        <Button
+                            android:id="@+id/btnLoc"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Lọc"
+                            android:textAllCaps="false"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorBlack"
+                            android:background="@color/colorWhite"
+                            android:drawableLeft="@drawable/filter"
+                            android:layout_marginHorizontal="12dp"
+                            />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBlack"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            />
+
+                        <Button
+                            android:id="@+id/btnXung"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Xung"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorBlack"
+                            android:background="@color/colorWhite"
+                            android:drawableLeft="@drawable/sweep"
+                            android:layout_marginHorizontal="12dp"
+                            />
+
+                    </LinearLayout>
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v4.view.ViewPager>
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="bottom|end"
+                android:src="@drawable/photo_camera"
+                app:backgroundTint="@color/colorRed"
+                app:fabSize="normal"/>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="start"
+        android:background="@color/colorWhite">
+        <include android:id="@+id/nav_view_header"
+            layout="@layout/nav_header_trangchu">
+
+        </include>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

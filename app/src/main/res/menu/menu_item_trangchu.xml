@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/itemTimKiem"
+    android:title="Tìm kiếm"
+    android:icon="@drawable/search"
+    app:showAsAction="always"/>
+
+    <item android:id="@+id/itemTinNhan"
+        android:title="Tin nhắn"
+        android:icon="@drawable/message"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/itemThongBao"
+        android:title="Thông báo"
+        android:icon="@drawable/notification"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/itemManHinh"
+        android:title="Màn hình"
+        android:icon="@drawable/computer"
+        app:showAsAction="always"/>
+</menu>

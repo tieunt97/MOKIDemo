@@ -1,0 +1,168 @@
+package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.icu.text.UnicodeSetSpanner;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
+import android.text.style.UnderlineSpan;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+
+import java.security.Key;
+
+/**
+ * Created by tieu_nt on 2/2/2018.
+ */
+
+public class ManHinhDangNhapActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button btnDangNhap, btnDangKy, btnBoQua;
+    private EditText edtSoDT, edtMatKhau;
+    private TextView txtQuenMK;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.manhinhdangnhap_layout);
+        AnhXa();
+        setUnderLine();
+
+        btnDangNhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Login();
+            }
+        });
+
+        btnDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentDangKy = new Intent(ManHinhDangNhapActivity.this, ManHinhDangKyActivity.class);
+                startActivity(intentDangKy);
+            }
+        });
+
+        btnBoQua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentTrangChu = new Intent(ManHinhDangNhapActivity.this, ManHinhTrangChuActivity.class);
+                startActivity(intentTrangChu);
+            }
+        });
+
+        edtSoDT.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() > 0){
+                    if(charSequence.toString().indexOf("0") != 0){
+                        edtSoDT.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void AnhXa(){
+        btnDangNhap = (Button) findViewById(R.id.btnDangNhap);
+        btnDangKy = (Button) findViewById(R.id.btnDangKy);
+        btnBoQua = (Button) findViewById(R.id.btnBoQua);
+        edtSoDT = (EditText) findViewById(R.id.edtSoDT);
+        edtMatKhau = (EditText) findViewById(R.id.edtMatKhau);
+        txtQuenMK = (TextView) findViewById(R.id.txtQuenMK);
+        txtQuenMK.setOnClickListener(this);
+    }
+
+    private void Login(){
+        String sdt = edtSoDT.getText().toString();
+        String matKhau = edtMatKhau.getText().toString();
+        String msg = "";
+        if(matKhau.equals("") && sdt.equals(""))
+            msg = "Bạn chưa nhập Số điện thoại và Mật khẩu";
+        else if(sdt.equals("")) msg = "Bạn chưa nhập Số điện thoại";
+        else if(matKhau.equals("")) msg = "Bạn chưa nhập Mật khẩu";
+        else if(sdt.indexOf("0") != 0 || sdt.length() < 10)
+            msg = "Số điện thoại không đúng";
+        else if(matKhau.length() < 6)
+            msg = "Mật khẩu không hợp lệ, ít nhất 6 ký tự";
+
+        if(!msg.equals("")){
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ManHinhDangNhapActivity.this);
+            View view = getLayoutInflater().inflate(R.layout.dialog_thongbao, null, false);
+            TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+            tvNoiDung.setText(msg);
+            Button btnDong = (Button) view.findViewById(R.id.btnDong);
+
+            builder.setView(view);
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            btnDong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
+            //đóng sau 3s
+            final Handler handler = new Handler();
+            final Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    if(alertDialog.isShowing()){
+                        alertDialog.dismiss();
+                    }
+                }
+            };
+
+            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    handler.removeCallbacks(runnable);
+                }
+            });
+
+            handler.postDelayed(runnable, 3000);
+        }
+    }
+
+    private void setUnderLine(){
+        String text = "<u>" + txtQuenMK.getText().toString() + "</u>";
+        txtQuenMK.setText(Html.fromHtml(text));
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.txtQuenMK:
+                Intent intent = new Intent(ManHinhDangNhapActivity.this, QuenMatKhauActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+}

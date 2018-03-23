@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:orientation="vertical"
+    android:background="@drawable/custom_corners5dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/cancel_red32"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Thông báo"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/tvNoiDung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Số điện thoại không đúng"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnDong"
+        android:layout_width="105dp"
+        android:layout_height="40dp"
+        android:text="Đóng"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/custom_btndong_dialog"
+        android:layout_marginBottom="8dp"
+        />
+
+
+</LinearLayout>
