@@ -23,7 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.tieu_nt.mokidemo.Adapter.RecyclerAdapter;
+import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapter;
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
 import com.example.tieu_nt.mokidemo.R;
@@ -36,13 +36,16 @@ import java.util.List;
  */
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener{
+    public static String SERVER = "http://192.168.1.110:8080/webmoki";
+    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki";
+//    public static String SERVER = "http://10.11.203.188:8080/webmoki";
     private FrameLayout trangChu;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
 //    NavigationView nav_view;
     Toolbar toolbar;
     RecyclerView recyclerView;
-    RecyclerAdapter adapter;
+    AdapterMenu adapter;
     List<DrawerItem> dsItems = new ArrayList<>();
     String[] tenItems = {"Trang chủ", "Tin tức", "Danh sách yêu thích", "Danh sách bán", "Danh sách mua",
         "Từ thiện", "Thiết lập", "Trung tâm hỗ trợ", "Giới thiệu MOKI", "Đăng xuất"};
@@ -86,7 +89,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         for (int i = 0; i < tenItems.length; i++){
             dsItems.add(new DrawerItem(hinhItems[i], tenItems[i]));
         }
-        adapter = new RecyclerAdapter(ManHinhTrangChuActivity.this, dsItems);
+        adapter = new AdapterMenu(ManHinhTrangChuActivity.this, dsItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

@@ -189,16 +189,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             if(requestCode == IMG_GALLERY_REQUEST){
                 Uri uri = data.getData();
                 imgHinhA.setImageURI(uri);
-//                try {
-//                    InputStream inputStream = getContentResolver().openInputStream(uri);
-//
-//                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-//                    Intent intent = new Intent(CameraActivity.this, CaptureCameraActivity.class);
-//                    intent.putExtra("image", image);
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(this, "Unable to open image", Toast.LENGTH_SHORT).show();
-//                }
             }
         }
     }

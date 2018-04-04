@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
+package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,11 +14,11 @@ import com.example.tieu_nt.mokidemo.R;
  * Created by tieu_nt on 2/27/2018.
  */
 
-public class FragmentBeKhoeAnToan extends Fragment {
+public class FragmentBeNgu extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bekhoeantoan, container, false);
+        View view = inflater.inflate(R.layout.layout_bengu, container, false);
         return view;
     }
 }

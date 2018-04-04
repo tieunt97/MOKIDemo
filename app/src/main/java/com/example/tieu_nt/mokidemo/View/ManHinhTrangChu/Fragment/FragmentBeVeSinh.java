@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
+package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import com.example.tieu_nt.mokidemo.R;
 
 /**
- * Created by tieu_nt on 2/27/2018.
+ * Created by tieu_nt on 3/12/2018.
  */
 
-public class FragmentTatCa extends Fragment{
+public class FragmentBeVeSinh extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_tatca, container, false);
+        View view = inflater.inflate(R.layout.layout_bevesinh, container, false);
         return view;
     }
 }

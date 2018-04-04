@@ -1,30 +1,39 @@
 package com.example.tieu_nt.mokidemo.Model;
 
+import java.util.List;
+
 /**
  * Created by tieu_nt on 2/28/2018.
  */
 
 public class SanPham {
-    private int hinh, gia, soLuotThich, soBinhLuan;
-    private String ten, moTa;
+    private int idSanPham, idNguoiBan, gia, soLuotThich, soBinhLuan;
+    private String tenSanPham, donViTinh, moTa, hinhLon;
     private boolean yeuThich;
+    private ChiTietSanPham chiTietSanPham;
 
-    public SanPham(int hinh, String ten, String moTa, int gia, int soLuotThich, int soBinhLuan, boolean yeuThich){
-        this.hinh = hinh;
-        this.ten = ten;
-        this.moTa = moTa;
-        this.gia = gia;
-        this.soLuotThich = soLuotThich;
-        this.soBinhLuan = soBinhLuan;
-        this.yeuThich = yeuThich;
+    public int getIdSanPham() {
+        return idSanPham;
     }
 
-    public int getHinh() {
-        return hinh;
+    public void setIdSanPham(int idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
-    public void setHinh(int hinh) {
-        this.hinh = hinh;
+    public int getIdNguoiBan() {
+        return idNguoiBan;
+    }
+
+    public void setIdNguoiBan(int idNguoiBan) {
+        this.idNguoiBan = idNguoiBan;
+    }
+
+    public String getHinhLon() {
+        return hinhLon;
+    }
+
+    public void setHinhLon(String hinhLon) {
+        this.hinhLon = hinhLon;
     }
 
     public int getGia() {
@@ -33,21 +42,6 @@ public class SanPham {
 
     public void setGia(int gia) {
         this.gia = gia;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
     public int getSoLuotThich() {
@@ -66,11 +60,43 @@ public class SanPham {
         this.soBinhLuan = soBinhLuan;
     }
 
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
+    public String getDonViTinh() {
+        return donViTinh;
+    }
+
+    public void setDonViTinh(String donViTinh) {
+        this.donViTinh = donViTinh;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     public boolean isYeuThich() {
         return yeuThich;
     }
 
     public void setYeuThich(boolean yeuThich) {
         this.yeuThich = yeuThich;
+    }
+
+    public ChiTietSanPham getChiTietSanPham() {
+        return chiTietSanPham;
+    }
+
+    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+        this.chiTietSanPham = chiTietSanPham;
     }
 }

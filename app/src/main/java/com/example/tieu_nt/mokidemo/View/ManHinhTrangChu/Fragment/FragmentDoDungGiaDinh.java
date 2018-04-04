@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
+package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
