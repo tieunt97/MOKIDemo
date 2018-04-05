@@ -20,8 +20,8 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     @Override
-    public void layDanhSachSanPham() {
-        List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham();
+    public void layDanhSachSanPham(String ham) {
+        List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham);
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
         }

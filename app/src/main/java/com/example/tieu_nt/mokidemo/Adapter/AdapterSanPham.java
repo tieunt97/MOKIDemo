@@ -20,12 +20,12 @@ import java.util.List;
  * Created by tieu_nt on 4/3/2018.
  */
 
-public class RecyclerViewAdapterSanPham extends RecyclerView.Adapter<RecyclerViewAdapterSanPham.ViewHolder>{
+public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHolder>{
 
     private Context context;
     private List<SanPham> dsSanPham;
 
-    public RecyclerViewAdapterSanPham(Context context, List<SanPham> dsSanPham) {
+    public AdapterSanPham(Context context, List<SanPham> dsSanPham) {
         this.context = context;
         this.dsSanPham = dsSanPham;
     }
@@ -33,7 +33,7 @@ public class RecyclerViewAdapterSanPham extends RecyclerView.Adapter<RecyclerVie
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.o_sanpham_layout, parent, false);
+        View view = inflater.inflate(R.layout.custom_layout_sanpham, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -42,7 +42,7 @@ public class RecyclerViewAdapterSanPham extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         SanPham sanPham = dsSanPham.get(position);
-        Picasso.get().load(sanPham.getHinhLon()).resize(165, 165).into(holder.imgHinhSP, new Callback() {
+        Picasso.get().load(sanPham.getHinhLon()).resize(145, 145).into(holder.imgHinhSP, new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);
@@ -54,9 +54,9 @@ public class RecyclerViewAdapterSanPham extends RecyclerView.Adapter<RecyclerVie
             }
         });
         holder.tvTenSP.setText(sanPham.getTenSanPham());
-        holder.tvYeuThich.setText(sanPham.getSoLuotThich());
-        holder.tvBinhLuan.setText(sanPham.getSoBinhLuan());
-        holder.tvGia.setText(sanPham.getGia());
+        holder.tvYeuThich.setText(sanPham.getSoLuotThich() + "");
+        holder.tvBinhLuan.setText(sanPham.getSoBinhLuan() + "");
+        holder.tvGia.setText(sanPham.getGia() + " đ");
     }
 
     @Override

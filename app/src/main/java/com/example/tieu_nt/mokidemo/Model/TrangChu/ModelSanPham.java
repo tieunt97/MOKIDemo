@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ModelSanPham {
-    public List<SanPham> layDanhSachSanPham(){
+    public List<SanPham> layDanhSachSanPham(String ham){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -27,8 +27,7 @@ public class ModelSanPham {
         String duongdan = ManHinhTrangChuActivity.SERVER_NAME;
 
         HashMap<String,String> hsHam = new HashMap<>();
-        hsHam.put("ham","LayDanhSachSanPham" +
-                "");
+        hsHam.put("ham", ham);
 
         attrs.add(hsHam);
 
@@ -48,8 +47,8 @@ public class ModelSanPham {
                 sanpham.setIdSanPham(object.getInt("idSanPham"));
                 sanpham.setIdNguoiBan(object.getInt("idNguoiBan"));
                 sanpham.setGia(object.getInt("giaChuan"));
-                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
-                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
+//                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
+//                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
                 sanpham.setTenSanPham(object.getString("tenSanPham"));
                 sanpham.setDonViTinh(object.getString("donViTinh"));
                 sanpham.setMoTa(object.getString("moTa"));
