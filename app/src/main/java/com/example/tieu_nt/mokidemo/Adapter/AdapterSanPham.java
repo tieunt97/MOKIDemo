@@ -14,6 +14,8 @@ import com.example.tieu_nt.mokidemo.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -56,7 +58,8 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
         holder.tvTenSP.setText(sanPham.getTenSanPham());
         holder.tvYeuThich.setText(sanPham.getSoLuotThich() + "");
         holder.tvBinhLuan.setText(sanPham.getSoBinhLuan() + "");
-        holder.tvGia.setText(sanPham.getGia() + " đ");
+        NumberFormat numberFormat = new DecimalFormat("###,###");
+        holder.tvGia.setText(numberFormat.format(sanPham.getGia()) + " đ");
     }
 
     @Override

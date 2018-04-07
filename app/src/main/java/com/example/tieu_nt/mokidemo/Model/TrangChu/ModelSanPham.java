@@ -47,8 +47,8 @@ public class ModelSanPham {
                 sanpham.setIdSanPham(object.getInt("idSanPham"));
                 sanpham.setIdNguoiBan(object.getInt("idNguoiBan"));
                 sanpham.setGia(object.getInt("giaChuan"));
-//                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
-//                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
+                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
+                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
                 sanpham.setTenSanPham(object.getString("tenSanPham"));
                 sanpham.setDonViTinh(object.getString("donViTinh"));
                 sanpham.setMoTa(object.getString("moTa"));

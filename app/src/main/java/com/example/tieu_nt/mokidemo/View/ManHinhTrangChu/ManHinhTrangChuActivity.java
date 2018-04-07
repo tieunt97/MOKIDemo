@@ -37,6 +37,19 @@ import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapter;
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeAn;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeChoiMaHoc;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeDiRaNgoai;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeKhoeAnToan;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeMac;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeNgu;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeTam;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeVeSinh;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentDanhChoMe;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentDoDungGiaDinh;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentMienPhi;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSanPhamKhac;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentTatCa;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +67,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 2/6/2018.
  */
 
-public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener{
+public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     public static String SERVER = "http://192.168.1.110:8080/webmoki";
     public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
 //    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki";
@@ -81,7 +94,9 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private int currentPos = 0;
     private float x1, x2;
     private final int IMG_REQUEST = 1;
+    private boolean dangList = false;
     private Bitmap bitmap;
+    private ViewPagerAdapter viewPagerAdapter;
 
 
     @Override
@@ -123,11 +138,10 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         viewFlipper.setFlipInterval(3000);
 
         //set viewPager
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override
@@ -142,6 +156,11 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.itemManHinh:
+                dangList = !dangList;
+                int position = viewPager.getCurrentItem();
+                setHienThiDanhSachSanPham(position);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -160,6 +179,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         trangChu = (FrameLayout) findViewById(R.id.themFragment);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setOnPageChangeListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -276,5 +296,64 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         byte[] imgByte = byteArrayOutputStream.toByteArray();
 
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        setHienThiDanhSachSanPham(position);
+    }
+
+    private void setHienThiDanhSachSanPham(int position){
+        switch (position){
+            case 0:
+                ((FragmentTatCa) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 1:
+                ((FragmentMienPhi) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 2:
+                ((FragmentBeAn) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 3:
+                ((FragmentBeMac) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 4:
+                ((FragmentBeNgu) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 5:
+                ((FragmentBeTam) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 6:
+                ((FragmentBeVeSinh) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 7:
+                ((FragmentBeKhoeAnToan) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 8:
+                ((FragmentBeDiRaNgoai) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 9:
+                ((FragmentBeChoiMaHoc) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 10:
+                ((FragmentDanhChoMe) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 11:
+                ((FragmentDoDungGiaDinh) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+            case 12:
+                ((FragmentSanPhamKhac) viewPagerAdapter.getItem(position)).setDangList(dangList);
+                break;
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

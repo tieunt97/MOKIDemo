@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawerLayout"
     tools:openDrawer="start"
+    android:id="@+id/drawerLayout"
     android:theme="@style/CustomDrawerToggle"
     >
 
@@ -95,18 +95,24 @@
                         android:background="@color/colorWhite"
                         >
 
-                        <Button
-                            android:id="@+id/btnSapXep"
+                        <FrameLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:text="Sắp xếp"
-                            android:textAllCaps="false"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="@color/colorBlack"
-                            android:background="@color/colorWhite"
-                            android:drawableLeft="@drawable/sort"
-                            android:layout_marginHorizontal="12dp"
-                            />
+                            >
+                            <Button
+                                android:id="@+id/btnSapXep"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sắp xếp"
+                                android:layout_gravity="center"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorBlack"
+                                android:background="@color/colorWhite"
+                                android:drawableLeft="@drawable/sort"
+                                android:layout_marginHorizontal="12dp"
+                                />
+                        </FrameLayout>
 
                         <View
                             android:layout_width="1dp"
@@ -116,18 +122,24 @@
                             android:layout_marginBottom="8dp"
                             />
 
-                        <Button
-                            android:id="@+id/btnLoc"
+                        <FrameLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:text="Lọc"
-                            android:textAllCaps="false"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="@color/colorBlack"
-                            android:background="@color/colorWhite"
-                            android:drawableLeft="@drawable/filter"
-                            android:layout_marginHorizontal="12dp"
-                            />
+                            >
+                            <Button
+                                android:id="@+id/btnLoc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lọc"
+                                android:textAllCaps="false"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:background="@color/colorWhite"
+                                android:drawableLeft="@drawable/filter"
+                                android:layout_marginHorizontal="12dp"
+                                />
+                        </FrameLayout>
 
                         <View
                             android:layout_width="1dp"
@@ -137,18 +149,24 @@
                             android:layout_marginBottom="8dp"
                             />
 
-                        <Button
-                            android:id="@+id/btnXung"
+                        <FrameLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Xung"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorBlack"
-                            android:background="@color/colorWhite"
-                            android:drawableLeft="@drawable/sweep"
-                            android:layout_marginHorizontal="12dp"
-                            />
+                            >
+                            <Button
+                                android:id="@+id/btnXung"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Xung"
+                                android:textAllCaps="false"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:background="@color/colorWhite"
+                                android:drawableLeft="@drawable/sweep"
+                                android:layout_marginHorizontal="12dp"
+                                />
+                        </FrameLayout>
 
                     </LinearLayout>
 
