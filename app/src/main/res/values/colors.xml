@@ -12,4 +12,7 @@
     <color name="colorBlue">#42A5F5</color>
     <color name="colorPink">#F06292</color>
     <color name="colorGreen">#64DD17</color>
+    <color name="tranparentGrey">#B2484646</color>
+    <color name="colorRedMua">#EF5350</color>
+    <color name="colorGreyish">#E0E0E0</color>
 </resources>

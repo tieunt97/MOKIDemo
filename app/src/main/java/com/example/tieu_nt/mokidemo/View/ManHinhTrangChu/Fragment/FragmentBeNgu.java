@@ -34,8 +34,8 @@ public class FragmentBeNgu extends Fragment implements ViewHienThiDanhSachSanPha
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bengu, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerBeNgu);
+        View view = inflater.inflate(R.layout.layout_sanpham, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamBeNgu");
         return view;

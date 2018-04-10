@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/relaNguoiBan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -41,8 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="15 giờ trước"
-                android:layout_gravity="center"
-                android:gravity="right"
                 android:drawableLeft="@drawable/clock"
                 android:drawablePadding="5dp"
                 android:layout_centerVertical="true"
@@ -53,6 +52,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutSanPham"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -102,90 +102,90 @@
                 android:layout_margin="10dp"
                 />
 
-            <LinearLayout
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relaThich"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_btnlike_list"
+                android:layout_marginRight="5dp">
 
-                <RelativeLayout
-                    android:id="@+id/relaThich"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_btnlike_list"
-                    android:layout_marginRight="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/like_white"
-                            />
-                        <TextView
-                            android:id="@+id/tvThich"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:layout_centerVertical="true"
-                            android:text="0"
-                            android:textSize="16sp"
-                            android:layout_marginLeft="5dp"/>
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relaBinhLuan"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/custom_btncomment_list">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/chat"
-                            />
-                        <TextView
-                            android:id="@+id/tvBinhLuan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:layout_centerVertical="true"
-                            android:text="0"
-                            android:textSize="16sp"
-                            android:layout_marginLeft="5dp"/>
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relaMua"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/custom_btnmua_list">
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/bag"
-                        android:layout_centerInParent="true"
+                        android:src="@drawable/like_white"
                         />
+                    <TextView
+                        android:id="@+id/tvThich"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerVertical="true"
+                        android:text="0"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
 
-                </RelativeLayout>
+            </RelativeLayout>
 
-            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/relaBinhLuan"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/custom_btncomment_list">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/chat"
+                        />
+                    <TextView
+                        android:id="@+id/tvBinhLuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerVertical="true"
+                        android:text="0"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relaMua"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/custom_btnmua_list">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bag"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

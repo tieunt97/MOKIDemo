@@ -1,16 +1,19 @@
 package com.example.tieu_nt.mokidemo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.HienThiChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -23,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/7/2018.
  */
 
-public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.ViewHolder> implements View.OnClickListener{
+public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.ViewHolder>{
     private Context context;
     private List<SanPham> dsSanPham;
 
@@ -43,7 +46,7 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SanPham sanPham = dsSanPham.get(position);
+        final SanPham sanPham = dsSanPham.get(position);
         Picasso.get().load(sanPham.getHinhLon()).into(holder.imgSanPham);
         holder.tvTenSanPham.setText(sanPham.getTenSanPham());
         NumberFormat numberFormat = new DecimalFormat("###,###");
@@ -53,9 +56,38 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
         holder.tvThich.setText(String.valueOf(sanPham.getSoLuotThich()));
         holder.tvBinhLuan.setText(String.valueOf(sanPham.getSoBinhLuan()));
 
-        holder.relaThich.setOnClickListener(this);
-        holder.relaBinhLuan.setOnClickListener(this);
-        holder.relateMua.setOnClickListener(this);
+        holder.relaNguoiBan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        holder.linearSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSanPham = new Intent(context, HienThiChiTietSanPhamActivity.class);
+                intentSanPham.putExtra("sanPham", sanPham);
+                context.startActivity(intentSanPham);
+            }
+        });
+        holder.relaThich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        holder.relaBinhLuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        holder.relateMua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -63,23 +95,12 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
         return dsSanPham.size();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.relaThich:
-                break;
-            case R.id.relaBinhLuan:
-                break;
-            case R.id.relaMua:
-                break;
-        }
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView imgInfoShop;
         TextView tvTenShop, tvThoiGian, tvTenSanPham, tvGiaSP, tvMoTaSanPham, tvThich, tvBinhLuan;
         ImageView imgSanPham;
-        RelativeLayout relaThich, relaBinhLuan, relateMua;
+        RelativeLayout relaThich, relaBinhLuan, relateMua, relaNguoiBan;
+        LinearLayout linearSanPham;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +116,8 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
             relaThich = (RelativeLayout) itemView.findViewById(R.id.relaThich);
             relaBinhLuan = (RelativeLayout) itemView.findViewById(R.id.relaBinhLuan);
             relateMua = (RelativeLayout) itemView.findViewById(R.id.relaMua);
+            relaNguoiBan = (RelativeLayout) itemView.findViewById(R.id.relaNguoiBan);
+            linearSanPham = (LinearLayout) itemView.findViewById(R.id.linearLayoutSanPham);
         }
     }
 }

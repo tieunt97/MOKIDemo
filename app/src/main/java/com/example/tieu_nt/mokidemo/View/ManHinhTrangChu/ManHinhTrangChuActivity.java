@@ -33,7 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
-import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapter;
+import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
@@ -70,7 +70,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     public static String SERVER = "http://192.168.1.110:8080/webmoki";
     public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki";
+//    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
     private String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
 
     private FrameLayout trangChu;
@@ -96,7 +96,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private final int IMG_REQUEST = 1;
     private boolean dangList = false;
     private Bitmap bitmap;
-    private ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapterTrangChu viewPagerAdapter;
 
 
     @Override
@@ -138,7 +138,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         viewFlipper.setFlipInterval(3000);
 
         //set viewPager
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapterTrangChu(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -158,6 +158,8 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 return true;
             case R.id.itemManHinh:
                 dangList = !dangList;
+                if(dangList) item.setIcon(R.drawable.layout);
+                else item.setIcon(R.drawable.computer);
                 int position = viewPager.getCurrentItem();
                 setHienThiDanhSachSanPham(position);
                 break;
@@ -225,10 +227,14 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 Toast.makeText(ManHinhTrangChuActivity.this, "Sắp xếp", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnLoc:
-                Toast.makeText(ManHinhTrangChuActivity.this, "Lọc", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ManHinhTrangChuActivity.this, "Lọc", Toast.LENGTH_SHORT).show();
+                Intent intentSanPham = new Intent(ManHinhTrangChuActivity.this, HienThiSanPhamTheoLoaiActivity.class);
+                startActivity(intentSanPham);
                 break;
             case R.id.btnXung:
-                Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
+                Intent intentUser = new Intent(ManHinhTrangChuActivity.this, ThongTinNguoiDungActivity.class);
+                startActivity(intentUser);
                 break;
             case R.id.fab:
                 Intent intent = new Intent(ManHinhTrangChuActivity.this, CameraActivity.class);

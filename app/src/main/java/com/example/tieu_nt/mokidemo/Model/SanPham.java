@@ -1,14 +1,14 @@
 package com.example.tieu_nt.mokidemo.Model;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by tieu_nt on 2/28/2018.
  */
 
-public class SanPham {
+public class SanPham implements Serializable {
     private int idSanPham, idNguoiBan, gia, soLuotThich, soBinhLuan;
-    private String tenSanPham, donViTinh, moTa, hinhLon;
+    private String tenSanPham, moTa, hinhLon;
     private boolean yeuThich;
     private ChiTietSanPham chiTietSanPham;
 
@@ -66,14 +66,6 @@ public class SanPham {
 
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
-    }
-
-    public String getDonViTinh() {
-        return donViTinh;
-    }
-
-    public void setDonViTinh(String donViTinh) {
-        this.donViTinh = donViTinh;
     }
 
     public String getMoTa() {

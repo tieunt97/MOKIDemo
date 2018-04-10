@@ -26,11 +26,11 @@ import java.util.List;
  * Created by tieu_nt on 2/27/2018.
  */
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapterTrangChu extends FragmentPagerAdapter {
     List<Fragment> list = new ArrayList<>();
     List<String> titles = new ArrayList<>();
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    public ViewPagerAdapterTrangChu(FragmentManager fm) {
         super(fm);
         list.add(new FragmentTatCa());
         list.add(new FragmentMienPhi());

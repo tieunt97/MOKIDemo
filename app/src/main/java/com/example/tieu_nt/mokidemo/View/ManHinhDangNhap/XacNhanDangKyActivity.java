@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.R;
@@ -28,7 +29,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
 
     private EditText edt1, edt2, edt3, edt4;
     private Button btnGuiLai;
-    private Toolbar toolbar;
+    private ImageButton imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,10 +38,6 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
 
         AnhXa();
         setActions();
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     private void AnhXa(){
@@ -49,11 +46,12 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
         edt3 = (EditText) findViewById(R.id.edt3);
         edt4 = (EditText) findViewById(R.id.edt4);
         btnGuiLai = (Button) findViewById(R.id.btnGuiLai);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        imgBack = (ImageButton) findViewById(R.id.imgBack);
     }
 
     private void setActions(){
         btnGuiLai.setOnClickListener(this);
+        imgBack.setOnClickListener(this);
         edt1.addTextChangedListener(this);
         edt2.addTextChangedListener(this);
         edt3.addTextChangedListener(this);
@@ -66,7 +64,15 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        guiLai();
+        int id = view.getId();
+        switch (id){
+            case R.id.btnGuiLai:
+                guiLai();
+                break;
+            case R.id.imgBack:
+                finish();
+                break;
+        }
     }
 
     @Override

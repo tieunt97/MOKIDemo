@@ -1,5 +1,7 @@
 package com.example.tieu_nt.mokidemo.Model.TrangChu;
 
+import android.util.Log;
+
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
@@ -50,9 +52,10 @@ public class ModelSanPham {
                 sanpham.setSoLuotThich(object.getInt("soLuotThich"));
                 sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
                 sanpham.setTenSanPham(object.getString("tenSanPham"));
-                sanpham.setDonViTinh(object.getString("donViTinh"));
                 sanpham.setMoTa(object.getString("moTa"));
                 sanpham.setHinhLon(object.getString("hinhLon"));
+
+                Log.d("MOKI", sanpham.getGia() + "");
 
                 dsSanPham.add(sanpham);
             }

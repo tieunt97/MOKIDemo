@@ -55,6 +55,21 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".View.ManHinhTrangChu.HienThiChiTietSanPhamActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.ManHinhTrangChu.HienThiSanPhamTheoLoaiActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.ManHinhTrangChu.ThongTinNguoiDungActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

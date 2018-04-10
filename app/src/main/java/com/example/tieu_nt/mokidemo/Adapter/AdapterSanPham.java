@@ -1,16 +1,20 @@
 package com.example.tieu_nt.mokidemo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.HienThiChiTietSanPhamActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -43,7 +47,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        SanPham sanPham = dsSanPham.get(position);
+        final SanPham sanPham = dsSanPham.get(position);
         Picasso.get().load(sanPham.getHinhLon()).resize(145, 145).into(holder.imgHinhSP, new Callback() {
             @Override
             public void onSuccess() {
@@ -55,11 +59,25 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
 
             }
         });
-        holder.tvTenSP.setText(sanPham.getTenSanPham());
+        String tenSP = sanPham.getTenSanPham();
+        if(tenSP.length() > 27){
+            tenSP = tenSP.substring(0, 27) + "...";
+        }
+        holder.tvTenSP.setText(tenSP);
+        int height = holder.tvTenSP.getLineHeight();
+        holder.tvTenSP.getLayoutParams().height = height + height + 5;
         holder.tvYeuThich.setText(sanPham.getSoLuotThich() + "");
         holder.tvBinhLuan.setText(sanPham.getSoBinhLuan() + "");
         NumberFormat numberFormat = new DecimalFormat("###,###");
         holder.tvGia.setText(numberFormat.format(sanPham.getGia()) + " đ");
+        holder.linearLayoutSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSanPham = new Intent(context, HienThiChiTietSanPhamActivity.class);
+                intentSanPham.putExtra("sanPham", sanPham);
+                context.startActivity(intentSanPham);
+            }
+        });
     }
 
     @Override
@@ -68,11 +86,13 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout linearLayoutSanPham;
         ImageView imgHinhSP;
         TextView tvTenSP, tvYeuThich, tvBinhLuan, tvGia;
         ProgressBar progressBar;
         public ViewHolder(View itemView) {
             super(itemView);
+            linearLayoutSanPham = (LinearLayout) itemView.findViewById(R.id.linearLayoutSanPham);
             imgHinhSP = (ImageView) itemView.findViewById(R.id.imgHinhSP);
             tvTenSP = (TextView) itemView.findViewById(R.id.tvTenSanPham);
             tvYeuThich = (TextView) itemView.findViewById(R.id.tvYeuThich);

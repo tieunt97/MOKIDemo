@@ -34,8 +34,8 @@ public class FragmentDoDungGiaDinh extends Fragment implements ViewHienThiDanhSa
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_dodunggiadinh, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerDoDungGiaDinh);
+        View view = inflater.inflate(R.layout.layout_sanpham, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamDoDungGiaDinh");
         return view;

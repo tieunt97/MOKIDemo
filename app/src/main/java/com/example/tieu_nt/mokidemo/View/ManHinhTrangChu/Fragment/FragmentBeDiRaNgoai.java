@@ -34,8 +34,8 @@ public class FragmentBeDiRaNgoai extends Fragment implements ViewHienThiDanhSach
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bedirangoai, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerBeDiRaNgoai);
+        View view = inflater.inflate(R.layout.layout_sanpham, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamBeDiRaNgoai");
         return view;

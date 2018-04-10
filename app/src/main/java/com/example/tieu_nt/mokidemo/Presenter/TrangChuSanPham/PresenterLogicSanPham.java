@@ -1,5 +1,7 @@
 package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
 
+import android.util.Log;
+
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelSanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewHienThiDanhSachSanPham;
@@ -11,8 +13,10 @@ import java.util.List;
  */
 
 public class PresenterLogicSanPham implements IPresenterSanPham{
-    ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham;
-    ModelSanPham modelSanPham;
+    private ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham;
+    private ModelSanPham modelSanPham;
+    private List<SanPham> dsSanPham;
+
 
     public PresenterLogicSanPham(ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham) {
         this.viewHienThiDanhSachSanPham = viewHienThiDanhSachSanPham;
@@ -21,7 +25,10 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
 
     @Override
     public void layDanhSachSanPham(String ham) {
-        List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham);
+        if(dsSanPham == null){
+            dsSanPham = modelSanPham.layDanhSachSanPham(ham);
+        }
+        Log.d("MOKISP", "LayDanhSachSanPham");
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
         }

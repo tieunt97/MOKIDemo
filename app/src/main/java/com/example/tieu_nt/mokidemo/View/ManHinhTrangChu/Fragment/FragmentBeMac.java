@@ -34,8 +34,8 @@ public class FragmentBeMac extends Fragment implements ViewHienThiDanhSachSanPha
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bemac, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerBeMac);
+        View view = inflater.inflate(R.layout.layout_sanpham, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamBeMac");
         return view;
