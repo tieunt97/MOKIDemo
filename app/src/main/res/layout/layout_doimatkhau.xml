@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@color/colorWhite"
+        >
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:text="Đổi mật khẩu"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textSize="@dimen/sizeTenSP"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRed"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGreyish"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtMatKhauCu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu cũ"
+            android:background="@color/colorWhite"
+            android:padding="15dp"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/edtMatKhauMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu mới"
+            android:background="@color/colorWhite"
+            android:padding="15dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="1dp"/>
+
+        <EditText
+            android:id="@+id/edtXacNhanMKMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Xác nhận mật khẩu mới"
+            android:background="@color/colorWhite"
+            android:padding="15dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="1dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="1dp"
+            android:padding="25dp">
+
+            <Button
+                android:id="@+id/btnCapNhat"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@drawable/custom_button_dangky"
+                android:textColor="@color/colorWhite"
+                android:text="Cập nhật"
+                android:textAllCaps="false"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

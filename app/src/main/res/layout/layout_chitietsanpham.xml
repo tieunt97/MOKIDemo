@@ -17,21 +17,32 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_collapseMode="parallax"
                 >
 
-                <ImageView
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPagerSlider"
                     android:layout_width="match_parent"
                     android:layout_height="345dp"
                     android:layout_marginTop="@dimen/actionBarSize"
-                    android:src="@drawable/background"
-                    android:scaleType="centerCrop"
                     />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom"
+                    android:background="@color/tranparentGrey">
+
+                </LinearLayout>
+
+            </FrameLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

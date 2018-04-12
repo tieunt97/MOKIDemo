@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/warning"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Thông báo"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/tvNoiDung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Bạn có chắc chắn muốn đăng xuất tài khoản?"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Hủy"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/custom_btn_huy"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnDangXuat"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:text="Đăng xuất"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/custom_btn_dangxuat"
+            android:layout_marginBottom="8dp"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

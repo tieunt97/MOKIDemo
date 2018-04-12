@@ -37,9 +37,10 @@
             />
 
         <ImageView
+            android:id="@+id/imgNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/next"
+            android:src="@drawable/next_black"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />

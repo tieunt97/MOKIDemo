@@ -54,8 +54,8 @@ public class ModelSanPham {
                 sanpham.setTenSanPham(object.getString("tenSanPham"));
                 sanpham.setMoTa(object.getString("moTa"));
                 sanpham.setHinhLon(object.getString("hinhLon"));
-
-                Log.d("MOKI", sanpham.getGia() + "");
+                sanpham.setHinhNho(object.getString("hinhNho"));
+                Log.d("hinhNho", sanpham.getHinhNho());
 
                 dsSanPham.add(sanpham);
             }

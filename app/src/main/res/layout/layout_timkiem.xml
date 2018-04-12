@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorGreyish">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@color/colorWhite"
+        >
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/tvTenSP"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:text="Tìm kiếm"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            />
+
+        <ImageButton
+            android:id="@+id/imgDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/delete"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"
+            android:layout_alignParentRight="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRed"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tìm kiếm"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
+    
+    <!--Layout danh mục-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:drawableLeft="@drawable/tag"
+            android:drawablePadding="15dp"
+            android:text="Danh mục"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawableRight="@drawable/next_black"
+            android:gravity="center"
+            android:text="Tất cả"
+            android:textColor="@color/colorRed" 
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+        
+    </RelativeLayout>
+    
+    <!--Layout nhãn hiệu-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:drawableLeft="@drawable/tag"
+            android:drawablePadding="15dp"
+            android:text="Nhãn hiệu"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawableRight="@drawable/next_black"
+            android:gravity="center"
+            android:text="Tất cả"
+            android:textColor="@color/colorRed" 
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+        
+    </RelativeLayout>
+    
+    <!--Layout kích cỡ-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:drawableLeft="@drawable/size_square"
+            android:drawablePadding="15dp"
+            android:text="Kích cỡ"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawableRight="@drawable/next_black"
+            android:gravity="center"
+            android:text="Tất cả"
+            android:textColor="@color/colorRed" 
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+        
+    </RelativeLayout>
+    
+    <!--Layout giá-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:drawableLeft="@drawable/visibility"
+            android:drawablePadding="15dp"
+            android:text="Giá"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawableRight="@drawable/next_black"
+            android:gravity="center"
+            android:text="Tất cả"
+            android:textColor="@color/colorRed" 
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+        
+    </RelativeLayout>
+
+    <!--Layout trạng thái-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/visibility"
+            android:drawablePadding="15dp"
+            android:text="Trạng thái"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawableRight="@drawable/next_black"
+            android:gravity="center"
+            android:text="Tất cả"
+            android:textColor="@color/colorRed"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:padding="20dp"
+        android:layout_marginTop="1dp">
+
+        <Button
+            android:id="@+id/btnTimKiem"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/custom_button_dangky"
+            android:text="Tìm kiếm"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="34dp"
+            android:layout_below="@id/btnTimKiem"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:id="@+id/button"
+            android:layout_marginTop="10dp"
+            android:text="Hướng dẫn tìm kiếm"
+            android:textSize="12dp"
+            android:background="@drawable/custom_button_bottom_login"
+            />
+        
+    </RelativeLayout>
+
+</LinearLayout>

@@ -27,38 +27,13 @@ import java.util.List;
  */
 
 public class ViewPagerAdapterTrangChu extends FragmentPagerAdapter {
-    List<Fragment> list = new ArrayList<>();
-    List<String> titles = new ArrayList<>();
+    List<Fragment> list;
+    List<String> titles;
 
-    public ViewPagerAdapterTrangChu(FragmentManager fm) {
+    public ViewPagerAdapterTrangChu(FragmentManager fm, List<Fragment> list, List<String> titles) {
         super(fm);
-        list.add(new FragmentTatCa());
-        list.add(new FragmentMienPhi());
-        list.add(new FragmentBeAn());
-        list.add(new FragmentBeMac());
-        list.add(new FragmentBeNgu());
-        list.add(new FragmentBeTam());
-        list.add(new FragmentBeVeSinh());
-        list.add(new FragmentBeKhoeAnToan());
-        list.add(new FragmentBeDiRaNgoai());
-        list.add(new FragmentBeChoiMaHoc());
-        list.add(new FragmentDanhChoMe());
-        list.add(new FragmentDoDungGiaDinh());
-        list.add(new FragmentSanPhamKhac());
-
-        titles.add("Tất cả");
-        titles.add("Miễn phí");
-        titles.add("Bé ăn");
-        titles.add("Bé mặc");
-        titles.add("Bé ngủ");
-        titles.add("Bé tắm");
-        titles.add("Bé vệ sinh");
-        titles.add("Bé khỏe-an toàn");
-        titles.add("Bé đi ra ngoài");
-        titles.add("Bé chơi mà học");
-        titles.add("Dành cho mẹ");
-        titles.add("Đồ dùng gia đình");
-        titles.add("Sản phẩm khác");
+        this.list = list;
+        this.titles = titles;
     }
 
     @Override

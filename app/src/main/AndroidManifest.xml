@@ -70,6 +70,57 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".View.TrungTamHoTro.TrungTamHoTroActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.ThietLap.ThietLapActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.TuThien.TuThienActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.TinTuc.TinTucActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.DanhSachYeuThich.DanhSachYeuThichActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.DanhSachMua.DanhSachMuaActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.DanhSachBan.DanhSachBanActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.GioiThieuMOKI.GioiThieuMOKIActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.TinTuc.ChiTietTinTucActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".View.ThietLap.DoiMatKhauActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>

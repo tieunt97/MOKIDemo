@@ -8,11 +8,13 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -37,6 +41,7 @@ import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangKyActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeAn;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeChoiMaHoc;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeDiRaNgoai;
@@ -68,35 +73,33 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
-    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-    public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
-    private String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
+//    public static String SERVER = "http://192.168.1.110:8080/webmoki";
+    public static String SERVER = "http://10.11.203.188:8080/webmoki";
+//    public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
+    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+    public static String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
 
     private FrameLayout trangChu;
+    private LinearLayout linearUser;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private AdapterMenu adapter;
-    private List<DrawerItem> dsItems = new ArrayList<>();
-    private String[] tenItems = {"Trang chủ", "Tin tức", "Danh sách yêu thích", "Danh sách bán", "Danh sách mua",
-        "Từ thiện", "Thiết lập", "Trung tâm hỗ trợ", "Giới thiệu MOKI", "Đăng xuất"};
-    private int[] hinhItems = {R.drawable.home, R.drawable.newspaper, R.drawable.like, R.drawable.clipboards,
-        R.drawable.shopping_cart, R.drawable.charity, R.drawable.settings, R.drawable.mail,
-        R.drawable.info, R.drawable.logout};
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewFlipper viewFlipper;
     private Button btnSapXep, btnLoc, btnXung;
     private CircleImageView imgUserInfo;
     private FloatingActionButton fab;
-    private int currentPos = 0;
     private float x1, x2;
     private final int IMG_REQUEST = 1;
     private boolean dangList = false;
     private Bitmap bitmap;
     private ViewPagerAdapterTrangChu viewPagerAdapter;
+    private List<Fragment> list = new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
+    private  AlertDialog.Builder builder;
 
 
     @Override
@@ -123,11 +126,8 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        //
-        for (int i = 0; i < tenItems.length; i++){
-            dsItems.add(new DrawerItem(hinhItems[i], tenItems[i]));
-        }
-        adapter = new AdapterMenu(ManHinhTrangChuActivity.this, dsItems);
+
+        adapter = new AdapterMenu(ManHinhTrangChuActivity.this, 0, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -138,7 +138,34 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         viewFlipper.setFlipInterval(3000);
 
         //set viewPager
-        viewPagerAdapter = new ViewPagerAdapterTrangChu(getSupportFragmentManager());
+        list.add(new FragmentTatCa());
+        list.add(new FragmentMienPhi());
+        list.add(new FragmentBeAn());
+        list.add(new FragmentBeMac());
+        list.add(new FragmentBeNgu());
+        list.add(new FragmentBeTam());
+        list.add(new FragmentBeVeSinh());
+        list.add(new FragmentBeKhoeAnToan());
+        list.add(new FragmentBeDiRaNgoai());
+        list.add(new FragmentBeChoiMaHoc());
+        list.add(new FragmentDanhChoMe());
+        list.add(new FragmentDoDungGiaDinh());
+        list.add(new FragmentSanPhamKhac());
+
+        titles.add("Tất cả");
+        titles.add("Miễn phí");
+        titles.add("Bé ăn");
+        titles.add("Bé mặc");
+        titles.add("Bé ngủ");
+        titles.add("Bé tắm");
+        titles.add("Bé vệ sinh");
+        titles.add("Bé khỏe-an toàn");
+        titles.add("Bé đi ra ngoài");
+        titles.add("Bé chơi mà học");
+        titles.add("Dành cho mẹ");
+        titles.add("Đồ dùng gia đình");
+        titles.add("Sản phẩm khác");
+        viewPagerAdapter = new ViewPagerAdapterTrangChu(getSupportFragmentManager(), list, titles);
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -174,11 +201,53 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         } else {
             super.onBackPressed();
         }
+
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(ManHinhTrangChuActivity.this);
+//        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
+//        TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+//        Button btnHuy = (Button) view.findViewById(R.id.btnHuy);
+//        Button btnDangXuat = (Button) view.findViewById(R.id.btnDangXuat);
+//
+//        builder.setView(view);
+//        final AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//
+//        btnHuy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertDialog.dismiss();
+//            }
+//        });
+//
+//        btnDangXuat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertDialog.onBackPressed();
+//            }
+//        });
+//
+//        //đóng sau 3s
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(3000);
+//                    if(alertDialog.isShowing())
+//                        alertDialog.dismiss();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        thread.start();
+
         super.onBackPressed();
     }
 
     private void anhXa(){
         trangChu = (FrameLayout) findViewById(R.id.themFragment);
+        linearUser = (LinearLayout) findViewById(R.id.linearUser);
+        linearUser.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setOnPageChangeListener(this);
@@ -220,6 +289,10 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.linearUser:
+                Intent intentUser = new Intent(ManHinhTrangChuActivity.this, ThongTinNguoiDungActivity.class);
+                startActivity(intentUser);
+                break;
             case R.id.imgUserInfo:
                 selectImage();
                 break;
@@ -232,9 +305,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 startActivity(intentSanPham);
                 break;
             case R.id.btnXung:
-//                Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
-                Intent intentUser = new Intent(ManHinhTrangChuActivity.this, ThongTinNguoiDungActivity.class);
-                startActivity(intentUser);
+                Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fab:
                 Intent intent = new Intent(ManHinhTrangChuActivity.this, CameraActivity.class);

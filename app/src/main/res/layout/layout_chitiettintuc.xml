@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@color/colorWhite"
+        >
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/tvTenSP"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:text="Chi tiết tin tức"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRed"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginHorizontal="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GIẢM GIÁ SỐC LÊN ĐẾN 45% ĐỒ CHO MẸ VÀ BÉ"
+            android:textSize="@dimen/sizeTenSP"
+            android:textColor="@color/colorRed"
+            android:padding="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày 20 Tháng 11 Năm 2017"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/clock"
+            android:drawablePadding="10dp"
+            android:padding="10dp"/>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:text="Chi Tiết Tin Tức"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

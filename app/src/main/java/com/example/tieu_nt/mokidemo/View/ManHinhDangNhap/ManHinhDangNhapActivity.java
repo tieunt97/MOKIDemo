@@ -2,19 +2,13 @@ package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
-import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.text.style.UnderlineSpan;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +18,6 @@ import android.widget.Toast;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterLogicDangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
-
-import java.security.Key;
 
 /**
  * Created by tieu_nt on 2/2/2018.
@@ -122,7 +114,7 @@ public class ManHinhDangNhapActivity extends AppCompatActivity implements View.O
 //
 //        if(!msg.equals("")){
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(ManHinhDangNhapActivity.this);
-//            View view = getLayoutInflater().inflate(R.layout.dialog_thongbao, null, false);
+//            View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
 //            TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
 //            tvNoiDung.setText(msg);
 //            Button btnDong = (Button) view.findViewById(R.id.btnDong);
@@ -183,7 +175,7 @@ public class ManHinhDangNhapActivity extends AppCompatActivity implements View.O
     @Override
     public void dangNhapThatBai(String msg) {
         builder = new AlertDialog.Builder(ManHinhDangNhapActivity.this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao, null, false);
+        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
         TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
         tvNoiDung.setText(msg);
         Button btnDong = (Button) view.findViewById(R.id.btnDong);
