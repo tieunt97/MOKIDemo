@@ -73,12 +73,12 @@
 
                 <!--Layout trang chủ-->
                 <RelativeLayout
+                    android:id="@+id/relaTrangCuaToi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:padding="15dp"
-                    android:background="@color/colorWhite"
-                    >
+                    android:background="@color/colorWhite">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -101,12 +101,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relaDiaChi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:padding="15dp"
-                    android:background="@color/colorWhite"
-                    >
+                    android:background="@color/colorWhite">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -129,6 +129,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relaDoiMatKhau"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -157,6 +158,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relaDSChan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -197,6 +199,7 @@
                     />
 
                 <RelativeLayout
+                    android:id="@+id/relaTaiKhoan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -238,6 +241,7 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/relaCaiDatThongBao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"

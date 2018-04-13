@@ -60,14 +60,18 @@
             android:layout_height="wrap_content"
             android:hint="Tìm kiếm"
             android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@drawable/custom_stroke_view"
+            android:padding="10dp"/>
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/microphone"
+            android:background="@color/colorWhite"/>
 
     </LinearLayout>
     
@@ -82,7 +86,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:drawableLeft="@drawable/tag"
+            android:drawableLeft="@drawable/clipboards"
             android:drawablePadding="15dp"
             android:text="Danh mục"
             android:gravity="center"
@@ -181,7 +185,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:drawableLeft="@drawable/visibility"
+            android:drawableLeft="@drawable/price"
             android:drawablePadding="15dp"
             android:text="Giá"
             android:gravity="center"
@@ -194,12 +198,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:drawableRight="@drawable/next_black"
+            android:drawableRight="@drawable/expand_arrow_16"
             android:gravity="center"
-            android:text="Tất cả"
-            android:textColor="@color/colorRed" 
+            android:text="10 K - 2,000 K"
+            android:textColor="@color/colorBlack"
             android:layout_centerVertical="true"
-            android:drawablePadding="5dp"/>
+            android:drawablePadding="20dp"
+            android:background="@drawable/custom_stroke_view"
+            android:padding="10dp"/>
         
     </RelativeLayout>
 

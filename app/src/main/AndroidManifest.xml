@@ -47,44 +47,28 @@
         </activity>
 
         <activity android:name=".View.ManHinhTrangChu.CameraActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhDangNhap.QuenMatKhauActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.HienThiChiTietSanPhamActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.HienThiSanPhamTheoLoaiActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.ThongTinNguoiDungActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrungTamHoTro.TrungTamHoTroActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ThietLap.ThietLapActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TuThien.TuThienActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TinTuc.TinTucActivity"
             android:screenOrientation="portrait">
@@ -97,29 +81,33 @@
         </activity>
 
         <activity android:name=".View.DanhSachMua.DanhSachMuaActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.DanhSachBan.DanhSachBanActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.GioiThieuMOKI.GioiThieuMOKIActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TinTuc.ChiTietTinTucActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ThietLap.DoiMatKhauActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ThietLap.TrangCuaToiActivity"
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".View.ThietLap.DiaChiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ThietLap.TaiKhoanActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ThietLap.CaiDatThongBaoActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

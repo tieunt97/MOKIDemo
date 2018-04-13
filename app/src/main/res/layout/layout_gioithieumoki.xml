@@ -192,7 +192,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/charity_red"
+                            android:drawableLeft="@drawable/gift"
                             android:text="Các mẹ chia sẻ đồ cho các bà mẹ khác bằng cách đưa hàng vào mục miện phí"
                             android:drawablePadding="5dp"
                             android:textSize="11dp"
