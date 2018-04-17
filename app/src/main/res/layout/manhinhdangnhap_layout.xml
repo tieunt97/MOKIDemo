@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:theme="@style/ColorBlack"
+    android:focusableInTouchMode="true"
     tools:context="com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangNhapActivity">
 
     <ImageView

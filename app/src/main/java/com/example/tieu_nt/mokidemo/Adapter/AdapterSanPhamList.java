@@ -49,9 +49,15 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
         final SanPham sanPham = dsSanPham.get(position);
         Picasso.get().load(sanPham.getHinhLon()).into(holder.imgSanPham);
         holder.tvTenSanPham.setText(sanPham.getTenSanPham());
-        NumberFormat numberFormat = new DecimalFormat("###,###");
-        String gia = numberFormat.format(sanPham.getGia()).toString();
-        holder.tvGiaSP.setText(gia + " đ");
+        if(sanPham.getGia() == 0){
+            holder.tvGiaSP.setText("Miễn phí");
+            holder.imgFree.setVisibility(View.VISIBLE);
+        }else{
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String gia = numberFormat.format(sanPham.getGia()).toString();
+            holder.tvGiaSP.setText(gia + " đ");
+        }
+
         holder.tvMoTaSanPham.setText(sanPham.getMoTa());
         holder.tvThich.setText(String.valueOf(sanPham.getSoLuotThich()));
         holder.tvBinhLuan.setText(String.valueOf(sanPham.getSoBinhLuan()));
@@ -98,7 +104,7 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView imgInfoShop;
         TextView tvTenShop, tvThoiGian, tvTenSanPham, tvGiaSP, tvMoTaSanPham, tvThich, tvBinhLuan;
-        ImageView imgSanPham;
+        ImageView imgSanPham, imgFree;
         RelativeLayout relaThich, relaBinhLuan, relateMua, relaNguoiBan;
         LinearLayout linearSanPham;
 
@@ -106,6 +112,7 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
             super(itemView);
             imgInfoShop = (CircleImageView) itemView.findViewById(R.id.imgInfoShop);
             imgSanPham = (ImageView) itemView.findViewById(R.id.imgSanPham);
+            imgFree = (ImageView) itemView.findViewById(R.id.imgFree);
             tvTenShop = (TextView) itemView.findViewById(R.id.tvTenShop);
             tvThoiGian = (TextView) itemView.findViewById(R.id.tvThoiGian);
             tvTenSanPham = (TextView) itemView.findViewById(R.id.tvTenSanPham);

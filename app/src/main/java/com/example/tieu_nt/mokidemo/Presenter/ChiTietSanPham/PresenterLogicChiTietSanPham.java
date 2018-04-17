@@ -31,6 +31,7 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
             }
 
             viewChiTietSanPham.hienThiSliderSP(linkHinhSP);
+            viewChiTietSanPham.hienThiChiTietSanPham(sanPham);
         }
     }
 }

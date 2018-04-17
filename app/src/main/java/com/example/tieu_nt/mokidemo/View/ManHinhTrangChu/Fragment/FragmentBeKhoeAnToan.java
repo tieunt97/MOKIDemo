@@ -37,7 +37,7 @@ public class FragmentBeKhoeAnToan extends Fragment implements ViewHienThiDanhSac
         View view = inflater.inflate(R.layout.layout_sanpham, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamBeKhoeAnToan");
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 7);
         return view;
     }
 
@@ -59,7 +59,7 @@ public class FragmentBeKhoeAnToan extends Fragment implements ViewHienThiDanhSac
     public void setDangList(boolean dangList){
         if(this.dangList == !dangList){
             this.dangList = dangList;
-            presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamBeKhoeAnToan");
+            presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 7);
         }
     }
 }

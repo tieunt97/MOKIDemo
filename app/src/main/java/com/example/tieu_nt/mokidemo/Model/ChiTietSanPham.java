@@ -1,11 +1,24 @@
 package com.example.tieu_nt.mokidemo.Model;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by tieu_nt on 4/3/2018.
  */
 
-public class ChiTietSanPham {
-    String khoiLuong, trangThai, kichThuoc, noiBan;
+public class ChiTietSanPham implements Serializable{
+    private String khoiLuong, trangThai, kichThuoc;
+    private List<DanhMuc> danhMucList;
+
+
+    public List<DanhMuc> getDanhMucList() {
+        return danhMucList;
+    }
+
+    public void setDanhMucList(List<DanhMuc> danhMucList) {
+        this.danhMucList = danhMucList;
+    }
 
     public String getKhoiLuong() {
         return khoiLuong;
@@ -29,13 +42,5 @@ public class ChiTietSanPham {
 
     public void setKichThuoc(String kichThuoc) {
         this.kichThuoc = kichThuoc;
-    }
-
-    public String getNoiBan() {
-        return noiBan;
-    }
-
-    public void setNoiBan(String noiBan) {
-        this.noiBan = noiBan;
     }
 }

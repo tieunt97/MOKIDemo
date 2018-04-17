@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@color/colorWhite"
+        >
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:background="@color/colorWhite"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/tvTenSP"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:text="Địa Chỉ Mới"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRed"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edtTinhTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Tỉnh, Thành phố"
+        android:textColor="@color/colorBlack"
+        android:padding="15dp"
+        />
+
+    <EditText
+        android:id="@+id/edtQuanHuyen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Quận, Huyện"
+        android:textColor="@color/colorBlack"
+        android:padding="15dp"
+        />
+
+    <EditText
+        android:id="@+id/edtXaPhuong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Phường, Xã, Thị Trấn"
+        android:textColor="@color/colorBlack"
+        android:padding="15dp"
+        />
+
+    <EditText
+        android:id="@+id/edtXom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Số nhà, Xóm, Tổ..v.v.."
+        android:textColor="@color/colorBlack"
+        android:padding="15dp"
+        />
+
+    <RadioButton
+        android:id="@+id/rbMacDinh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đặt mặc định"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrey"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hãy chắc chắn rằng địa chỉ này là chính xác để bạn có thể giao/nhận hàng đúng thời hạn"
+        android:textColor="@color/colorBlack"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrey"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/custom_button_dangnhap"
+        android:textColor="@color/colorWhite"
+        android:text="Thêm địa chỉ mới"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

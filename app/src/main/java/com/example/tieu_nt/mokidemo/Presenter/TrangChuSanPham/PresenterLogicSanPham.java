@@ -24,11 +24,10 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     @Override
-    public void layDanhSachSanPham(String ham) {
+    public void layDanhSachSanPham(String ham, int idLoaiSP) {
         if(dsSanPham == null){
-            dsSanPham = modelSanPham.layDanhSachSanPham(ham);
+            dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP);
         }
-        Log.d("MOKISP", "LayDanhSachSanPham");
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
         }

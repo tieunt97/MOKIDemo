@@ -73,10 +73,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
-//    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-    public static String SERVER = "http://10.11.203.188:8080/webmoki";
-//    public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+    //may tinh ca nhan
+    public static String SERVER = "http://192.168.1.110:8080/webmoki";
+    public static String SERVER_NAME = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
+
+    //Genymotion
+//    public static String SERVER = "http://10.0.3.2:8080/webmoki";
+//    public static String SERVER_NAME = "http://10.0.3.2:8080/webmoki/laydssanpham.php";
+
+    //Wifi HUST
+//    public static String SERVER = "http://10.11.203.188:8080/webmoki";
+//    public static String SERVER_NAME = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+
     public static String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
 
     private FrameLayout trangChu;
@@ -183,6 +191,10 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.itemTimKiem:
+                Intent iTimKiem = new Intent(ManHinhTrangChuActivity.this, TimKiemActivity.class);
+                startActivity(iTimKiem);
+                break;
             case R.id.itemManHinh:
                 dangList = !dangList;
                 if(dangList) item.setIcon(R.drawable.layout);
@@ -301,8 +313,8 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btnLoc:
 //                Toast.makeText(ManHinhTrangChuActivity.this, "Lọc", Toast.LENGTH_SHORT).show();
-                Intent intentSanPham = new Intent(ManHinhTrangChuActivity.this, HienThiSanPhamTheoLoaiActivity.class);
-                startActivity(intentSanPham);
+                Intent intentCTSP = new Intent(ManHinhTrangChuActivity.this, HienThiChiTietSanPhamActivity.class);
+                startActivity(intentCTSP);
                 break;
             case R.id.btnXung:
                 Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();

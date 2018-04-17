@@ -29,22 +29,13 @@
         </activity>
 
         <activity android:name=".View.ManHinhDangNhap.ManHinhDangKyActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.ManHinhTrangChuActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhDangNhap.XacNhanDangKyActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".View.ManHinhDangNhap.ManHinhDangKyActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.ManHinhDangNhap.ManHinhDangKyActivity"
-                ></meta-data>
-
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.CameraActivity"
             android:screenOrientation="portrait"/>
@@ -96,6 +87,7 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ThietLap.TrangCuaToiActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait">
 
         </activity>
@@ -107,6 +99,18 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ThietLap.CaiDatThongBaoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ThietLap.ThemDiaChiMoiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ManHinhTrangChu.BinhLuanActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ManHinhTrangChu.TimKiemActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ManHinhTrangChu.TrangThaiTimKiemActivity"
             android:screenOrientation="portrait"/>
 
     </application>

@@ -68,8 +68,16 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
         holder.tvTenSP.getLayoutParams().height = height + height + 5;
         holder.tvYeuThich.setText(sanPham.getSoLuotThich() + "");
         holder.tvBinhLuan.setText(sanPham.getSoBinhLuan() + "");
-        NumberFormat numberFormat = new DecimalFormat("###,###");
-        holder.tvGia.setText(numberFormat.format(sanPham.getGia()) + " đ");
+        if(sanPham.getGia() == 0){
+            holder.imgFree.setVisibility(View.VISIBLE);
+            holder.tvGia.setText("Miễn phí");
+        }else{
+            holder.imgFree.setVisibility(View.GONE);
+            int gia = sanPham.getGia()/1000;
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            holder.tvGia.setText(numberFormat.format(gia) + " K");
+        }
+
         holder.linearLayoutSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +95,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         LinearLayout linearLayoutSanPham;
-        ImageView imgHinhSP;
+        ImageView imgHinhSP, imgFree;
         TextView tvTenSP, tvYeuThich, tvBinhLuan, tvGia;
         ProgressBar progressBar;
         public ViewHolder(View itemView) {
@@ -98,6 +106,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
             tvYeuThich = (TextView) itemView.findViewById(R.id.tvYeuThich);
             tvBinhLuan = (TextView) itemView.findViewById(R.id.tvBinhLuan);
             tvGia = (TextView) itemView.findViewById(R.id.tvGiaSP);
+            imgFree = (ImageView) itemView.findViewById(R.id.imgFree);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar_download);
         }
     }

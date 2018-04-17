@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp"
+        android:layout_marginLeft="38dp">
+
+        <TextView
+            android:id="@+id/tvXom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yên Thái"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sizeTenSP"/>
+
+        <TextView
+            android:id="@+id/tvXaPhuong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xã Tiền Yên"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sizeTenSP"/>
+
+        <TextView
+            android:id="@+id/tvQuanHuyen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Huyện Hoài Đức"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sizeTenSP" />
+
+        <TextView
+            android:id="@+id/tvTinhTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hà Nội"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sizeTenSP"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvMacDinh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[Mặc định]"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:textSize="@dimen/sizeTenSP"/>
+
+    <ImageView
+        android:id="@+id/imgBaCham"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGreyish"/>
+
+</RelativeLayout>

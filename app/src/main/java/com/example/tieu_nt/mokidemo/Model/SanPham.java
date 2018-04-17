@@ -8,10 +8,18 @@ import java.io.Serializable;
 
 public class SanPham implements Serializable {
     private int idSanPham, idNguoiBan, gia, soLuotThich, soBinhLuan;
-    private String tenSanPham, moTa, hinhLon, hinhNho;
+    private String tenSanPham, moTa, hinhLon, hinhNho, NoiBan;
     private boolean yeuThich;
     private ChiTietSanPham chiTietSanPham;
 
+
+    public String getNoiBan() {
+        return NoiBan;
+    }
+
+    public void setNoiBan(String noiBan) {
+        NoiBan = noiBan;
+    }
 
     public String getHinhNho() {
         return hinhNho;

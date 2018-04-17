@@ -1,6 +1,7 @@
 package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,17 +10,25 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterViewPagerSlider;
+import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSliderChiTietSanPham;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +38,18 @@ import java.util.List;
 
 public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements View.OnClickListener, ViewChiTietSanPham, ViewPager.OnPageChangeListener{
     private SanPham sanPham;
-    private TextView tvTenSP;
+    private TextView tvTenSP, tvMoTaSP, tvXemThem, tvGiaSP, tvNoiBan, tvTrangThai, tvKichThuoc,
+            tvKhoiLuong, tvSoLuotThich, tvSoBinhLuan;
+    private Button btnMua, btnBinhLuan;
     private ImageButton imgBack;
     private ViewPager viewPagerSlider;
-    private LinearLayout layoutDots;
+    private LinearLayout layoutDots, linearNhanHieu, linearDanhMuc;
+    private RelativeLayout relaXemThem, relaTrangThai, relaNhanHieu, relaKichThuoc, relaKhoiLuong;
     private List<Fragment> fragmentList = new ArrayList<>();
     private TextView[] tvDots;
     private PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
+    private boolean xemThem = true;
+    private Button[] danhMuc;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,18 +58,37 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         anhXa();
         Intent intent = getIntent();
         sanPham = (SanPham) intent.getSerializableExtra("sanPham");
-        tvTenSP.setText(sanPham.getTenSanPham());
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
     }
 
     private void anhXa(){
         tvTenSP = (TextView) findViewById(R.id.tvTenSP);
+        tvMoTaSP = (TextView) findViewById(R.id.tvMoTaSanPham);
+        tvXemThem = (TextView) findViewById(R.id.tvXemThem);
+        tvGiaSP = (TextView) findViewById(R.id.tvGiaSP);
+        tvNoiBan = (TextView) findViewById(R.id.tvNoiBan);
+        tvTrangThai = (TextView) findViewById(R.id.tvTrangThai);
+        tvKichThuoc = (TextView) findViewById(R.id.tvKichThuoc);
+        tvKhoiLuong = (TextView) findViewById(R.id.tvKhoiLuong);
+        tvSoLuotThich = (TextView) findViewById(R.id.tvSoLuotThich);
+        tvSoBinhLuan = (TextView) findViewById(R.id.tvSoBinhLuan);
+        btnMua = (Button) findViewById(R.id.btnMua);
+        btnMua.setOnClickListener(this);
+        btnBinhLuan = (Button) findViewById(R.id.btnBinhLuan);
+        btnBinhLuan.setOnClickListener(this);
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         viewPagerSlider = (ViewPager) findViewById(R.id.viewPagerSlider);
         viewPagerSlider.setOnPageChangeListener(this);
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
+        linearDanhMuc = (LinearLayout) findViewById(R.id.linearDanhMuc);
+        linearNhanHieu = (LinearLayout) findViewById(R.id.linearNhanHieu);
         imgBack.setOnClickListener(this);
+        relaXemThem = (RelativeLayout) findViewById(R.id.relaXemThem);
+        relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
+        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
+        relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
+        relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
     }
 
     @Override
@@ -64,6 +97,12 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         switch (id){
             case R.id.imgBack:
                 finish();
+                break;
+            case R.id.btnBinhLuan:
+                Intent iBinhLuan = new Intent(HienThiChiTietSanPhamActivity.this, BinhLuanActivity.class);
+                startActivity(iBinhLuan);
+                break;
+            case R.id.btnMua:
                 break;
         }
     }
@@ -88,6 +127,90 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
 
     @Override
     public void hienThiChiTietSanPham(SanPham sanPham) {
+        ChiTietSanPham  chiTietSanPham = sanPham.getChiTietSanPham();
+
+        tvSoLuotThich.setText(String.valueOf(sanPham.getSoLuotThich()));
+        tvSoBinhLuan.setText(String.valueOf(sanPham.getSoBinhLuan()));
+        tvTenSP.setText(sanPham.getTenSanPham());
+        tvMoTaSP.setText(sanPham.getMoTa());
+        tvMoTaSP.post(new Runnable() {
+            @Override
+            public void run() {
+                int line = tvMoTaSP.getLineCount();
+                if(line > 2){
+                    tvMoTaSP.setMaxLines(2);
+                    tvXemThem.setVisibility(View.VISIBLE);
+                    tvXemThem.setText("Xem thêm");
+                    relaXemThem.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (xemThem){
+                                tvMoTaSP.setMaxLines(Integer.MAX_VALUE);
+                                xemThem = !xemThem;
+                                tvXemThem.setText("Thu lại");
+                            }else{
+                                tvMoTaSP.setMaxLines(2);
+                                xemThem = !xemThem;
+                                tvXemThem.setText("Xem thêm");
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        final List<DanhMuc> danhMucList = chiTietSanPham.getDanhMucList();
+        int size = danhMucList.size();
+        danhMuc = new Button[size];
+        for(int i = 0; i < size; i++){
+            danhMuc[i] = new Button(this);
+            danhMuc[i].setTextColor(getIdColor(R.color.colorRed));
+            danhMuc[i].setBackgroundResource(R.drawable.custom_button_bottom_login);
+            danhMuc[i].setAllCaps(false);
+            danhMuc[i].setTextSize(12);
+            danhMuc[i].setText(danhMucList.get(i).getTenDanhMuc());
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 50);
+            layoutParams.setMargins(0, 0, 0, 5);
+            danhMuc[i].setLayoutParams(layoutParams);
+            danhMuc[i].setPadding(10, 0, 10, 0);
+            final int j = i;
+            danhMuc[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("TNT", " aadsj ");
+                    Intent iDSSPTheoLoai = new Intent(HienThiChiTietSanPhamActivity.this, HienThiSanPhamTheoLoaiActivity.class);
+                    iDSSPTheoLoai.putExtra("danhMuc", danhMucList.get(j));
+                    startActivity(iDSSPTheoLoai);
+                }
+            });
+            linearDanhMuc.addView(danhMuc[i]);
+        }
+
+        if(chiTietSanPham.getKhoiLuong().equals("null")) relaKhoiLuong.setVisibility(View.GONE);
+        else tvKhoiLuong.setText(chiTietSanPham.getKhoiLuong());
+
+        if (chiTietSanPham.getKichThuoc().equals("null")) relaKichThuoc.setVisibility(View.GONE);
+        else tvKichThuoc.setText(chiTietSanPham.getKichThuoc());
+
+        if(chiTietSanPham.getTrangThai().equals("null")) relaTrangThai.setVisibility(View.GONE);
+        else tvTrangThai.setText(chiTietSanPham.getTrangThai());
+
+        tvNoiBan.setText(sanPham.getNoiBan());
+
+        if(sanPham.getSoBinhLuan() > 0){
+            btnBinhLuan.setText("Xem và viết bình luận");
+        }
+
+        if(sanPham.getGia() == 0){
+            tvGiaSP.setText("Miễn phí");
+            btnMua.setText("Nhận");
+            btnMua.setBackgroundColor(getIdColor(R.color.colorLightGreen));
+        }else {
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String gia = numberFormat.format(sanPham.getGia()).toString();
+            tvGiaSP.setText(gia + " VNĐ");
+        }
 
     }
 

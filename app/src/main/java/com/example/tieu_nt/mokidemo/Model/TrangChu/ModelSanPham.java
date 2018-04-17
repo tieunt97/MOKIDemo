@@ -3,6 +3,8 @@ package com.example.tieu_nt.mokidemo.Model.TrangChu;
 import android.util.Log;
 
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
+import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
@@ -20,7 +22,7 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ModelSanPham {
-    public List<SanPham> layDanhSachSanPham(String ham){
+    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -31,7 +33,11 @@ public class ModelSanPham {
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
 
+        HashMap<String,String> hsIdLoaiSP = new HashMap<>();
+        hsIdLoaiSP.put("idLoaiSP", String.valueOf(idLoaiSP));
+
         attrs.add(hsHam);
+        attrs.add(hsIdLoaiSP);
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
         //end phương thức post
@@ -55,8 +61,26 @@ public class ModelSanPham {
                 sanpham.setMoTa(object.getString("moTa"));
                 sanpham.setHinhLon(object.getString("hinhLon"));
                 sanpham.setHinhNho(object.getString("hinhNho"));
-                Log.d("hinhNho", sanpham.getHinhNho());
+                sanpham.setNoiBan(object.getString("noiBan"));
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                List<DanhMuc> danhMucList = new ArrayList<>();
+                chiTietSanPham.setKhoiLuong(object.getString("khoiLuong"));
+                chiTietSanPham.setKichThuoc(object.getString("kichThuoc"));
+                chiTietSanPham.setTrangThai(object.getString("trangThai"));
 
+                JSONArray jsonArrayLoaiSP = object.getJSONArray("loaiSP");
+                for (int j = 0; j < jsonArrayLoaiSP.length(); j++){
+                    JSONObject jsonObject1 = jsonArrayLoaiSP.getJSONObject(j);
+                    DanhMuc danhMuc = new DanhMuc();
+                    danhMuc.setIdDanhMuc(jsonObject1.getInt("idLoaiSP"));
+                    danhMuc.setTenDanhMuc(jsonObject1.getString("tenLoaiSP"));
+                    danhMuc.setIdDanhMucCha(jsonObject1.getInt("idLoaiSPCha"));
+
+                    danhMucList.add(danhMuc);
+                }
+
+                chiTietSanPham.setDanhMucList(danhMucList);
+                sanpham.setChiTietSanPham(chiTietSanPham);
                 dsSanPham.add(sanpham);
             }
         } catch (InterruptedException e) {

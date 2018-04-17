@@ -17,4 +17,6 @@
     <color name="colorRedMua">#EF5350</color>
     <color name="colorGreyish">#E0E0E0</color>
     <color name="colorDeepOrange">#F4511E</color>
+    <color name="colorLightGreen">#b5fa8a</color>
+    <color name="tranparent">#00FFFFFF</color>
 </resources>

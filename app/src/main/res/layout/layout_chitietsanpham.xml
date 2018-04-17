@@ -105,9 +105,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true">
 
                     <TextView
+                        android:id="@+id/tvSoLuotThich"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -122,6 +124,7 @@
                         android:textColor="@color/colorWhite"/>
 
                     <TextView
+                        android:id="@+id/tvSoBinhLuan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -139,8 +142,8 @@
 
                 <ToggleButton
                     android:id="@+id/tgLike"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
                     android:textOff=""
                     android:textOn=""
                     android:background="@drawable/custom_toggle_like"
@@ -152,6 +155,7 @@
 
             <!--Layout user-->
             <RelativeLayout
+                android:id="@+id/relaNguoiBan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -193,6 +197,7 @@
                             android:textSize="@dimen/sizeTenSP"/>
 
                         <TextView
+                            android:id="@+id/tvDiem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorBlack"
@@ -208,6 +213,7 @@
                             android:text="Sản phẩm: "/>
 
                         <TextView
+                            android:id="@+id/tvTongSP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorBlack"
@@ -310,25 +316,29 @@
                     android:text="Hàng xách tay từ Canada nên chỉ có 1 tuýp duy nhất thôi ạ. Mùi siêu ngọt ngào không cần xịt nước hoa vẫn thơm"/>
 
                 <RelativeLayout
+                    android:id="@+id/relaXemThem"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/tvThoiGian"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="15 giờ trước"
-                        android:drawableLeft="@drawable/clock"
                         android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/clock"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
                         />
 
                     <TextView
+                        android:id="@+id/tvXemThem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Thu lại"
+                        android:text="Xem thêm"
+                        android:visibility="gone"
                         android:textColor="@color/colorRed"/>
 
                 </RelativeLayout>
@@ -351,18 +361,21 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/colorBlack"/>
 
-                <android.support.v7.widget.RecyclerView
+                <LinearLayout
+                    android:id="@+id/linearDanhMuc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
-                    android:layout_marginLeft="135dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="135dp"
+                    android:orientation="vertical">
 
-                </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
 
             </RelativeLayout>
 
             <!--Layout khối lượng-->
             <RelativeLayout
+                android:id="@+id/relaKhoiLuong"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
@@ -379,6 +392,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
+                    android:id="@+id/tvKhoiLuong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="135dp"
@@ -389,6 +403,7 @@
 
             <!--Layout kích thước-->
             <RelativeLayout
+                android:id="@+id/relaKichThuoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -405,6 +420,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
+                    android:id="@+id/tvKichThuoc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="135dp"
@@ -415,12 +431,14 @@
 
             <!--Layout nhãn hiệu-->
             <RelativeLayout
+                android:id="@+id/relaNhanHieu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/colorWhite">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -430,18 +448,21 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/colorBlack"/>
 
-                <android.support.v7.widget.RecyclerView
+                <LinearLayout
+                    android:id="@+id/linearNhanHieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
-                    android:layout_marginLeft="135dp">
+                    android:layout_marginLeft="135dp"
+                    android:orientation="vertical">
 
-                </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
 
             </RelativeLayout>
 
             <!--Layout trạng thái-->
             <RelativeLayout
+                android:id="@+id/relaTrangThai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -458,6 +479,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
+                    android:id="@+id/tvTrangThai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="135dp"
@@ -484,6 +506,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
+                    android:id="@+id/tvNoiBan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="135dp"
@@ -493,6 +516,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/btnBinhLuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Trở thành người bình luận đầu tiên"
@@ -534,6 +558,7 @@
                 android:background="@color/colorGrey"/>
 
             <TextView
+                android:id="@+id/tvGiaSP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -545,6 +570,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnMua"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Mua"
