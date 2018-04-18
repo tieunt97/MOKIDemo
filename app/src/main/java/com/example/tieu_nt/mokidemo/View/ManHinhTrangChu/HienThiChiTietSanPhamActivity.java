@@ -1,7 +1,6 @@
 package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,34 +13,43 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterViewPagerSlider;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSliderChiTietSanPham;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by tieu_nt on 4/7/2018.
  */
 
-public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements View.OnClickListener, ViewChiTietSanPham, ViewPager.OnPageChangeListener{
+public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements View.OnClickListener,
+        ViewChiTietSanPham, ViewPager.OnPageChangeListener, CompoundButton.OnCheckedChangeListener{
     private SanPham sanPham;
+    private CircleImageView imgKhachHang;
     private TextView tvTenSP, tvMoTaSP, tvXemThem, tvGiaSP, tvNoiBan, tvTrangThai, tvKichThuoc,
-            tvKhoiLuong, tvSoLuotThich, tvSoBinhLuan;
+            tvKhoiLuong, tvSoLuotThich, tvSoBinhLuan, tvDiem, tvSoSP, tvTenKhachHang;
     private Button btnMua, btnBinhLuan;
     private ImageButton imgBack;
+    private ToggleButton tgLike;
     private ViewPager viewPagerSlider;
     private LinearLayout layoutDots, linearNhanHieu, linearDanhMuc;
     private RelativeLayout relaXemThem, relaTrangThai, relaNhanHieu, relaKichThuoc, relaKhoiLuong;
@@ -63,6 +71,10 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     }
 
     private void anhXa(){
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        tvDiem = (TextView) findViewById(R.id.tvDiem);
+        tvSoSP = (TextView) findViewById(R.id.tvTongSP);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
         tvTenSP = (TextView) findViewById(R.id.tvTenSP);
         tvMoTaSP = (TextView) findViewById(R.id.tvMoTaSanPham);
         tvXemThem = (TextView) findViewById(R.id.tvXemThem);
@@ -73,6 +85,8 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         tvKhoiLuong = (TextView) findViewById(R.id.tvKhoiLuong);
         tvSoLuotThich = (TextView) findViewById(R.id.tvSoLuotThich);
         tvSoBinhLuan = (TextView) findViewById(R.id.tvSoBinhLuan);
+        tgLike = (ToggleButton) findViewById(R.id.tgLike);
+        tgLike.setOnCheckedChangeListener(this);
         btnMua = (Button) findViewById(R.id.btnMua);
         btnMua.setOnClickListener(this);
         btnBinhLuan = (Button) findViewById(R.id.btnBinhLuan);
@@ -158,6 +172,14 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
                 }
             }
         });
+
+        KhachHang khachHang = sanPham.getKhachHang();
+        Log.d("InfoKH", khachHang.getAnhInfoKH());
+        if(!khachHang.getAnhInfoKH().equalsIgnoreCase("null"))
+            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
+        tvTenKhachHang.setText(khachHang.getTenKhachHang());
+        tvDiem.setText(String.valueOf(khachHang.getDiemTinCay()));
+        tvSoSP.setText(String.valueOf(khachHang.getSoSanPham()));
 
         final List<DanhMuc> danhMucList = chiTietSanPham.getDanhMucList();
         int size = danhMucList.size();
@@ -258,5 +280,15 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if(b) {
+            tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
+        }
+        else {
+            tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
+        }
     }
 }

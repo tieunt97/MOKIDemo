@@ -7,11 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
+import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterLogicDangKy;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
@@ -19,8 +23,8 @@ import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity
  * Created by tieu_nt on 2/2/2018.
  */
 
-public class ManHinhDangKyActivity extends AppCompatActivity {
-
+public class ManHinhDangKyActivity extends AppCompatActivity implements ViewDangKy{
+    private PresenterLogicDangKy presenterLogicDangKy;
     private Button btnDaCoTK, btnBoQua, btnDangKy;
     private EditText edtSDT, edtMatKhau;
     private TextView txtDieuKhoanDK, tvMOKI;
@@ -33,13 +37,15 @@ public class ManHinhDangKyActivity extends AppCompatActivity {
         setStyleText();
         setActionEdt();
 
+        presenterLogicDangKy = new PresenterLogicDangKy(this);
+
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Register())
-                {
-                 Intent iXacNhan = new Intent(ManHinhDangKyActivity.this, XacNhanDangKyActivity.class);
-                 startActivity(iXacNhan);
+                String sdt = edtSDT.getText().toString();
+                String matKhau = edtMatKhau.getText().toString();
+                if(Register(sdt, matKhau)) {
+                    presenterLogicDangKy.dangKyTaiKhoan(sdt, matKhau);
                 }
 
             }
@@ -50,7 +56,6 @@ public class ManHinhDangKyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ManHinhDangKyActivity.this, ManHinhDangNhapActivity.class);
                 startActivity(intent);
-//                finish();
             }
         });
 
@@ -61,27 +66,6 @@ public class ManHinhDangKyActivity extends AppCompatActivity {
                 startActivity(intentTrangChu);
             }
         });
-
-//        edtSDT.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if(charSequence.length() > 0){
-//                    if(charSequence.toString().indexOf("0") != 0){
-//                        edtSDT.setText("");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
 
     }
 
@@ -136,9 +120,7 @@ public class ManHinhDangKyActivity extends AppCompatActivity {
         });
     }
 
-    private boolean Register(){
-        String sdt = edtSDT.getText().toString();
-        String matKhau = edtMatKhau.getText().toString();
+    private boolean Register(String sdt, String matKhau){
         String msg = "";
         if(matKhau.equals("") && sdt.equals(""))
             msg = "Bạn chưa nhập Số điện thoại và Mật khẩu";
@@ -204,5 +186,50 @@ public class ManHinhDangKyActivity extends AppCompatActivity {
         edtMatKhau = (EditText) findViewById(R.id.edtMatKhau);
         txtDieuKhoanDK = (TextView) findViewById(R.id.txtDieuKhoanDK);
         tvMOKI = (TextView) findViewById(R.id.tvMOKI);
+    }
+
+    @Override
+    public void dangKyThanhCong(TaiKhoan taiKhoan) {
+        Log.d("maXacNhan", String.valueOf(taiKhoan.getMaXacNhan()));
+        Intent iXacNhanDangKy = new Intent(ManHinhDangKyActivity.this, XacNhanDangKyActivity.class);
+        iXacNhanDangKy.putExtra("taiKhoan", taiKhoan);
+        startActivity(iXacNhanDangKy);
+
+        //gửi mã xác nhận
+    }
+
+    @Override
+    public void dangKyThatBai(String msg) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ManHinhDangKyActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
+        TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+        tvNoiDung.setText(msg);
+        Button btnDong = (Button) view.findViewById(R.id.btnDong);
+
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        btnDong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        //đóng sau 3s
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                    if(alertDialog.isShowing())
+                        alertDialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }

@@ -5,7 +5,7 @@
     android:layout_margin="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgInfoShop"
+        android:id="@+id/imgKhachHang"
         android:layout_width="@dimen/sizeImgUser"
         android:layout_height="@dimen/sizeImgUser"
         android:src="@drawable/user"/>
@@ -13,13 +13,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgInfoShop"
+        android:layout_toRightOf="@id/imgKhachHang"
         android:layout_marginLeft="10dp"
         android:orientation="vertical"
         >
 
         <TextView
-            android:id="@+id/tvTenShop"
+            android:id="@+id/tvTenKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"

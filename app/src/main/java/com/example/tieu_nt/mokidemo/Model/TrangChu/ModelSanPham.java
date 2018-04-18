@@ -1,10 +1,9 @@
 package com.example.tieu_nt.mokidemo.Model.TrangChu;
 
-import android.util.Log;
-
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
@@ -28,7 +27,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = ManHinhTrangChuActivity.SERVER_NAME;
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -53,7 +52,18 @@ public class ModelSanPham {
                 SanPham sanpham = new SanPham();
                 JSONObject object = jsonArrayDanhSachSanPham.getJSONObject(i);
                 sanpham.setIdSanPham(object.getInt("idSanPham"));
-                sanpham.setIdNguoiBan(object.getInt("idNguoiBan"));
+//                sanpham.setIdNguoiBan(object.getInt("idNguoiBan"));
+
+                KhachHang khachHang = new KhachHang();
+                JSONArray arrayKhachHang = object.getJSONArray("thongTinNguoiBan");
+                JSONObject objectKhachHang = arrayKhachHang.getJSONObject(0);
+                khachHang.setIdKhachHang(objectKhachHang.getInt("idKhachHang"));
+                khachHang.setTenKhachHang(objectKhachHang.getString("tenKhachHang"));
+                khachHang.setAnhInfoKH(objectKhachHang.getString("anhInfoKH"));
+                khachHang.setDiemTinCay(objectKhachHang.getInt("diemTinCay"));
+                khachHang.setSoSanPham(objectKhachHang.getInt("soSanPham"));
+                sanpham.setKhachHang(khachHang);
+
                 sanpham.setGia(object.getInt("giaChuan"));
                 sanpham.setSoLuotThich(object.getInt("soLuotThich"));
                 sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));

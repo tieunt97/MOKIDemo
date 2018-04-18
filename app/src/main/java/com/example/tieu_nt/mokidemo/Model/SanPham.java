@@ -11,7 +11,16 @@ public class SanPham implements Serializable {
     private String tenSanPham, moTa, hinhLon, hinhNho, NoiBan;
     private boolean yeuThich;
     private ChiTietSanPham chiTietSanPham;
+    private KhachHang khachHang;
 
+
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
 
     public String getNoiBan() {
         return NoiBan;

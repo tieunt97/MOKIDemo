@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterLogicDangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
@@ -168,8 +169,10 @@ public class ManHinhDangNhapActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void dangNhapThanhCong() {
-        Toast.makeText(ManHinhDangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+    public void dangNhapThanhCong(TaiKhoan taiKhoan) {
+        Intent iTrangChu = new Intent(ManHinhDangNhapActivity.this, ManHinhTrangChuActivity.class);
+        iTrangChu.putExtra("taiKhoan", taiKhoan);
+        startActivity(iTrangChu);
     }
 
     @Override
