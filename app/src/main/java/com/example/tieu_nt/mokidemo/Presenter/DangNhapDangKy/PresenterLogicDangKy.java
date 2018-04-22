@@ -15,7 +15,7 @@ public class PresenterLogicDangKy implements IPresenterDangKy{
 
     public PresenterLogicDangKy(ViewDangKy viewDangKy) {
         this.viewDangKy = viewDangKy;
-        modelDangNhap_dangKy = new ModelDangNhap_DangKy();
+        modelDangNhap_dangKy = ModelDangNhap_DangKy.getInstance();
     }
 
     @Override

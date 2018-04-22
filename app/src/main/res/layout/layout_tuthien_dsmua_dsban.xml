@@ -55,7 +55,11 @@
             android:layout_marginTop="50dp"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             android:background="@drawable/custom_button_bottom_login"
-            app:tabIndicatorHeight="0dp">
+            app:tabIndicatorHeight="0dp"
+            app:tabTextColor="@color/colorBlack"
+            app:tabSelectedTextColor="@color/colorRed"
+            app:tabMode="fixed"
+            app:tabGravity="fill">
 
         </android.support.design.widget.TabLayout>
 
@@ -87,14 +91,14 @@
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgUserInfo"
+                android:id="@+id/imgKhachHang"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/user"
                 />
 
             <TextView
-                android:id="@+id/tvUserName"
+                android:id="@+id/tvTenKhachHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="tieunt"

@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -38,10 +39,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
-import com.example.tieu_nt.mokidemo.Model.DrawerItem;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangKyActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeAn;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeChoiMaHoc;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeDiRaNgoai;
@@ -74,17 +75,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     //may tinh ca nhan
-//    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-//    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
+    public static String SERVER = "http://192.168.1.110:8080/webmoki";
+    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
+    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php";
+    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.110:8080/webmoki/khachhang.php";
+
 
     //Genymotion
-    public static String SERVER = "http://10.0.3.2:8080/webmoki";
-    public static String SERVER_NAME_SANPHAM = "http://10.0.3.2:8080/webmoki/laydssanpham.php";
-    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.0.3.2:8080/webmoki/dangnhap_dangky.php";
+//    public static String SERVER = "http://10.0.3.2:8080/webmoki";
+//    public static String SERVER_NAME_SANPHAM = "http://10.0.3.2:8080/webmoki/laydssanpham.php";
+//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.0.3.2:8080/webmoki/dangnhap_dangky.php";
 
     //Wifi HUST
 //    public static String SERVER = "http://10.11.203.188:8080/webmoki";
 //    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
+
 
     public static String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
 
@@ -99,7 +105,8 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private TabLayout tabLayout;
     private ViewFlipper viewFlipper;
     private Button btnSapXep, btnLoc, btnXung;
-    private CircleImageView imgUserInfo;
+    private CircleImageView imgKhachHang;
+    private TextView tvTenKhachHang;
     private FloatingActionButton fab;
     private float x1, x2;
     private final int IMG_REQUEST = 1;
@@ -109,6 +116,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private List<Fragment> list = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private  AlertDialog.Builder builder;
+    private KhachHang khachHang;
 
 
     @Override
@@ -135,11 +143,14 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-
-        adapter = new AdapterMenu(ManHinhTrangChuActivity.this, 0, drawerLayout);
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        if (khachHang != null)
+            tvTenKhachHang.setText(khachHang.getTenKhachHang());
+        adapter = new AdapterMenu(ManHinhTrangChuActivity.this, 0, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        if (khachHang != null)
 
         viewFlipper.setInAnimation(this, android.R.anim.fade_in);
         viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
@@ -174,6 +185,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         titles.add("Dành cho mẹ");
         titles.add("Đồ dùng gia đình");
         titles.add("Sản phẩm khác");
+
         viewPagerAdapter = new ViewPagerAdapterTrangChu(getSupportFragmentManager(), list, titles);
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -215,45 +227,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
             super.onBackPressed();
         }
 
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(ManHinhTrangChuActivity.this);
-//        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
-//        TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
-//        Button btnHuy = (Button) view.findViewById(R.id.btnHuy);
-//        Button btnDangXuat = (Button) view.findViewById(R.id.btnDangXuat);
-//
-//        builder.setView(view);
-//        final AlertDialog alertDialog = builder.create();
-//        alertDialog.show();
-//
-//        btnHuy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//
-//        btnDangXuat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertDialog.onBackPressed();
-//            }
-//        });
-//
-//        //đóng sau 3s
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(3000);
-//                    if(alertDialog.isShowing())
-//                        alertDialog.dismiss();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        thread.start();
-
         super.onBackPressed();
     }
 
@@ -273,11 +246,12 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         btnLoc.setOnClickListener(this);
         btnXung = (Button) findViewById(R.id.btnXung);
         btnXung.setOnClickListener(this);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgUserInfo);
-        imgUserInfo.setOnClickListener(this);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        imgKhachHang.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
     }
 
     //action view flipper
@@ -306,14 +280,13 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 Intent intentUser = new Intent(ManHinhTrangChuActivity.this, ThongTinNguoiDungActivity.class);
                 startActivity(intentUser);
                 break;
-            case R.id.imgUserInfo:
+            case R.id.imgKhachHang:
                 selectImage();
                 break;
             case R.id.btnSapXep:
                 Toast.makeText(ManHinhTrangChuActivity.this, "Sắp xếp", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnLoc:
-//                Toast.makeText(ManHinhTrangChuActivity.this, "Lọc", Toast.LENGTH_SHORT).show();
                 Intent intentCTSP = new Intent(ManHinhTrangChuActivity.this, HienThiChiTietSanPhamActivity.class);
                 startActivity(intentCTSP);
                 break;
@@ -341,7 +314,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
             Uri path = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-                imgUserInfo.setImageBitmap(bitmap);
+                imgKhachHang.setImageBitmap(bitmap);
                 uploadImage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -370,7 +343,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("name", "1ImgUserInfo");
+                params.put("name", khachHang.getIdKhachHang() + "AnhKhachHang");
                 params.put("image", imageToString(bitmap));
 
                 return params;

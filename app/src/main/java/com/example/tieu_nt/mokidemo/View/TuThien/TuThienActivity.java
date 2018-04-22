@@ -28,6 +28,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
@@ -63,6 +65,7 @@ public class TuThienActivity extends AppCompatActivity implements View.OnClickLi
     private Bitmap bitmap;
     private List<Fragment> list = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
+    private KhachHang khachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,8 +86,8 @@ public class TuThienActivity extends AppCompatActivity implements View.OnClickLi
         actionBarDrawerToggle.syncState();
 
         //set viewpager
-
-        adapter = new AdapterMenu(TuThienActivity.this, 5, drawerLayout);
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        adapter = new AdapterMenu(TuThienActivity.this, 5, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -100,7 +103,7 @@ public class TuThienActivity extends AppCompatActivity implements View.OnClickLi
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgUserInfo);
+        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -123,7 +126,7 @@ public class TuThienActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgUserInfo:
+            case R.id.imgKhachHang:
                 selectImage();
                 break;
         }

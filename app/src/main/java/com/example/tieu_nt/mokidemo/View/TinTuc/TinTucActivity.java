@@ -25,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterTinTuc;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
@@ -56,6 +58,7 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
     private AdapterTinTuc adapterTinTuc;
+    private KhachHang khachHang;
 
 
     @Override
@@ -77,8 +80,8 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
         actionBarDrawerToggle.syncState();
 
         //set viewpager
-
-        adapter = new AdapterMenu(TinTucActivity.this, 1, drawerLayout);
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        adapter = new AdapterMenu(TinTucActivity.this, 1, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -95,7 +98,7 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgUserInfo);
+        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewTinTuc = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
@@ -117,7 +120,7 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgUserInfo:
+            case R.id.imgKhachHang:
                 selectImage();
                 break;
         }

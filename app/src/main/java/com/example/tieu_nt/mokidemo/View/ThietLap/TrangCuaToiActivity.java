@@ -1,37 +1,78 @@
 package com.example.tieu_nt.mokidemo.View.ThietLap;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.tieu_nt.mokidemo.Model.BottomSheetThayAnhNen;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tieu_nt on 4/13/2018.
  */
 
-public class TrangCuaToiActivity extends AppCompatActivity implements View.OnClickListener{
+public class TrangCuaToiActivity extends AppCompatActivity implements View.OnClickListener, BottomSheetThayAnhNen.GiaoTiepGiuaFragmentVaActivity {
+    private FrameLayout frameChinhSuaAnhInfo;
     private ImageButton imgBack;
     private EditText edtThongTin;
-    private TextView tvSoKyTu, tvXong;
+    private Button btnCapNhat;
+    private TextView tvSoKyTu, tvXong, tvChinhSuaAnhBia;
     private RelativeLayout relaXong;
+    private BottomSheetThayAnhNen bottomSheetThayAnhNen;
+    private ImageView imgAnhBia;
+    private CircleImageView imgKhachHang;
     private boolean visible = false;
+    private Bitmap bitmapKH, bitmapAnhBia;
+    private KhachHang khachHang;
+    private ModelKhachHang modelKhachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_trangcuatoi);
         anhXa();
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        if (!khachHang.getAnhInfoKH().equals("null"))
+            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
+        if (!khachHang.getAnhBia().equals("null"))Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhBia()).into(imgAnhBia);
+        if (!khachHang.getMoTa().equals("null"))
+            edtThongTin.setText(khachHang.getMoTa());
+        modelKhachHang = ModelKhachHang.getInstance();
+        bottomSheetThayAnhNen = new BottomSheetThayAnhNen();
 
         edtThongTin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,12 +95,20 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
     private void anhXa(){
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
+        btnCapNhat = (Button) findViewById(R.id.btnCapNhat);
+        btnCapNhat.setOnClickListener(this);
+        frameChinhSuaAnhInfo = (FrameLayout) findViewById(R.id.frameChinhSuaAnhInfo);
+        frameChinhSuaAnhInfo.setOnClickListener(this);
+        imgAnhBia = (ImageView) findViewById(R.id.imgAnhBia);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
         edtThongTin = (EditText) findViewById(R.id.edtThongTin);
         edtThongTin.setOnClickListener(this);
         relaXong = (RelativeLayout) findViewById(R.id.relaXong);
         tvSoKyTu = (TextView) findViewById(R.id.tvSoKyTu);
         tvXong = (TextView) findViewById(R.id.tvXong);
         tvXong.setOnClickListener(this);
+        tvChinhSuaAnhBia = (TextView) findViewById(R.id.tvChinhSuaAnhBia);
+        tvChinhSuaAnhBia.setOnClickListener(this);
         edtThongTin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -71,12 +120,36 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    private String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imgBack:
                 finish();
+                break;
+            case R.id.btnCapNhat:
+                String name = "", image = "", nameAnhBia = "", imageAnhBia = "", moTa = "";
+                if (bitmapKH != null) {
+                    name = khachHang.getIdKhachHang() + "AnhKhachHang";
+                    image = imageToString(bitmapKH);
+                }
+                if (bitmapAnhBia != null) {
+                    nameAnhBia = khachHang.getIdKhachHang() + "AnhBia";
+                    imageAnhBia = imageToString(bitmapAnhBia);
+                }
+                if (edtThongTin.getText().toString().length() > 0) {
+                    moTa = edtThongTin.getText().toString();
+                }
+                modelKhachHang.capNhatThongTinKhachHang("capNhatThongTinKhachHang", khachHang.getIdKhachHang(),
+                        name, image, nameAnhBia, imageAnhBia, moTa);
+                Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.edtThongTin:
                 if(!visible){
@@ -91,7 +164,28 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
                 visible = !visible;
                 relaXong.setVisibility(View.GONE);
                 break;
+            case R.id.frameChinhSuaAnhInfo:
+                bottomSheetThayAnhNen.setAnhBia(false);
+                bottomSheetThayAnhNen.show(getSupportFragmentManager(), "anhInfo");
+                break;
+            case R.id.tvChinhSuaAnhBia:
+                bottomSheetThayAnhNen.setAnhBia(true);
+                bottomSheetThayAnhNen.show(getSupportFragmentManager(), "anhBia");
+                break;
+        }
+    }
 
+    @Override
+    public void bitMap(boolean anhBia, Bitmap bitmap) {
+        if(anhBia) {
+            bottomSheetThayAnhNen.dismiss();
+            bitmapAnhBia = bitmap;
+            imgAnhBia.setImageBitmap(bitmapAnhBia);
+        }
+        else{
+            bottomSheetThayAnhNen.dismiss();
+            bitmapKH = bitmap;
+            imgKhachHang.setImageBitmap(bitmapKH);
         }
     }
 }

@@ -14,7 +14,7 @@ public class PresenterLogicDangNhap implements IPresenterDangNhap{
 
     public PresenterLogicDangNhap(ViewDangNhap viewDangNhap) {
         this.viewDangNhap = viewDangNhap;
-        modelDangNhap = new ModelDangNhap_DangKy();
+        modelDangNhap = ModelDangNhap_DangKy.getInstance();
     }
 
     @Override

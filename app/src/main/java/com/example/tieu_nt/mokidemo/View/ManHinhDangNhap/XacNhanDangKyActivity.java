@@ -161,6 +161,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
                     edt1.requestFocus();
                 }
             }
+
         }
     }
 

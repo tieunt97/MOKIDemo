@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -25,6 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
@@ -54,6 +57,7 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
     private ImageButton imgMenu;
+    private KhachHang khachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,8 +77,8 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-
-        adapter = new AdapterMenu(ThietLapActivity.this, 6, drawerLayout);
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        adapter = new AdapterMenu(ThietLapActivity.this, 6, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -97,7 +101,7 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgUserInfo);
+        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
     }
@@ -118,11 +122,12 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgUserInfo:
+            case R.id.imgKhachHang:
                 selectImage();
                 break;
             case R.id.relaTrangCuaToi:
                 Intent iTrangCuaToi = new Intent(ThietLapActivity.this, TrangCuaToiActivity.class);
+                iTrangCuaToi.putExtra("khachHang", khachHang);
                 startActivity(iTrangCuaToi);
                 break;
             case R.id.relaDiaChi:
@@ -131,6 +136,7 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.relaDoiMatKhau:
                 Intent iDoiMK = new Intent(ThietLapActivity.this, DoiMatKhauActivity.class);
+                iDoiMK.putExtra("khachHang", khachHang);
                 startActivity(iDoiMK);
                 break;
             case R.id.relaDSChan:

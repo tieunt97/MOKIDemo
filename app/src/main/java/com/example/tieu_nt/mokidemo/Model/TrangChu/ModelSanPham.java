@@ -21,6 +21,16 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ModelSanPham {
+    private static ModelSanPham modelSanPham;
+
+    private ModelSanPham(){
+
+    }
+
+    public static synchronized ModelSanPham getInstance(){
+        if(modelSanPham == null) modelSanPham = new ModelSanPham();
+        return modelSanPham;
+    }
     public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP){
         List<SanPham> dsSanPham = new ArrayList<>();
 
@@ -52,7 +62,6 @@ public class ModelSanPham {
                 SanPham sanpham = new SanPham();
                 JSONObject object = jsonArrayDanhSachSanPham.getJSONObject(i);
                 sanpham.setIdSanPham(object.getInt("idSanPham"));
-//                sanpham.setIdNguoiBan(object.getInt("idNguoiBan"));
 
                 KhachHang khachHang = new KhachHang();
                 JSONArray arrayKhachHang = object.getJSONArray("thongTinNguoiBan");

@@ -20,6 +20,17 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ModelDangNhap_DangKy {
+    private static ModelDangNhap_DangKy modelDangNhap_dangKy;
+
+    private ModelDangNhap_DangKy(){
+
+    }
+
+    public static synchronized ModelDangNhap_DangKy getInstance(){
+        if(modelDangNhap_dangKy == null) modelDangNhap_dangKy = new ModelDangNhap_DangKy();
+        return modelDangNhap_dangKy;
+    }
+
     public TaiKhoan layTaiKhoan(String ham, String soDT, String matKhau){
         TaiKhoan taiKhoan = new TaiKhoan();
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -50,6 +61,7 @@ public class ModelDangNhap_DangKy {
             JSONArray jsonArray = jsonObject.getJSONArray("taikhoan");
             JSONObject objectTaiKhoan = jsonArray.getJSONObject(0);
             taiKhoan.setSoDT(objectTaiKhoan.getString("soDT"));
+            Log.d("soDT", taiKhoan.getSoDT());
             taiKhoan.setMatKhau(objectTaiKhoan.getString("matKhau"));
             taiKhoan.setTrangThai(objectTaiKhoan.getInt("trangThai"));
             taiKhoan.setNgayKichHoat(objectTaiKhoan.getString("ngayKichHoat"));

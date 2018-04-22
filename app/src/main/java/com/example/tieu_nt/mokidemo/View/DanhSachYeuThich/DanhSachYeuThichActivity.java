@@ -26,7 +26,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamYeuThich;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
@@ -58,6 +60,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
     private AdapterSanPhamYeuThich adapterSanPhamYeuThich;
+    private KhachHang khachHang;
 
 
     @Override
@@ -81,8 +84,8 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         actionBarDrawerToggle.syncState();
 
         //set viewpager
-
-        adapter = new AdapterMenu(DanhSachYeuThichActivity.this, 2, drawerLayout);
+        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
+        adapter = new AdapterMenu(DanhSachYeuThichActivity.this, 2, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -100,7 +103,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgUserInfo);
+        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewTinTuc = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
@@ -122,7 +125,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgUserInfo:
+            case R.id.imgKhachHang:
                 selectImage();
                 break;
         }

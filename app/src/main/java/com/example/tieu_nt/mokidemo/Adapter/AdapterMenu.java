@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
+import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ItemClickListener;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.DanhSachBan.DanhSachBanActivity;
@@ -35,6 +37,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
     private Context context;
     private int position;
     private DrawerLayout drawerLayout;
+    private KhachHang khachHang;
 
     private String[] tenItems = {"Trang chủ", "Tin tức", "Danh sách yêu thích", "Danh sách bán", "Danh sách mua",
             "Từ thiện", "Thiết lập", "Trung tâm hỗ trợ", "Giới thiệu MOKI", "Đăng xuất"};
@@ -42,12 +45,17 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
             R.drawable.shopping_cart, R.drawable.charity, R.drawable.settings, R.drawable.mail,
             R.drawable.info, R.drawable.logout};
 
-    public AdapterMenu(Context context, int position, DrawerLayout drawerLayout){
+    public AdapterMenu(Context context, int position, DrawerLayout drawerLayout, KhachHang khachHang){
         this.context = context;
         this.position = position;
         this.drawerLayout = drawerLayout;
+        this.khachHang = khachHang;
 
-        for (int i = 0; i < tenItems.length; i++){
+        int length = tenItems.length;
+        if (khachHang != null) tenItems[length - 1] = "Đăng xuất";
+        else tenItems[length - 1] = "Đăng nhập";
+
+        for (int i = 0; i < length; i++){
             dsItems.add(new DrawerItem(hinhItems[i], tenItems[i]));
         }
     }
@@ -78,6 +86,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iTrangChu = new Intent(context, ManHinhTrangChuActivity.class);
+                            iTrangChu.putExtra("khachHang", khachHang);
                             context.startActivity(iTrangChu);
                         }
                         break;
@@ -87,6 +96,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iTinTuc = new Intent(context, TinTucActivity.class);
+                            iTinTuc.putExtra("khachHang", khachHang);
                             context.startActivity(iTinTuc);
                         }
                         break;
@@ -96,6 +106,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iDSYeuThich = new Intent(context, DanhSachYeuThichActivity.class);
+                            iDSYeuThich.putExtra("khachHang", khachHang);
                             context.startActivity(iDSYeuThich);
                         }
                         break;
@@ -105,6 +116,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iDSBan = new Intent(context, DanhSachBanActivity.class);
+                            iDSBan.putExtra("khachHang", khachHang);
                             context.startActivity(iDSBan);
                         }
                         break;
@@ -114,6 +126,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iDSMua = new Intent(context, DanhSachMuaActivity.class);
+                            iDSMua.putExtra("khachHang", khachHang);
                             context.startActivity(iDSMua);
                         }
                         break;
@@ -123,6 +136,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iTuThien = new Intent(context, TuThienActivity.class);
+                            iTuThien.putExtra("khachHang", khachHang);
                             context.startActivity(iTuThien);
                         }
                         break;
@@ -132,6 +146,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iThietLap = new Intent(context, ThietLapActivity.class);
+                            iThietLap.putExtra("khachHang", khachHang);
                             context.startActivity(iThietLap);
                         }
                         break;
@@ -141,6 +156,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iTrungTamHoTro = new Intent(context, TrungTamHoTroActivity.class);
+                            iTrungTamHoTro.putExtra("khachHang", khachHang);
                             context.startActivity(iTrungTamHoTro);
                         }
                         break;
@@ -150,6 +166,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             drawerLayout.closeDrawers();
                         }else {
                             Intent iGioiThieu = new Intent(context, GioiThieuMOKIActivity.class);
+                            iGioiThieu.putExtra("khachHang", khachHang);
                             context.startActivity(iGioiThieu);
                         }
                         break;

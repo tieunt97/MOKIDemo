@@ -20,7 +20,7 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
 
     public PresenterLogicSanPham(ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham) {
         this.viewHienThiDanhSachSanPham = viewHienThiDanhSachSanPham;
-        this.modelSanPham = new ModelSanPham();
+        this.modelSanPham = ModelSanPham.getInstance();
     }
 
     @Override

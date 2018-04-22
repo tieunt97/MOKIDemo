@@ -9,9 +9,10 @@ import java.util.List;
 
 public class KhachHang implements Serializable{
     private int idKhachHang, diemTinCay, soSanPham;
-    private String tenKhachHang, diaChi, anhInfoKH, moTa, thoiGianOnline, thoiGianOffline;
+    private String tenKhachHang, diaChi, anhInfoKH, anhBia, moTa, thoiGianOnline, thoiGianOffline;
     private TaiKhoan taiKhoan;
     private List<SanPham> dsSanPham;
+    private List<DiaChi> dsDiaChi;
 
 
     public List<SanPham> getDsSanPham() {
@@ -28,6 +29,14 @@ public class KhachHang implements Serializable{
 
     public void setAnhInfoKH(String anhInfoKH) {
         this.anhInfoKH = anhInfoKH;
+    }
+
+    public String getAnhBia() {
+        return anhBia;
+    }
+
+    public void setAnhBia(String anhBia) {
+        this.anhBia = anhBia;
     }
 
     public int getIdKhachHang() {
@@ -100,5 +109,13 @@ public class KhachHang implements Serializable{
 
     public void setTaiKhoan(TaiKhoan taiKhoan) {
         this.taiKhoan = taiKhoan;
+    }
+
+    public List<DiaChi> getDsDiaChi() {
+        return dsDiaChi;
+    }
+
+    public void setDsDiaChi(List<DiaChi> dsDiaChi) {
+        this.dsDiaChi = dsDiaChi;
     }
 }
