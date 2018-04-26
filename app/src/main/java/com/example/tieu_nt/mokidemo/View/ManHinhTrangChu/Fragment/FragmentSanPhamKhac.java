@@ -30,14 +30,18 @@ public class FragmentSanPhamKhac extends Fragment implements ViewHienThiDanhSach
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private boolean dangList = false;
+    private int idKhachHang;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_sanpham, container, false);
+        Bundle bundle = getArguments();
+        idKhachHang = bundle.getInt("idKhachHang");
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 12);
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 12, 0, idKhachHang);
         return view;
     }
 
@@ -59,7 +63,7 @@ public class FragmentSanPhamKhac extends Fragment implements ViewHienThiDanhSach
     public void setDangList(boolean dangList){
         if(this.dangList == !dangList){
             this.dangList = dangList;
-            presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 12);
+            presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 12, 0, idKhachHang);
         }
     }
 }

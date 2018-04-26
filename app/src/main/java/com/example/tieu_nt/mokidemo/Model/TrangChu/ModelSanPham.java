@@ -1,5 +1,7 @@
 package com.example.tieu_nt.mokidemo.Model.TrangChu;
 
+import android.util.Log;
+
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
@@ -31,7 +33,7 @@ public class ModelSanPham {
         if(modelSanPham == null) modelSanPham = new ModelSanPham();
         return modelSanPham;
     }
-    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP){
+    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -45,8 +47,17 @@ public class ModelSanPham {
         HashMap<String,String> hsIdLoaiSP = new HashMap<>();
         hsIdLoaiSP.put("idLoaiSP", String.valueOf(idLoaiSP));
 
+        HashMap<String,String> hsLimit = new HashMap<>();
+        hsLimit.put("limit", String.valueOf(limit));
+
         attrs.add(hsHam);
         attrs.add(hsIdLoaiSP);
+        attrs.add(hsLimit);
+        if (idKhachHang != 0){
+            HashMap<String,String> hsIdKhachHang = new HashMap<>();
+            hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+            attrs.add(hsIdKhachHang);
+        }
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
         //end phương thức post
@@ -54,7 +65,6 @@ public class ModelSanPham {
 
         try {
             dataJSON = downloadJSON.get();
-
             JSONObject jsonObject = new JSONObject(dataJSON);
             JSONArray jsonArrayDanhSachSanPham = jsonObject.getJSONArray("danhsachsanpham");
             int count = jsonArrayDanhSachSanPham.length();
@@ -81,6 +91,9 @@ public class ModelSanPham {
                 sanpham.setHinhLon(object.getString("hinhLon"));
                 sanpham.setHinhNho(object.getString("hinhNho"));
                 sanpham.setNoiBan(object.getString("noiBan"));
+                if(idKhachHang != 0){
+                    sanpham.setYeuThich(object.getBoolean("yeuThich"));
+                }
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                 List<DanhMuc> danhMucList = new ArrayList<>();
                 chiTietSanPham.setKhoiLuong(object.getString("khoiLuong"));

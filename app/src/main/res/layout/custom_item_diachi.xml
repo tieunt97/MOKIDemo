@@ -55,10 +55,10 @@
         android:textSize="@dimen/sizeTenSP"/>
 
     <ImageView
-        android:id="@+id/imgBaCham"
+        android:id="@+id/imgTuyChon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/home"
+        android:src="@drawable/more"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"/>

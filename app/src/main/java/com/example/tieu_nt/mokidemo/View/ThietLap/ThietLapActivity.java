@@ -132,6 +132,7 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.relaDiaChi:
                 Intent iDiaChi = new Intent(ThietLapActivity.this, DiaChiActivity.class);
+                iDiaChi.putExtra("khachHang", khachHang);
                 startActivity(iDiaChi);
                 break;
             case R.id.relaDoiMatKhau:

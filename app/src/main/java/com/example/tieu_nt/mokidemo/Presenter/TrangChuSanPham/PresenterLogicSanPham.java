@@ -6,6 +6,7 @@ import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelSanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewHienThiDanhSachSanPham;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ import java.util.List;
 public class PresenterLogicSanPham implements IPresenterSanPham{
     private ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham;
     private ModelSanPham modelSanPham;
-    private List<SanPham> dsSanPham;
 
 
     public PresenterLogicSanPham(ViewHienThiDanhSachSanPham viewHienThiDanhSachSanPham) {
@@ -24,12 +24,17 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     @Override
-    public void layDanhSachSanPham(String ham, int idLoaiSP) {
-        if(dsSanPham == null){
-            dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP);
-        }
+    public void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang) {
+         List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang);
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
         }
+    }
+
+    public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang) {
+        List<SanPham> dsSanPham = new ArrayList<>();
+        dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang);
+
+        return dsSanPham;
     }
 }

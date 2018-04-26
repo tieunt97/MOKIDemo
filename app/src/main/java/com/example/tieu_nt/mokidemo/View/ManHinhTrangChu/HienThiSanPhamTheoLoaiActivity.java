@@ -31,6 +31,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
     private AdapterSanPham adapterSanPham;
     private PresenterLogicSanPham presenterLogicSanPham;
     private DanhMuc danhMuc;
+    private int idKhachHang = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,9 +41,10 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
 
         Intent intent = getIntent();
         danhMuc = (DanhMuc) intent.getSerializableExtra("danhMuc");
+        idKhachHang = intent.getIntExtra("idKhachHang", idKhachHang);
         tvTenLoaiSP.setText(danhMuc.getTenDanhMuc());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc());
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), 0, idKhachHang);
     }
 
     private void anhXa(){

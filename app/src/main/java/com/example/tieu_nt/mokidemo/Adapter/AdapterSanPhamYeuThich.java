@@ -1,15 +1,18 @@
 package com.example.tieu_nt.mokidemo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.HienThiChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -40,12 +43,29 @@ public class AdapterSanPhamYeuThich extends RecyclerView.Adapter<AdapterSanPhamY
 
     @Override
     public void onBindViewHolder(AdapterSanPhamYeuThich.ViewHolder holder, int position) {
-        SanPham sanPham = dsSanPham.get(position);
+        final SanPham sanPham = dsSanPham.get(position);
         Picasso.get().load(sanPham.getHinhLon()).into(holder.imgHinhSP);
         holder.tvTenSP.setText(sanPham.getTenSanPham());
-        NumberFormat numberFormat = new DecimalFormat("###,###");
-        String gia = numberFormat.format(sanPham.getGia()).toString();
-        holder.tvGia.setText(gia);
+        if(sanPham.getGia() == 0){
+            holder.tvGia.setText("Miễn phí");
+        }else {
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String gia = numberFormat.format(sanPham.getGia()).toString();
+            holder.tvGia.setText(gia);
+        }
+        holder.relaSanPhamYeuThich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSanPham = new Intent(context, HienThiChiTietSanPhamActivity.class);
+                intentSanPham.putExtra("sanPham", sanPham);
+                context.startActivity(intentSanPham);
+            }
+        });
+        if (position != dsSanPham.size() -  1){
+            holder.view.setVisibility(View.VISIBLE);
+        }else{
+            holder.view.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -56,11 +76,15 @@ public class AdapterSanPhamYeuThich extends RecyclerView.Adapter<AdapterSanPhamY
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTenSP, tvGia;
         ImageView imgHinhSP;
+        RelativeLayout relaSanPhamYeuThich;
+        View view;
         public ViewHolder(View itemView) {
             super(itemView);
+            relaSanPhamYeuThich = (RelativeLayout) itemView.findViewById(R.id.relaSanPhamYeuThich);
             tvTenSP = (TextView) itemView.findViewById(R.id.tvTenSP);
             tvGia = (TextView) itemView.findViewById(R.id.tvGiaSP);
             imgHinhSP = (ImageView) itemView.findViewById(R.id.imgHinhSP);
+            view = (View) itemView.findViewById(R.id.view);
         }
     }
 }

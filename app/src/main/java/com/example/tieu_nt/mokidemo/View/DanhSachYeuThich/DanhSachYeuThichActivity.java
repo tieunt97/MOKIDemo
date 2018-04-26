@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -28,8 +29,8 @@ import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamYeuThich;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
+import com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich.PresenterDanhSachYeuThich;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
@@ -40,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,11 +50,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class DanhSachYeuThichActivity extends AppCompatActivity implements View.OnClickListener{
+public class DanhSachYeuThichActivity extends AppCompatActivity implements View.OnClickListener, ViewDSSanPhamYeuThich{
     private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private RecyclerView recyclerView, recyclerViewTinTuc;
+    private RecyclerView recyclerView, recyclerViewSPYeuThich;
     private AdapterMenu adapter;
     private CircleImageView imgUserInfo;
     private ImageButton imgMenu;
@@ -61,6 +63,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
     private Bitmap bitmap;
     private AdapterSanPhamYeuThich adapterSanPhamYeuThich;
     private KhachHang khachHang;
+    private PresenterDanhSachYeuThich presenterDanhSachYeuThich;
 
 
     @Override
@@ -89,12 +92,11 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
-        adapterSanPhamYeuThich = new AdapterSanPhamYeuThich(DanhSachYeuThichActivity.this, new ArrayList<SanPham>());
-        recyclerViewTinTuc.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewTinTuc.setHasFixedSize(true);
-        recyclerViewTinTuc.setAdapter(adapterSanPhamYeuThich);
-
+        presenterDanhSachYeuThich = new PresenterDanhSachYeuThich(this);
+        Log.d("idkhachhang", khachHang.getIdKhachHang() + "");
+        presenterDanhSachYeuThich.layDSSanPhamYeuThich("layDSSanPhamYeuThich", khachHang.getIdKhachHang(), 0);
     }
 
     private void anhXa(){
@@ -106,7 +108,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerViewTinTuc = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
+        recyclerViewSPYeuThich = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
     }
 
     @Override
@@ -190,5 +192,14 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         byte[] imgByte = byteArrayOutputStream.toByteArray();
 
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    @Override
+    public void hienThiDSSanPham(List<SanPham> dsSanPham) {
+        adapterSanPhamYeuThich = new AdapterSanPhamYeuThich(DanhSachYeuThichActivity.this, dsSanPham);
+        recyclerViewSPYeuThich.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewSPYeuThich.setHasFixedSize(true);
+        recyclerViewSPYeuThich.setAdapter(adapterSanPhamYeuThich);
+        adapterSanPhamYeuThich.notifyDataSetChanged();
     }
 }

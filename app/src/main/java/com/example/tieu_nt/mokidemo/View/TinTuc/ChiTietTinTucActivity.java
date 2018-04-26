@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.R;
 
 /**
@@ -17,20 +17,27 @@ import com.example.tieu_nt.mokidemo.R;
 
 public class ChiTietTinTucActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageButton imgBack;
+    private TextView tvTieuDe, tvNgayDang, tvNoiDung;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_chitiettintuc);
-
-
-        AnhXa();
+        anhXa();
         setActions();
+        TinTuc tinTuc = (TinTuc) getIntent().getSerializableExtra("tinTuc");
+        tvTieuDe.setText(tinTuc.getTieuDe());
+        String ngayDang = "Ngày " + tinTuc.getNgayDang()[2] + " Tháng " + tinTuc.getNgayDang()[1] + " Năm" + tinTuc.getNgayDang()[0];
+        tvNgayDang.setText(ngayDang);
+        tvNoiDung.setText(tinTuc.getNoiDung());
     }
 
-    private void AnhXa(){
+    private void anhXa(){
         imgBack = (ImageButton) findViewById(R.id.imgBack);
+        tvTieuDe = (TextView) findViewById(R.id.tvTieuDe);
+        tvNgayDang = (TextView) findViewById(R.id.tvNgayDang);
+        tvNoiDung = (TextView) findViewById(R.id.tvNoiDung);
     }
 
     private void setActions(){

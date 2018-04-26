@@ -1,14 +1,17 @@
 package com.example.tieu_nt.mokidemo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TinTuc.ChiTietTinTucActivity;
 
 import java.util.List;
 
@@ -36,10 +39,25 @@ public class AdapterTinTuc extends RecyclerView.Adapter<AdapterTinTuc.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TinTuc tinTuc = dsTinTuc.get(position);
-        holder.tvNgay.setText(tinTuc.getNgayDang());
-        holder.tvThoiGian.setText(tinTuc.getThoiGian());
-        holder.tvTinTuc.setText(tinTuc.getTenThongBao());
+        final TinTuc tinTuc = dsTinTuc.get(position);
+        String ngayDang = tinTuc.getNgayDang()[2] + "/" + tinTuc.getNgayDang()[1] + "/" + tinTuc.getNgayDang()[0];
+        holder.tvNgay.setText(ngayDang);
+        String thoiGian = tinTuc.getGioDang()[0] + ":" + tinTuc.getGioDang()[1];
+        holder.tvThoiGian.setText(thoiGian);
+        holder.tvTinTuc.setText(tinTuc.getTieuDe());
+        if(position != dsTinTuc.size() - 1){
+            holder.view.setVisibility(View.VISIBLE);
+        }else{
+            holder.view.setVisibility(View.GONE);
+        }
+        holder.relaTinTuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iChiTietTinTuc = new Intent(context, ChiTietTinTucActivity.class);
+                iChiTietTinTuc.putExtra("tinTuc", tinTuc);
+                context.startActivity(iChiTietTinTuc);
+            }
+        });
     }
 
     @Override
@@ -48,12 +66,16 @@ public class AdapterTinTuc extends RecyclerView.Adapter<AdapterTinTuc.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout relaTinTuc;
         TextView tvNgay, tvThoiGian, tvTinTuc;
+        View view;
         public ViewHolder(View itemView) {
             super(itemView);
+            relaTinTuc = (RelativeLayout) itemView.findViewById(R.id.relaTinTuc);
             tvNgay = (TextView) itemView.findViewById(R.id.tvNgay);
             tvThoiGian = (TextView) itemView.findViewById(R.id.tvThoiGian);
             tvTinTuc = (TextView) itemView.findViewById(R.id.tvTenTinTuc);
+            view = (View) itemView.findViewById(R.id.view);
         }
     }
 }

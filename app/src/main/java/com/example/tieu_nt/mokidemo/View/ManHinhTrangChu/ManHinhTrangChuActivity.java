@@ -85,6 +85,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
 //    public static String SERVER = "http://10.0.3.2:8080/webmoki";
 //    public static String SERVER_NAME_SANPHAM = "http://10.0.3.2:8080/webmoki/laydssanpham.php";
 //    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.0.3.2:8080/webmoki/dangnhap_dangky.php";
+//    public static String SERVER_NAME_KHACHHANG = "http://10.0.3.2:8080/webmoki/khachhang.php";
 
     //Wifi HUST
 //    public static String SERVER = "http://10.11.203.188:8080/webmoki";
@@ -117,6 +118,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private List<String> titles = new ArrayList<>();
     private  AlertDialog.Builder builder;
     private KhachHang khachHang;
+    public static int idKhachHang = 0;
 
 
     @Override
@@ -144,13 +146,14 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         actionBarDrawerToggle.syncState();
 
         khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        if (khachHang != null)
+        if (khachHang != null){
             tvTenKhachHang.setText(khachHang.getTenKhachHang());
+            idKhachHang = khachHang.getIdKhachHang();
+        }
         adapter = new AdapterMenu(ManHinhTrangChuActivity.this, 0, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        if (khachHang != null)
 
         viewFlipper.setInAnimation(this, android.R.anim.fade_in);
         viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
@@ -158,19 +161,61 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         viewFlipper.setFlipInterval(3000);
 
         //set viewPager
-        list.add(new FragmentTatCa());
-        list.add(new FragmentMienPhi());
-        list.add(new FragmentBeAn());
-        list.add(new FragmentBeMac());
-        list.add(new FragmentBeNgu());
-        list.add(new FragmentBeTam());
-        list.add(new FragmentBeVeSinh());
-        list.add(new FragmentBeKhoeAnToan());
-        list.add(new FragmentBeDiRaNgoai());
-        list.add(new FragmentBeChoiMaHoc());
-        list.add(new FragmentDanhChoMe());
-        list.add(new FragmentDoDungGiaDinh());
-        list.add(new FragmentSanPhamKhac());
+        Bundle bundleIdKhachHang = new Bundle();
+        bundleIdKhachHang.putInt("idKhachHang", idKhachHang);
+
+        FragmentTatCa fragmentTatCa = new FragmentTatCa();
+        fragmentTatCa.setArguments(bundleIdKhachHang);
+
+        FragmentMienPhi fragmentMienPhi = new FragmentMienPhi();
+        fragmentMienPhi.setArguments(bundleIdKhachHang);
+
+        FragmentBeAn fragmentBeAn = new FragmentBeAn();
+        fragmentBeAn.setArguments(bundleIdKhachHang);
+
+        FragmentBeMac fragmentBeMac = new FragmentBeMac();
+        fragmentBeMac.setArguments(bundleIdKhachHang);
+
+        FragmentBeNgu fragmentBeNgu = new FragmentBeNgu();
+        fragmentBeNgu.setArguments(bundleIdKhachHang);
+
+        FragmentBeTam fragmentBeTam =  new FragmentBeTam();
+        fragmentBeTam.setArguments(bundleIdKhachHang);
+
+        FragmentBeVeSinh fragmentBeVeSinh = new FragmentBeVeSinh();
+        fragmentBeVeSinh.setArguments(bundleIdKhachHang);
+
+        FragmentBeKhoeAnToan fragmentBeKhoeAnToan = new FragmentBeKhoeAnToan();
+        fragmentBeKhoeAnToan.setArguments(bundleIdKhachHang);
+
+        FragmentBeDiRaNgoai fragmentBeDiRaNgoai = new FragmentBeDiRaNgoai();
+        fragmentBeDiRaNgoai.setArguments(bundleIdKhachHang);
+
+        FragmentBeChoiMaHoc fragmentBeChoiMaHoc = new FragmentBeChoiMaHoc();
+        fragmentBeChoiMaHoc.setArguments(bundleIdKhachHang);
+
+        FragmentDanhChoMe fragmentDanhChoMe = new FragmentDanhChoMe();
+        fragmentDanhChoMe.setArguments(bundleIdKhachHang);
+
+        FragmentDoDungGiaDinh fragmentDoDungGiaDinh = new FragmentDoDungGiaDinh();
+        fragmentDoDungGiaDinh.setArguments(bundleIdKhachHang);
+
+        FragmentSanPhamKhac fragmentSanPhamKhac = new FragmentSanPhamKhac();
+        fragmentSanPhamKhac.setArguments(bundleIdKhachHang);
+
+        list.add(fragmentTatCa);
+        list.add(fragmentMienPhi);
+        list.add(fragmentBeAn);
+        list.add(fragmentBeMac);
+        list.add(fragmentBeNgu);
+        list.add(fragmentBeTam);
+        list.add(fragmentBeVeSinh);
+        list.add(fragmentBeKhoeAnToan);
+        list.add(fragmentBeDiRaNgoai);
+        list.add(fragmentBeChoiMaHoc);
+        list.add(fragmentDanhChoMe);
+        list.add(fragmentDoDungGiaDinh);
+        list.add(fragmentSanPhamKhac);
 
         titles.add("Tất cả");
         titles.add("Miễn phí");

@@ -29,6 +29,7 @@ import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
+import com.example.tieu_nt.mokidemo.Presenter.TinTuc.PresenterTinTuc;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
@@ -39,6 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,7 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class TinTucActivity extends AppCompatActivity implements View.OnClickListener{
+public class TinTucActivity extends AppCompatActivity implements View.OnClickListener, ViewHienThiDanhSachTinTuc{
     private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -59,6 +61,7 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
     private Bitmap bitmap;
     private AdapterTinTuc adapterTinTuc;
     private KhachHang khachHang;
+    private PresenterTinTuc presenterTinTuc;
 
 
     @Override
@@ -86,11 +89,10 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        adapterTinTuc = new AdapterTinTuc(TinTucActivity.this, new ArrayList<TinTuc>());
         recyclerViewTinTuc.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTinTuc.setHasFixedSize(true);
-        recyclerViewTinTuc.setAdapter(adapterTinTuc);
-
+        presenterTinTuc = new PresenterTinTuc(this);
+        presenterTinTuc.layDanhSachTinTuc(0);
     }
 
     private void anhXa(){
@@ -185,5 +187,12 @@ public class TinTucActivity extends AppCompatActivity implements View.OnClickLis
         byte[] imgByte = byteArrayOutputStream.toByteArray();
 
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    @Override
+    public void hienThiDanhSachTinTuc(List<TinTuc> dsTinTuc) {
+        adapterTinTuc = new AdapterTinTuc(TinTucActivity.this, dsTinTuc);
+        recyclerViewTinTuc.setAdapter(adapterTinTuc);
+        adapterTinTuc.notifyDataSetChanged();
     }
 }

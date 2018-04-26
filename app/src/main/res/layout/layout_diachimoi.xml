@@ -19,7 +19,7 @@
             android:layout_margin="8dp"/>
 
         <TextView
-            android:id="@+id/tvTenSP"
+            android:id="@+id/tvDiaChiMoi"
             android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
@@ -82,8 +82,8 @@
         android:padding="15dp"
         />
 
-    <RadioButton
-        android:id="@+id/rbMacDinh"
+    <CheckBox
+        android:id="@+id/cbMacDinh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đặt mặc định"
@@ -112,6 +112,7 @@
         android:background="@color/colorGrey"/>
 
     <Button
+        android:id="@+id/btnThemDiaChi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"

@@ -25,6 +25,7 @@ import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
+import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSliderChiTietSanPham;
@@ -58,6 +59,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     private PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
     private boolean xemThem = true;
     private Button[] danhMuc;
+    private ModelKhachHang modelKhachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         anhXa();
         Intent intent = getIntent();
         sanPham = (SanPham) intent.getSerializableExtra("sanPham");
+        modelKhachHang = ModelKhachHang.getInstance();
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
     }
@@ -86,7 +89,6 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         tvSoLuotThich = (TextView) findViewById(R.id.tvSoLuotThich);
         tvSoBinhLuan = (TextView) findViewById(R.id.tvSoBinhLuan);
         tgLike = (ToggleButton) findViewById(R.id.tgLike);
-        tgLike.setOnCheckedChangeListener(this);
         btnMua = (Button) findViewById(R.id.btnMua);
         btnMua.setOnClickListener(this);
         btnBinhLuan = (Button) findViewById(R.id.btnBinhLuan);
@@ -145,6 +147,8 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
 
         tvSoLuotThich.setText(String.valueOf(sanPham.getSoLuotThich()));
         tvSoBinhLuan.setText(String.valueOf(sanPham.getSoBinhLuan()));
+        tgLike.setChecked(sanPham.isYeuThich());
+        tgLike.setOnCheckedChangeListener(this);
         tvTenSP.setText(sanPham.getTenSanPham());
         tvMoTaSP.setText(sanPham.getMoTa());
         tvMoTaSP.post(new Runnable() {
@@ -285,10 +289,12 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if(b) {
-            tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
+            boolean b1 = modelKhachHang.capNhatSanPhamYeuThich("themSanPhamYeuThich", ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham());
+            if (b1) tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
         }
         else {
-            tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
+            boolean b1 = modelKhachHang.capNhatSanPhamYeuThich("xoaSanPhamYeuThich", ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham());
+            if (b1) tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
         }
     }
 }

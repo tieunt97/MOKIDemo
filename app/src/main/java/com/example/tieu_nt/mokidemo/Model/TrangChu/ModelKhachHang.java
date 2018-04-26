@@ -9,6 +9,7 @@ import com.example.tieu_nt.mokidemo.Model.DiaChi;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
+import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 
 import org.json.JSONArray;
@@ -35,6 +36,140 @@ public class ModelKhachHang {
         if(modelKhachHang == null) modelKhachHang = new ModelKhachHang();
 
         return modelKhachHang;
+    }
+
+    public List<TinTuc> layDanhSachTinTuc(int limit){
+        List<TinTuc> dsTinTuc = new ArrayList<>();
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "layDSTinTuc");
+
+        HashMap<String,String> hsLimit = new HashMap<>();
+        hsLimit.put("limit", String.valueOf(limit));
+
+        attrs.add(hsHam);
+        attrs.add(hsLimit);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject object = new JSONObject(dataJSON);
+            JSONArray jsonArray = object.getJSONArray("danhsachtintuc");
+            int length = jsonArray.length();
+            for(int i = 0; i < length; i++){
+                JSONObject object1 = jsonArray.getJSONObject(i);
+                TinTuc tinTuc = new TinTuc();
+                tinTuc.setIdTinTuc(object1.getInt("idTinTuc"));
+                tinTuc.setTieuDe(object1.getString("tieuDe"));
+                tinTuc.setNoiDung(object1.getString("noiDung"));
+                String dateTime[] = object1.getString("ngayDang").split(" ");
+                tinTuc.setNgayDang(dateTime[0].split("-"));
+                tinTuc.setGioDang(dateTime[1].split(":"));
+
+                dsTinTuc.add(tinTuc);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return dsTinTuc;
+    }
+
+    public boolean capNhatSanPhamYeuThich(String ham, int idKhachHang, int idSanPham){
+        boolean b = false;
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", ham);
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+
+        HashMap<String,String> hsIdSanPham = new HashMap<>();
+        hsIdSanPham.put("idSanPham", String.valueOf(idSanPham));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsIdSanPham);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject object = new JSONObject(dataJSON);
+            int response = object.getInt("response");
+            if (response == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
+
+    public boolean capNhatDiaChi(String ham, int idKhachHang, String diaChiCu, String diaChi, int macDinh){
+        boolean b = false;
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", ham);
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+
+        HashMap<String,String> hsDiaChiCu = new HashMap<>();
+        hsDiaChiCu.put("diaChiCu", diaChiCu);
+
+        HashMap<String,String> hsDiaChi = new HashMap<>();
+        hsDiaChi.put("diaChi", diaChi);
+
+        HashMap<String,String> hsMacDinh = new HashMap<>();
+        hsMacDinh.put("macDinh", String.valueOf(macDinh));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsDiaChiCu);
+        attrs.add(hsDiaChi);
+        attrs.add(hsMacDinh);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject object = new JSONObject(dataJSON);
+            int response = object.getInt("response");
+            if (response == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return b;
     }
 
     public boolean doiMatKhau(String ham, int idKhachHang, String matKhauMoi){
@@ -268,6 +403,91 @@ public class ModelKhachHang {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return dsSanPham;
+    }
+
+    public List<SanPham> layDSSanPhamYeuThich(String ham , int idKhachHang, int limit){
+        List<SanPham> dsSanPham = new ArrayList<>();
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", ham);
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+
+        HashMap<String,String> hsLimit = new HashMap<>();
+        hsLimit.put("limit", String.valueOf(limit));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsLimit);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJSON);
+            JSONArray jsonArray = jsonObject.getJSONArray("danhsachsanpham");
+            int count = jsonArray.length();
+            for(int i = 0; i < count; i++){
+                SanPham sanpham = new SanPham();
+                JSONObject object = jsonArray.getJSONObject(i);
+                sanpham.setIdSanPham(object.getInt("idSanPham"));
+
+                KhachHang khachHang = new KhachHang();
+                JSONArray arrayKhachHang = object.getJSONArray("thongTinNguoiBan");
+                JSONObject objectKhachHang = arrayKhachHang.getJSONObject(0);
+                khachHang.setIdKhachHang(objectKhachHang.getInt("idKhachHang"));
+                khachHang.setTenKhachHang(objectKhachHang.getString("tenKhachHang"));
+                khachHang.setAnhInfoKH(objectKhachHang.getString("anhInfoKH"));
+                khachHang.setDiemTinCay(objectKhachHang.getInt("diemTinCay"));
+                khachHang.setSoSanPham(objectKhachHang.getInt("soSanPham"));
+                sanpham.setKhachHang(khachHang);
+
+                sanpham.setGia(object.getInt("giaChuan"));
+                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
+                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
+                sanpham.setTenSanPham(object.getString("tenSanPham"));
+                sanpham.setMoTa(object.getString("moTa"));
+                sanpham.setHinhLon(object.getString("hinhLon"));
+                sanpham.setHinhNho(object.getString("hinhNho"));
+                sanpham.setNoiBan(object.getString("noiBan"));
+                sanpham.setYeuThich(true);
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                List<DanhMuc> danhMucList = new ArrayList<>();
+                chiTietSanPham.setKhoiLuong(object.getString("khoiLuong"));
+                chiTietSanPham.setKichThuoc(object.getString("kichThuoc"));
+                chiTietSanPham.setTrangThai(object.getString("trangThai"));
+
+                JSONArray jsonArrayLoaiSP = object.getJSONArray("loaiSP");
+                for (int j = 0; j < jsonArrayLoaiSP.length(); j++){
+                    JSONObject jsonObject1 = jsonArrayLoaiSP.getJSONObject(j);
+                    DanhMuc danhMuc = new DanhMuc();
+                    danhMuc.setIdDanhMuc(jsonObject1.getInt("idLoaiSP"));
+                    danhMuc.setTenDanhMuc(jsonObject1.getString("tenLoaiSP"));
+                    danhMuc.setIdDanhMucCha(jsonObject1.getInt("idLoaiSPCha"));
+
+                    danhMucList.add(danhMuc);
+                }
+
+                chiTietSanPham.setDanhMucList(danhMucList);
+                sanpham.setChiTietSanPham(chiTietSanPham);
+                dsSanPham.add(sanpham);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return dsSanPham;
     }
 }
