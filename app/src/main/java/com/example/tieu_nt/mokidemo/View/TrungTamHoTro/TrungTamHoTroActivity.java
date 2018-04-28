@@ -1,11 +1,14 @@
 package com.example.tieu_nt.mokidemo.View.TrungTamHoTro;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +19,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +33,7 @@ import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,15 +49,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnClickListener{
+public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnClickListener {
     private FrameLayout frameLayout;
+    private RelativeLayout relaCall, relaSendMail, relaHuongDanSD, relaChat;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView recyclerView;
     private AdapterMenu adapter;
     private CircleImageView imgUserInfo;
-    private final int IMG_REQUEST = 1;
-    private Bitmap bitmap;
     private ImageButton imgMenu;
     private KhachHang khachHang;
 
@@ -63,7 +67,7 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
         anhXa();
 
         //create Navigation
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_nav_drawer, R.string.close_nav_drawer){
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_nav_drawer, R.string.close_nav_drawer) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
@@ -79,9 +83,13 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+
+        if(khachHang  != null && !khachHang.getAnhInfoKH().equals("null")){
+            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
+        }
     }
 
-    private void anhXa(){
+    private void anhXa() {
         frameLayout = (FrameLayout) findViewById(R.id.themFragment);
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
@@ -89,6 +97,14 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        relaCall = (RelativeLayout) findViewById(R.id.relaCall);
+        relaCall.setOnClickListener(this);
+        relaHuongDanSD = (RelativeLayout) findViewById(R.id.relaHuongDanSD);
+        relaHuongDanSD.setOnClickListener(this);
+        relaChat = (RelativeLayout) findViewById(R.id.relaChat);
+        relaChat.setOnClickListener(this);
+        relaSendMail = (RelativeLayout) findViewById(R.id.relaSendMail);
+        relaSendMail.setOnClickListener(this);
     }
 
     @Override
@@ -103,74 +119,44 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgKhachHang:
-                selectImage();
+            case R.id.relaHuongDanSD:
+                Intent iHDSD = new Intent(TrungTamHoTroActivity.this, HuongDanSuDungActivity.class);
+                startActivity(iHDSD);
+                break;
+            case R.id.relaChat:
+                break;
+            case R.id.relaCall:
+                Intent iCall = new Intent(Intent.ACTION_CALL);
+                iCall.setData(Uri.parse("tel:0965677760"));
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                startActivity(iCall);
+                break;
+            case R.id.relaSendMail:
+                Intent iSendMail = new Intent(Intent.ACTION_SEND);
+                iSendMail.setType("message/rfc822");
+                iSendMail.putExtra(Intent.EXTRA_EMAIL  , new String[]{"tieutienyen1027@gmail.com"});
+                iSendMail.putExtra(Intent.EXTRA_SUBJECT, "Hỗ trợ người dùng MOKI");
+//                iSendMail.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                try{
+                    startActivity(iSendMail);
+                }catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(TrungTamHoTroActivity.this, "Bạn cần cài đặt Gmail của Google để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
 
-    private void selectImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMG_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null){
-            Uri path = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-                imgUserInfo.setImageBitmap(bitmap);
-                uploadImage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void uploadImage(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ManHinhTrangChuActivity.uploadUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    Toast.makeText(TrungTamHoTroActivity.this, Response, Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("name", "1ImgUserInfo");
-                params.put("image", imageToString(bitmap));
-
-                return params;
-            }
-        };
-
-        MySingleton.getInstance(TrungTamHoTroActivity.this).addToRequestQue(stringRequest);
-    }
-
-    private String imageToString(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(imgByte, Base64.DEFAULT);
-    }
 }

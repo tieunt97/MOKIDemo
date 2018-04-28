@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -111,6 +112,9 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.TrangThaiTimKiemActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.TrungTamHoTro.HuongDanSuDungActivity"
             android:screenOrientation="portrait"/>
 
     </application>

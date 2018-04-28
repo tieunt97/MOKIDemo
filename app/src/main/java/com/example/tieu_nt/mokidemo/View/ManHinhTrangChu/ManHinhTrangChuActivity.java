@@ -56,6 +56,7 @@ import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentDoDung
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentMienPhi;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSanPhamKhac;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentTatCa;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -149,6 +150,8 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         if (khachHang != null){
             tvTenKhachHang.setText(khachHang.getTenKhachHang());
             idKhachHang = khachHang.getIdKhachHang();
+            if(!khachHang.getAnhInfoKH().equals("null"))
+                Picasso.get().load(SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
         }
         adapter = new AdapterMenu(ManHinhTrangChuActivity.this, 0, drawerLayout, khachHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -292,7 +295,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
         btnXung = (Button) findViewById(R.id.btnXung);
         btnXung.setOnClickListener(this);
         imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
-        imgKhachHang.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
@@ -325,9 +327,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 Intent intentUser = new Intent(ManHinhTrangChuActivity.this, ThongTinNguoiDungActivity.class);
                 startActivity(intentUser);
                 break;
-            case R.id.imgKhachHang:
-                selectImage();
-                break;
             case R.id.btnSapXep:
                 Toast.makeText(ManHinhTrangChuActivity.this, "Sắp xếp", Toast.LENGTH_SHORT).show();
                 break;
@@ -343,67 +342,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
                 break;
         }
-    }
-
-    private void selectImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMG_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null){
-            Uri path = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-                imgKhachHang.setImageBitmap(bitmap);
-                uploadImage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void uploadImage(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, uploadUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    Toast.makeText(ManHinhTrangChuActivity.this, Response, Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("name", khachHang.getIdKhachHang() + "AnhKhachHang");
-                params.put("image", imageToString(bitmap));
-
-                return params;
-            }
-        };
-
-        MySingleton.getInstance(ManHinhTrangChuActivity.this).addToRequestQue(stringRequest);
-    }
-
-    private String imageToString(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
     @Override

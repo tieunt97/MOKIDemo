@@ -107,13 +107,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Thứ 2 - thứ 6"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:textSize="13sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Thứ 7"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:textSize="13sp"/>
 
                         </LinearLayout>
 
@@ -127,13 +129,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="8h00 - 12h00, 13h00 - 17h00"
-                                android:textColor="@color/colorRed"/>
+                                android:textColor="@color/colorRed"
+                                android:textSize="13sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="8h00 - 12h00"
-                                android:textColor="@color/colorRed"/>
+                                android:textColor="@color/colorRed"
+                                android:textSize="13sp"/>
                         </LinearLayout>
 
 
@@ -157,6 +161,7 @@
                     android:background="@drawable/custom_stroke_view">
 
                     <RelativeLayout
+                        android:id="@+id/relaHuongDanSD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -185,6 +190,7 @@
                         android:background="@color/colorGreyish"/>
 
                     <RelativeLayout
+                        android:id="@+id/relaChat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -207,6 +213,7 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relaCall"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     android:background="@drawable/custom_button_dangnhap"
@@ -228,6 +235,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relaSendMail"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     android:background="@drawable/custom_button_dangnhap"

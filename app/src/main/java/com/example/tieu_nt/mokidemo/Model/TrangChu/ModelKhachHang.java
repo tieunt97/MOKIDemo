@@ -315,7 +315,7 @@ public class ModelKhachHang {
                 dsDiaChi.add(diaChi);
             }
 
-            khachHang.setDiaChi(dsDiaChi.get(0).getDiaChi());
+            if(dsDiaChi.size() == 0)khachHang.setDiaChi("Chưa có thông tin địa chỉ");
             khachHang.setDsDiaChi(dsDiaChi);
 
             List<SanPham> dsSanPhamBan = layDSSanPhamBan("layDSSanPhamBan", khachHang);

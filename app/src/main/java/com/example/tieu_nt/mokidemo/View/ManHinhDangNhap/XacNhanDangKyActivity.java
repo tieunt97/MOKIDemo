@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -16,9 +17,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
+import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelDangNhap_DangKy;
 import com.example.tieu_nt.mokidemo.R;
 
 import org.w3c.dom.Text;
@@ -32,6 +36,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
     private Button btnGuiLai;
     private ImageButton imgBack;
     private TaiKhoan taiKhoan;
+    private ModelDangNhap_DangKy modelDangNhap_dangKy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.xacnhandangky_layout);
         Intent intent = getIntent();
         taiKhoan = (TaiKhoan) intent.getSerializableExtra("taiKhoan");
+        modelDangNhap_dangKy = ModelDangNhap_DangKy.getInstance();
         AnhXa();
         setActions();
     }
@@ -87,57 +93,21 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         if(edt1.getText().hashCode() == charSequence.hashCode() && charSequence.length() > 0){
             if(edt2.getText().length() > 0 && edt3.getText().length() > 0 && edt4.getText().length() > 0){
-                int maXacNhan = Integer.parseInt(edt1.getText().toString() + edt2.getText().toString()
-                        + edt3.getText().toString() + edt4.getText().toString());
-                if(maXacNhan == taiKhoan.getMaXacNhan()) Toast.makeText(this,
-                        "Mã xác nhận đúng", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(this,
-                            "Mã xác không khớp", Toast.LENGTH_SHORT).show();
-                    edt1.setText("");
-                    edt2.setText("");
-                    edt3.setText("");
-                    edt4.setText("");
-                    edt1.requestFocus();
-                }
+                xacNhan();
             }else{
                 edt2.requestFocus();
             }
         }
         if(edt2.getText().hashCode() == charSequence.hashCode() && charSequence.length() > 0){
             if(edt1.getText().length() > 0 && edt3.getText().length() > 0 && edt4.getText().length() > 0){
-                int maXacNhan = Integer.parseInt(edt1.getText().toString() + edt2.getText().toString()
-                        + edt3.getText().toString() + edt4.getText().toString());
-                if(maXacNhan == taiKhoan.getMaXacNhan()) Toast.makeText(this,
-                        "Mã xác nhận đúng", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(this,
-                            "Mã xác không khớp", Toast.LENGTH_SHORT).show();
-                    edt1.setText("");
-                    edt2.setText("");
-                    edt3.setText("");
-                    edt4.setText("");
-                    edt1.requestFocus();
-                }
+                xacNhan();
             }else{
                 edt3.requestFocus();
             }
         }
         if(edt3.getText().hashCode() == charSequence.hashCode() && charSequence.length() > 0){
             if(edt1.getText().length() > 0 && edt2.getText().length() > 0 && edt4.getText().length() > 0){
-                int maXacNhan = Integer.parseInt(edt1.getText().toString() + edt2.getText().toString()
-                        + edt3.getText().toString() + edt4.getText().toString());
-                if(maXacNhan == taiKhoan.getMaXacNhan()) Toast.makeText(this,
-                        "Mã xác nhận đúng", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(this,
-                            "Mã xác không khớp", Toast.LENGTH_SHORT).show();
-                    edt1.setText("");
-                    edt2.setText("");
-                    edt3.setText("");
-                    edt4.setText("");
-                    edt1.requestFocus();
-                }
+                xacNhan();
             }else{
                 edt4.requestFocus();
             }
@@ -146,27 +116,103 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
             if(edt1.getText().length() == 0) edt1.requestFocus();
             else if(edt2.getText().length() == 0) edt2.requestFocus();
             else if(edt3.getText().length() == 0) edt3.requestFocus();
-            if(edt1.getText().length() > 0 && edt2.getText().length() > 0 && edt3.getText().length() > 0){
-                int maXacNhan = Integer.parseInt(edt1.getText().toString() + edt2.getText().toString()
-                        + edt3.getText().toString() + edt4.getText().toString());
-                if(maXacNhan == taiKhoan.getMaXacNhan()) Toast.makeText(this,
-                        "Mã xác nhận đúng", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(this,
-                            "Mã xác không khớp", Toast.LENGTH_SHORT).show();
-                    edt1.setText("");
-                    edt2.setText("");
-                    edt3.setText("");
-                    edt4.setText("");
-                    edt1.requestFocus();
-                }
+            else if(edt1.getText().length() > 0 && edt2.getText().length() > 0 && edt3.getText().length() > 0){
+                xacNhan();
             }
-
         }
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    private void xacNhan(){
+        int maXacNhan = Integer.parseInt(edt1.getText().toString() + edt2.getText().toString()
+                + edt3.getText().toString() + edt4.getText().toString());
+        if(maXacNhan == taiKhoan.getMaXacNhan()) {
+            boolean b = modelDangNhap_dangKy.xacNhanDangKy("xacNhanDangKy", taiKhoan.getSoDT());
+            if(b){
+                taiKhoan.setTrangThai(1);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(XacNhanDangKyActivity.this);
+                View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
+                ImageView imgDialog = (ImageView) view.findViewById(R.id.imgDialog);
+                imgDialog.setImageDrawable(getResources().getDrawable(R.drawable.success));
+                TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+                tvNoiDung.setText("Tài khoản đã được kích hoạt");
+                Button btnDong = (Button) view.findViewById(R.id.btnDong);
+
+                builder.setView(view);
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                btnDong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                        Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, ManHinhDangNhapActivity.class);
+                        iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(iDangNhap);
+                    }
+                });
+
+                //đóng sau 3s
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+                            if(alertDialog.isShowing())
+                                alertDialog.dismiss();
+                            Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, ManHinhDangNhapActivity.class);
+                            iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(iDangNhap);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+            }
+        }
+        else {
+            edt1.setText("");
+            edt2.setText("");
+            edt3.setText("");
+            edt4.setText("");
+            edt1.requestFocus();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(XacNhanDangKyActivity.this);
+            View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
+            TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+            tvNoiDung.setText("Mã xác nhận không đúng");
+            Button btnDong = (Button) view.findViewById(R.id.btnDong);
+
+            builder.setView(view);
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            btnDong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
+            //đóng sau 3s
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                        if(alertDialog.isShowing())
+                            alertDialog.dismiss();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.start();
+        }
     }
 }

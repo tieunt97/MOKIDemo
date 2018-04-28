@@ -33,6 +33,7 @@ import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich.PresenterDanhSachYeuThich;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,8 +60,6 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
     private CircleImageView imgUserInfo;
     private ImageButton imgMenu;
     private TextView tvTitle;
-    private final int IMG_REQUEST = 1;
-    private Bitmap bitmap;
     private AdapterSanPhamYeuThich adapterSanPhamYeuThich;
     private KhachHang khachHang;
     private PresenterDanhSachYeuThich presenterDanhSachYeuThich;
@@ -94,6 +93,10 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        if(khachHang  != null && !khachHang.getAnhInfoKH().equals("null")){
+            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
+        }
+
         presenterDanhSachYeuThich = new PresenterDanhSachYeuThich(this);
         Log.d("idkhachhang", khachHang.getIdKhachHang() + "");
         presenterDanhSachYeuThich.layDSSanPhamYeuThich("layDSSanPhamYeuThich", khachHang.getIdKhachHang(), 0);
@@ -106,7 +109,6 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
-        imgUserInfo.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewSPYeuThich = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
     }
@@ -127,71 +129,7 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
             case R.id.imgMenu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.imgKhachHang:
-                selectImage();
-                break;
         }
-    }
-
-    private void selectImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMG_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null){
-            Uri path = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-                imgUserInfo.setImageBitmap(bitmap);
-                uploadImage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void uploadImage(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ManHinhTrangChuActivity.uploadUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    Toast.makeText(DanhSachYeuThichActivity.this, Response, Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("name", "1ImgUserInfo");
-                params.put("image", imageToString(bitmap));
-
-                return params;
-            }
-        };
-
-        MySingleton.getInstance(DanhSachYeuThichActivity.this).addToRequestQue(stringRequest);
-    }
-
-    private String imageToString(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imgByte = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
     @Override

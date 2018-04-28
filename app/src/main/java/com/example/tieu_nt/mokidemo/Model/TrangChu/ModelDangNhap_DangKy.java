@@ -118,4 +118,42 @@ public class ModelDangNhap_DangKy {
 
         return taiKhoan;
     }
+
+    public boolean xacNhanDangKy(String ham, String soDT){
+        boolean b = false;
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_DANGNHAP_DANGKY;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", ham);
+
+        HashMap<String,String> hsSoDT = new HashMap<>();
+        hsSoDT.put("soDT", soDT);
+
+        attrs.add(hsHam);
+        attrs.add(hsSoDT);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJSON);
+            JSONArray jsonArray = jsonObject.getJSONArray("xacNhan");
+            JSONObject object = jsonArray.getJSONObject(0);
+            int xacNhan = object.getInt("xacNhan");
+            if(xacNhan == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return b;
+    }
 }

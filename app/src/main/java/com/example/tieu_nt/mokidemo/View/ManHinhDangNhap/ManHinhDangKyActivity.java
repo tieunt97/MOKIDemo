@@ -54,8 +54,9 @@ public class ManHinhDangKyActivity extends AppCompatActivity implements ViewDang
         btnDaCoTK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ManHinhDangKyActivity.this, ManHinhDangNhapActivity.class);
-                startActivity(intent);
+                Intent iDangNhap = new Intent(ManHinhDangKyActivity.this, ManHinhDangNhapActivity.class);
+                iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(iDangNhap);
             }
         });
 
@@ -190,7 +191,6 @@ public class ManHinhDangKyActivity extends AppCompatActivity implements ViewDang
 
     @Override
     public void dangKyThanhCong(TaiKhoan taiKhoan) {
-        Log.d("maXacNhan", String.valueOf(taiKhoan.getMaXacNhan()));
         Intent iXacNhanDangKy = new Intent(ManHinhDangKyActivity.this, XacNhanDangKyActivity.class);
         iXacNhanDangKy.putExtra("taiKhoan", taiKhoan);
         startActivity(iXacNhanDangKy);
