@@ -60,6 +60,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     private boolean xemThem = true;
     private Button[] danhMuc;
     private ModelKhachHang modelKhachHang;
+    private int idSanPham;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         modelKhachHang = ModelKhachHang.getInstance();
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
+        setActions();
     }
 
     private void anhXa(){
@@ -90,21 +92,24 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         tvSoBinhLuan = (TextView) findViewById(R.id.tvSoBinhLuan);
         tgLike = (ToggleButton) findViewById(R.id.tgLike);
         btnMua = (Button) findViewById(R.id.btnMua);
-        btnMua.setOnClickListener(this);
         btnBinhLuan = (Button) findViewById(R.id.btnBinhLuan);
-        btnBinhLuan.setOnClickListener(this);
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         viewPagerSlider = (ViewPager) findViewById(R.id.viewPagerSlider);
-        viewPagerSlider.setOnPageChangeListener(this);
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
         linearDanhMuc = (LinearLayout) findViewById(R.id.linearDanhMuc);
         linearNhanHieu = (LinearLayout) findViewById(R.id.linearNhanHieu);
-        imgBack.setOnClickListener(this);
         relaXemThem = (RelativeLayout) findViewById(R.id.relaXemThem);
         relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
         relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
         relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
         relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
+    }
+
+    private void setActions(){
+        btnMua.setOnClickListener(this);
+        btnBinhLuan.setOnClickListener(this);
+        viewPagerSlider.setOnPageChangeListener(this);
+        imgBack.setOnClickListener(this);
     }
 
     @Override
@@ -116,6 +121,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
                 break;
             case R.id.btnBinhLuan:
                 Intent iBinhLuan = new Intent(HienThiChiTietSanPhamActivity.this, BinhLuanActivity.class);
+                iBinhLuan.putExtra("idSanPham", idSanPham);
                 startActivity(iBinhLuan);
                 break;
             case R.id.btnMua:
@@ -143,6 +149,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
 
     @Override
     public void hienThiChiTietSanPham(SanPham sanPham) {
+        idSanPham = sanPham.getIdSanPham();
         ChiTietSanPham  chiTietSanPham = sanPham.getChiTietSanPham();
 
         tvSoLuotThich.setText(String.valueOf(sanPham.getSoLuotThich()));

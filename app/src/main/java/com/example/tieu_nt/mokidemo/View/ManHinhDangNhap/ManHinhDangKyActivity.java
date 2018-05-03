@@ -7,17 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterLogicDangKy;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrungTamHoTro.HuongDanSuDungActivity;
 
 /**
  * Created by tieu_nt on 2/2/2018.
@@ -65,6 +64,15 @@ public class ManHinhDangKyActivity extends AppCompatActivity implements ViewDang
             public void onClick(View view) {
                 Intent intentTrangChu = new Intent(ManHinhDangKyActivity.this, ManHinhTrangChuActivity.class);
                 startActivity(intentTrangChu);
+            }
+        });
+
+        txtDieuKhoanDK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iHDSD = new Intent(ManHinhDangKyActivity.this, HuongDanSuDungActivity.class);
+                iHDSD.putExtra("title", "Các Điều Khoản Sử Dụng");
+                startActivity(iHDSD);
             }
         });
 

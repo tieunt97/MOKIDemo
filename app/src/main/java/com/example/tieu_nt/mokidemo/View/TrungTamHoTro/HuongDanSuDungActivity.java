@@ -22,7 +22,8 @@ public class HuongDanSuDungActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_huongdansdmoki);
         anhXa();
-        tvTitle.setText("Hướng Dẫn Sử Dụng MOKI");
+        String title = getIntent().getStringExtra("title");
+        tvTitle.setText(title);
     }
 
     private void anhXa() {

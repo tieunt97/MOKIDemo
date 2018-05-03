@@ -94,8 +94,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
 //    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
 
 
-    public static String uploadUrl = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php?ham=updateImgUserInfo";
-
     private FrameLayout trangChu;
     private LinearLayout linearUser;
     private DrawerLayout drawerLayout;
@@ -118,7 +116,7 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
     private List<Fragment> list = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private  AlertDialog.Builder builder;
-    private KhachHang khachHang;
+    public static KhachHang khachHang;
     public static int idKhachHang = 0;
 
 
@@ -331,8 +329,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 Toast.makeText(ManHinhTrangChuActivity.this, "Sắp xếp", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnLoc:
-                Intent intentCTSP = new Intent(ManHinhTrangChuActivity.this, HienThiChiTietSanPhamActivity.class);
-                startActivity(intentCTSP);
                 break;
             case R.id.btnXung:
                 Toast.makeText(ManHinhTrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();

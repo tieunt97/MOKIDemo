@@ -125,6 +125,7 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.relaHuongDanSD:
                 Intent iHDSD = new Intent(TrungTamHoTroActivity.this, HuongDanSuDungActivity.class);
+                iHDSD.putExtra("title", "Hướng Dẫn Sử Dụng MOKI");
                 startActivity(iHDSD);
                 break;
             case R.id.relaChat:

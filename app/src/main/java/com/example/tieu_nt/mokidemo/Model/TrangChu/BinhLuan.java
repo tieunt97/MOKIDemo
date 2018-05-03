@@ -7,8 +7,9 @@ import java.io.Serializable;
  */
 
 public class BinhLuan implements Serializable{
-    int idKhachHang;
-    String tenKhachHang, noiDungBL, hinhKhachHang;
+    private int idKhachHang, idSanPham;
+    private String tenKhachHang, noiDungBL, hinhKhachHang;
+    private String thoiGianBL;
 
     public int getIdKhachHang() {
         return idKhachHang;
@@ -16,6 +17,14 @@ public class BinhLuan implements Serializable{
 
     public void setIdKhachHang(int idKhachHang) {
         this.idKhachHang = idKhachHang;
+    }
+
+    public int getIdSanPham() {
+        return idSanPham;
+    }
+
+    public void setIdSanPham(int idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public String getTenKhachHang() {
@@ -40,5 +49,13 @@ public class BinhLuan implements Serializable{
 
     public void setHinhKhachHang(String hinhKhachHang) {
         this.hinhKhachHang = hinhKhachHang;
+    }
+
+    public String getThoiGianBL() {
+        return thoiGianBL;
+    }
+
+    public void setThoiGianBL(String thoiGianBL) {
+        this.thoiGianBL = thoiGianBL;
     }
 }

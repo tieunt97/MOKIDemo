@@ -114,6 +114,7 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
             public void onFocusChange(View view, boolean b) {
                 if(!visible){
                     visible = !visible;
+                    tvSoKyTu.setText(edtThongTin.getText().toString().length());
                     relaXong.setVisibility(View.VISIBLE);
                 }
             }

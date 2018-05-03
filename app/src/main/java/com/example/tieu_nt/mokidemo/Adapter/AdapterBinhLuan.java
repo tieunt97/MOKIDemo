@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.TrangChu.BinhLuan;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -40,9 +41,24 @@ public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         BinhLuan binhLuan = dsBinhLuan.get(position);
-        Picasso.get().load(binhLuan.getHinhKhachHang()).into(holder.imgKH);
+        Picasso.get().load(ManHinhTrangChuActivity.SERVER + binhLuan.getHinhKhachHang()).into(holder.imgKH);
         holder.tvTenKH.setText(binhLuan.getTenKhachHang());
         holder.tvNoiDung.setText(binhLuan.getNoiDungBL());
+        String datetime[] = binhLuan.getThoiGianBL().split(" ");
+        String ngayBL[] = datetime[0].split("-");
+        String thoiGian[] = datetime[1].split(":");
+        holder.tvThoiGian.setText(ngayBL[2] + "/" + ngayBL[1] + "/" + ngayBL[0]
+            + " ( "+ thoiGian[0] + ":" + thoiGian[1] + " )");
+    }
+
+    public void add(BinhLuan binhLuan) {
+        dsBinhLuan.add(0, binhLuan);
+        notifyItemInserted(0);
+    }
+
+    public void addAlL(List<BinhLuan> dsBinhLuan){
+        this.dsBinhLuan.addAll(0, dsBinhLuan);
+        notifyItemInserted(0);
     }
 
     @Override
@@ -52,12 +68,13 @@ public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imgKH;
-        TextView tvTenKH, tvNoiDung;
+        TextView tvTenKH, tvNoiDung, tvThoiGian;
         public ViewHolder(View itemView) {
             super(itemView);
             imgKH = (CircleImageView) itemView.findViewById(R.id.imgKhachHang);
             tvTenKH = (TextView) itemView.findViewById(R.id.tvTenKhachHang);
             tvNoiDung = (TextView) itemView.findViewById(R.id.tvNoiDungBinhLuan);
+            tvThoiGian = (TextView) itemView.findViewById(R.id.tvThoiGian);
         }
     }
 }

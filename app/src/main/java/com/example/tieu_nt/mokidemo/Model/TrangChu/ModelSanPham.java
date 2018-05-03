@@ -33,6 +33,56 @@ public class ModelSanPham {
         if(modelSanPham == null) modelSanPham = new ModelSanPham();
         return modelSanPham;
     }
+
+    public List<BinhLuan> layDanhSachBinhLuan(int idSanPham){
+        List<BinhLuan> dsBinhLuan = new ArrayList<>();
+
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "layDanhSachBinhLuan");
+
+        HashMap<String,String> hsIdSanPham = new HashMap<>();
+        hsIdSanPham.put("idSanPham", String.valueOf(idSanPham));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdSanPham);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        Log.d("idSanPham", idSanPham + "");
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJSON);
+            JSONArray jsonArray = jsonObject.getJSONArray("binhluan");
+            int length = jsonArray.length();
+            for (int i = 0; i < length; i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                BinhLuan binhLuan = new BinhLuan();
+                binhLuan.setIdKhachHang(object.getInt("idKhachHang"));
+                binhLuan.setTenKhachHang(object.getString("tenKhachHang"));
+                binhLuan.setHinhKhachHang(object.getString("anhInfoKH"));
+                binhLuan.setNoiDungBL(object.getString("noiDung"));
+                binhLuan.setThoiGianBL(object.getString("thoiGian"));
+
+                dsBinhLuan.add(binhLuan);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return dsBinhLuan;
+    }
+
     public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang){
         List<SanPham> dsSanPham = new ArrayList<>();
 

@@ -71,7 +71,7 @@
             android:id="@+id/recyclerViewBinhLuan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp">
+            android:background="@color/colorGreyish">
 
         </android.support.v7.widget.RecyclerView>
 

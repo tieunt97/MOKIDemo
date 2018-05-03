@@ -38,6 +38,58 @@ public class ModelKhachHang {
         return modelKhachHang;
     }
 
+    public boolean guiBinhLuan(BinhLuan binhLuan){
+        boolean b = false;
+
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "guiBinhLuan");
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(binhLuan.getIdKhachHang()));
+
+        HashMap<String,String> hsIdSanPham = new HashMap<>();
+        hsIdSanPham.put("idSanPham", String.valueOf(binhLuan.getIdSanPham()));
+
+        HashMap<String,String> hsNoiDung = new HashMap<>();
+        hsNoiDung.put("noiDung", binhLuan.getNoiDungBL());
+
+        HashMap<String,String> hsThoiGian = new HashMap<>();
+        hsThoiGian.put("thoiGian", binhLuan.getThoiGianBL());
+
+        Log.d("BinhLuan", binhLuan.getIdKhachHang() + "=" + binhLuan.getIdSanPham() + binhLuan.getNoiDungBL() + binhLuan.getThoiGianBL());
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsIdSanPham);
+        attrs.add(hsNoiDung);
+        attrs.add(hsThoiGian);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            Log.d("dataJSOn", dataJSON);
+            JSONObject object = new JSONObject(dataJSON);
+            int response = object.getInt("response");
+            if (response == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return b;
+    }
+
     public List<TinTuc> layDanhSachTinTuc(int limit){
         List<TinTuc> dsTinTuc = new ArrayList<>();
         List<HashMap<String,String>> attrs = new ArrayList<>();
