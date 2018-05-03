@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPham;
+import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
     private RecyclerView recyclerView;
     private ImageButton imgBack;
     private TextView tvTenLoaiSP;
-    private AdapterSanPham adapterSanPham;
+    private AdapterSanPhamGrid adapterSanPham;
     private PresenterLogicSanPham presenterLogicSanPham;
     private DanhMuc danhMuc;
     private int idKhachHang = 0;
@@ -44,7 +43,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
         idKhachHang = intent.getIntExtra("idKhachHang", idKhachHang);
         tvTenLoaiSP.setText(danhMuc.getTenDanhMuc());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), 0, idKhachHang);
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), 0, idKhachHang, "", "");
     }
 
     private void anhXa(){
@@ -66,7 +65,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
 
     @Override
     public void hienThiDanhSachSanPham(List<SanPham> dsSanPham) {
-        adapterSanPham = new AdapterSanPham(this, dsSanPham);
+        adapterSanPham = new AdapterSanPhamGrid(this, dsSanPham);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterSanPham);

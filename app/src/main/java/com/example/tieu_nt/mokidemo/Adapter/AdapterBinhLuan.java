@@ -48,7 +48,7 @@ public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHo
         String ngayBL[] = datetime[0].split("-");
         String thoiGian[] = datetime[1].split(":");
         holder.tvThoiGian.setText(ngayBL[2] + "/" + ngayBL[1] + "/" + ngayBL[0]
-            + " ( "+ thoiGian[0] + ":" + thoiGian[1] + " )");
+            + " ("+ thoiGian[0] + ":" + thoiGian[1] + ")");
     }
 
     public void add(BinhLuan binhLuan) {

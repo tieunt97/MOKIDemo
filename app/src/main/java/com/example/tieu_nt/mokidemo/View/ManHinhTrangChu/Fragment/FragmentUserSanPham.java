@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPham;
+import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.R;
 
@@ -34,7 +34,7 @@ public class FragmentUserSanPham extends Fragment{
 
         layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterSanPham(getContext(), dsSanPham);
+        adapter = new AdapterSanPhamGrid(getContext(), dsSanPham);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

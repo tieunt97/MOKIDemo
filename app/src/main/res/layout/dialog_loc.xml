@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp">
+
+    <View android:layout_height="1.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="65dp"
+        android:background="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/tvChucNang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lọc"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:padding="8dp"/>
+
+    <View android:layout_height="1.5dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorBlack"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorGreyish">
+
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:text="Hủy"
+            android:textColor="@color/colorBlack"/>
+
+        <Button
+            android:id="@+id/btnApDung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:text="Áp dụng"
+            android:textColor="@color/colorBlack"
+            android:layout_marginLeft="1dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

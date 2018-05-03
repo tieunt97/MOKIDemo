@@ -24,16 +24,16 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     @Override
-    public void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang) {
-         List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang);
+    public void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep) {
+         List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
         }
     }
 
-    public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang) {
-        List<SanPham> dsSanPham = new ArrayList<>();
-        dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang);
+    public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep) {
+        List<SanPham> dsSanPham;
+        dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
 
         return dsSanPham;
     }

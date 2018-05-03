@@ -9,14 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPham;
+import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang.PresenterSanPhamKhachHangLogic;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ViewHienThiDSSanPhamKhachHang;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +45,7 @@ public class FragmentSanPham extends Fragment implements ViewHienThiDSSanPhamKha
     @Override
     public void hienThiDSSanPham(List<SanPham> dsSanPhams) {
         layoutManager = new GridLayoutManager(getContext(), 2);
-        adapter = new AdapterSanPham(getContext(), dsSanPhams);
+        adapter = new AdapterSanPhamGrid(getContext(), dsSanPhams);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

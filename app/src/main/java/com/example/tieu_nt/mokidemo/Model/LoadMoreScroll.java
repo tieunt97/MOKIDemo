@@ -24,10 +24,11 @@ public class LoadMoreScroll extends RecyclerView.OnScrollListener{
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        tongItem = layoutManager.getItemCount();
         if (layoutManager instanceof LinearLayoutManager){
+            tongItem = ((LinearLayoutManager) layoutManager).getItemCount();
             itemAnDauTien = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
         }else if(layoutManager instanceof GridLayoutManager){
+            tongItem = ((GridLayoutManager) layoutManager).getItemCount();
             itemAnDauTien = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
         }
         Log.d("kiemTra", tongItem + " - " + itemAnDauTien );

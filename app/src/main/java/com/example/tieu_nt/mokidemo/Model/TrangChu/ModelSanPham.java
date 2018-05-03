@@ -83,7 +83,7 @@ public class ModelSanPham {
         return dsBinhLuan;
     }
 
-    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang){
+    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -103,6 +103,18 @@ public class ModelSanPham {
         attrs.add(hsHam);
         attrs.add(hsIdLoaiSP);
         attrs.add(hsLimit);
+
+        if (!giaTri.equals("")){
+            HashMap<String,String> hsGiaTri = new HashMap<>();
+            hsGiaTri.put("giaTri", giaTri);
+
+            HashMap<String,String> hsSapXep = new HashMap<>();
+            hsSapXep.put("sapXep", sapXep);
+
+            attrs.add(hsGiaTri);
+            attrs.add(hsSapXep);
+        }
+
         if (idKhachHang != 0){
             HashMap<String,String> hsIdKhachHang = new HashMap<>();
             hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));

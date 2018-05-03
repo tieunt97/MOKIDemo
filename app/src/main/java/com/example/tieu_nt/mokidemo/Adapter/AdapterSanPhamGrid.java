@@ -3,7 +3,6 @@ package com.example.tieu_nt.mokidemo.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +25,12 @@ import java.util.List;
  * Created by tieu_nt on 4/3/2018.
  */
 
-public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHolder>{
+public class AdapterSanPhamGrid extends RecyclerView.Adapter<AdapterSanPhamGrid.ViewHolder>{
 
     private Context context;
     private List<SanPham> dsSanPham;
 
-    public AdapterSanPham(Context context, List<SanPham> dsSanPham) {
+    public AdapterSanPhamGrid(Context context, List<SanPham> dsSanPham) {
         this.context = context;
         this.dsSanPham = dsSanPham;
     }

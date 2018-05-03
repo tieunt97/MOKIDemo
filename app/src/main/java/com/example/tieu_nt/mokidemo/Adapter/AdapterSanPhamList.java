@@ -44,6 +44,12 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
         return viewHolder;
     }
 
+    public void addAll(List<SanPham> dsSanPham){
+        int size = this.dsSanPham.size();
+        this.dsSanPham.addAll(dsSanPham);
+        notifyItemInserted(size - 1);
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final SanPham sanPham = dsSanPham.get(position);
