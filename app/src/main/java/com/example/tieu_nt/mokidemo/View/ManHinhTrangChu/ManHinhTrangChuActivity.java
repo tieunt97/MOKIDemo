@@ -80,10 +80,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     //may tinh ca nhan
-    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php";
-    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.110:8080/webmoki/khachhang.php";
+//    public static String SERVER = "http://192.168.1.110:8080/webmoki";
+//    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
+//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php";
+//    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.110:8080/webmoki/khachhang.php";
 
 
     //Genymotion
@@ -93,10 +93,10 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
 //    public static String SERVER_NAME_KHACHHANG = "http://10.0.3.2:8080/webmoki/khachhang.php";
 
     //Wifi HUST
-//    public static String SERVER = "http://10.11.203.188:8080/webmoki";
-//    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
-//    public static String SERVER_NAME_KHACHHANG = "http://10.11.203.188:8080/webmoki/khachhang.php";
+    public static String SERVER = "http://10.11.203.188:8080/webmoki";
+    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
+    public static String SERVER_NAME_KHACHHANG = "http://10.11.203.188:8080/webmoki/khachhang.php";
 
 
     private FrameLayout trangChu;

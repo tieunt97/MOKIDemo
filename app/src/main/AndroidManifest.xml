@@ -117,6 +117,9 @@
         <activity android:name=".View.TrungTamHoTro.HuongDanSuDungActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".View.ManHinhTrangChu.ThemSanPhamActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

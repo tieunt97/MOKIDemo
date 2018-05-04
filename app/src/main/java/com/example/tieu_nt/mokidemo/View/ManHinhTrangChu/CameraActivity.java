@@ -3,7 +3,6 @@ package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,17 +17,16 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Presenter.CameraTrangChu.CameraView;
 import com.example.tieu_nt.mokidemo.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,6 +43,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private ToggleButton tgFlash;
     private int IMG_GALLERY_REQUEST = 1;
     private int cameraID;
+    int position = -1;
+    private byte[] byteImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +52,15 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.camera_trangchu_layout);
         anhXa();
 
-        try{
-            cameraID = Camera.CameraInfo.CAMERA_FACING_BACK;
-            mCamera = Camera.open(cameraID);//you can use open(int) to use different cameras
-        } catch (Exception e){
-            Log.d("ERROR", "Failed to get camera: " + e.getMessage());
-        }
+        position = getIntent().getIntExtra("position", -1);
+
+        cameraID = Camera.CameraInfo.CAMERA_FACING_BACK;
+        mCamera = getCameraInstance(cameraID);
+//        try{
+//            mCamera = Camera.open(cameraID);//you can use open(int) to use different cameras
+//        } catch (Exception e){
+//            Log.d("ERROR", "Failed to get camera: " + e.getMessage());
+//        }
 
         if(mCamera != null) {
             mCameraView = new CameraView(this, mCamera);//create a SurfaceView to show camera data
@@ -188,7 +191,25 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         if (resultCode == Activity.RESULT_OK){
             if(requestCode == IMG_GALLERY_REQUEST){
                 Uri uri = data.getData();
-                imgHinhA.setImageURI(uri);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    if(position == -1){
+                        Log.d("TLD1827", position + "s");
+                        Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
+                        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+                        byte[] byteArray = bStream.toByteArray();
+                        iThemSanPham.putExtra("image", byteArray);
+                        startActivity(iThemSanPham);
+                    }else{
+                        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+                        byteImage = bStream.toByteArray();
+                        finish();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -230,5 +251,29 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 + "IMG_" + timeStamp + ".jpg");
 
         return mediaFile;
+    }
+
+    private Camera getCameraInstance(int cameraID){
+        Camera c = null;
+        try {
+            c = Camera.open(cameraID); // attempt to get a Camera instance
+        }
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+            Log.d("ErrorCamera", "Fail to connect to camera:");
+            e.printStackTrace();
+        }
+        return c; // returns null if camera is unavailable
+    }
+
+    @Override
+    public void finish() {
+        if (byteImage != null){
+            Intent data = new Intent();
+            data.putExtra("image", byteImage);
+            setResult(RESULT_OK, data);
+//            mCamera.release();
+        }
+        super.finish();
     }
 }
