@@ -1,14 +1,17 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
+package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
@@ -19,8 +22,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
-import com.example.tieu_nt.mokidemo.Presenter.CameraTrangChu.CameraView;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ThemSanPhamActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,7 +37,7 @@ import java.util.Date;
  * Created by tieu_nt on 3/13/2018.
  */
 
-public class CameraActivity extends AppCompatActivity implements View.OnClickListener{
+public class CameraActivity extends AppCompatActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback{
     private Camera mCamera = null;
     private CameraView mCameraView = null;
     private ImageButton imgClose, imgChupAnh, imgGallery, imgRotateCamera;
@@ -43,8 +46,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private ToggleButton tgFlash;
     private int IMG_GALLERY_REQUEST = 1;
     private int cameraID;
-    int position = -1;
+    int position = -1, dem = 0;
     private byte[] byteImage;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    public static final int MEDIA_TYPE_VIDEO = 2;
+    private File pictureFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,11 +62,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
         cameraID = Camera.CameraInfo.CAMERA_FACING_BACK;
         mCamera = getCameraInstance(cameraID);
-//        try{
-//            mCamera = Camera.open(cameraID);//you can use open(int) to use different cameras
-//        } catch (Exception e){
-//            Log.d("ERROR", "Failed to get camera: " + e.getMessage());
-//        }
 
         if(mCamera != null) {
             mCameraView = new CameraView(this, mCamera);//create a SurfaceView to show camera data
@@ -107,7 +108,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imgClose:
-                System.exit(0);
+                finish();
                 break;
             case R.id.imgChupAnh:
                 mCamera.takePicture(null, null, mPicture);
@@ -191,20 +192,18 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         if (resultCode == Activity.RESULT_OK){
             if(requestCode == IMG_GALLERY_REQUEST){
                 Uri uri = data.getData();
+                Bitmap bitmap = null;
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                        /*Nếu lấy quality quá lớn sẽ có một số ảnh dung lượng lớn gây tràn bộ nhớ*/
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bStream);
+                    byteImage = bStream.toByteArray();
                     if(position == -1){
-                        Log.d("TLD1827", position + "s");
                         Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
-                        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-                        byte[] byteArray = bStream.toByteArray();
-                        iThemSanPham.putExtra("image", byteArray);
+                        iThemSanPham.putExtra("image", byteImage);
                         startActivity(iThemSanPham);
                     }else{
-                        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-                        byteImage = bStream.toByteArray();
                         finish();
                     }
                 } catch (IOException e) {
@@ -217,38 +216,62 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            File pictureFile = getOutputMediaFile();
-            if (pictureFile == null) {
+            pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+            if (pictureFile == null){
+                Log.d("MOKIDemo", "Error creating media file, check storage permissions: ");
                 return;
             }
+
             try {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
+                setImage();
             } catch (FileNotFoundException e) {
-
+                Log.d("MOKIDemo", "File not found: " + e.getMessage());
             } catch (IOException e) {
+                Log.d("MOKIDemo", "Error accessing file: " + e.getMessage());
             }
         }
     };
 
-    private static File getOutputMediaFile() {
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                "MOKIDemo");
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
+
+
+    /** Create a file Uri for saving an image or video */
+    private static Uri getOutputMediaFileUri(int type){
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    /** Create a File for saving an image or video */
+    private static File getOutputMediaFile(int type){
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "MOKIDemo");
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
                 Log.d("MOKIDemo", "failed to create directory");
                 return null;
             }
         }
+
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
-                .format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                + "IMG_" + timeStamp + ".jpg");
+        if (type == MEDIA_TYPE_IMAGE){
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "IMG_"+ timeStamp + ".jpg");
+        } else if(type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "VID_"+ timeStamp + ".mp4");
+        } else {
+            return null;
+        }
 
         return mediaFile;
     }
@@ -272,8 +295,39 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             Intent data = new Intent();
             data.putExtra("image", byteImage);
             setResult(RESULT_OK, data);
-//            mCamera.release();
         }
         super.finish();
+    }
+
+    private void setImage(){
+        Bitmap bitmap = BitmapFactory.decodeFile(pictureFile.getPath());
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        /*Nếu lấy quality = 100 sẽ có một số ảnh dung lượng lớn gây tràn bộ nhớ*/
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bStream);
+        byteImage = bStream.toByteArray();
+        if (byteImage != null){
+            if(position == -1){
+                Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
+                iThemSanPham.putExtra("image", byteImage);
+                startActivity(iThemSanPham);
+            }else{
+                finish();
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseCamera();
+    }
+
+    private void releaseCamera(){
+        if (mCamera != null){
+            mCamera.stopPreview();
+            mCameraView.getHolder().removeCallback(mCameraView);
+            mCamera.release();        // release the camera for other applications
+            mCamera = null;
+        }
     }
 }

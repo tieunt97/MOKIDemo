@@ -38,7 +38,7 @@
         <activity android:name=".View.ManHinhDangNhap.XacNhanDangKyActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.CameraActivity"
+        <activity android:name=".View.ManHinhTrangChu.CameraTrangChu.CameraActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhDangNhap.QuenMatKhauActivity"

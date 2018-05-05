@@ -2,9 +2,7 @@ package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -19,8 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -34,18 +30,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.MySingleton;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangKyActivity;
+import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeAn;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeChoiMaHoc;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeDiRaNgoai;
@@ -62,15 +51,8 @@ import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSanPha
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentTatCa;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -80,10 +62,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     //may tinh ca nhan
-//    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-//    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php";
-//    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.110:8080/webmoki/khachhang.php";
+    public static String SERVER = "http://192.168.1.111:8080/webmoki";
+    public static String SERVER_NAME_SANPHAM = "http://192.168.1.111:8080/webmoki/laydssanpham.php";
+    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.111:8080/webmoki/dangnhap_dangky.php";
+    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.111:8080/webmoki/khachhang.php";
 
 
     //Genymotion
@@ -93,10 +75,10 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
 //    public static String SERVER_NAME_KHACHHANG = "http://10.0.3.2:8080/webmoki/khachhang.php";
 
     //Wifi HUST
-    public static String SERVER = "http://10.11.203.188:8080/webmoki";
-    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
-    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
-    public static String SERVER_NAME_KHACHHANG = "http://10.11.203.188:8080/webmoki/khachhang.php";
+//    public static String SERVER = "http://10.11.203.188:8080/webmoki";
+//    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
+//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
+//    public static String SERVER_NAME_KHACHHANG = "http://10.11.203.188:8080/webmoki/khachhang.php";
 
 
     private FrameLayout trangChu;

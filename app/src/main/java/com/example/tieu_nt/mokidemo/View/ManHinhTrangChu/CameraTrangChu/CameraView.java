@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.Presenter.CameraTrangChu;
+package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu;
 
 import android.content.Context;
 import android.hardware.Camera;
