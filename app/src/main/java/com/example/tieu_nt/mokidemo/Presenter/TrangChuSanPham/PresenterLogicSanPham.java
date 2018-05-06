@@ -1,12 +1,9 @@
 package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
 
-import android.util.Log;
-
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelSanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewHienThiDanhSachSanPham;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,8 +29,7 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep) {
-        List<SanPham> dsSanPham;
-        dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
+        List<SanPham> dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
 
         return dsSanPham;
     }

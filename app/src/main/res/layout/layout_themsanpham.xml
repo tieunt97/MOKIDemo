@@ -111,6 +111,7 @@
                 android:background="@color/colorGrey"/>
 
             <EditText
+                android:id="@+id/edtTenSP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Tên sản phẩm (Yêu cầu)"
@@ -123,6 +124,7 @@
                 android:background="@color/colorGrey"/>
 
             <EditText
+                android:id="@+id/edtMoTaSP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="95dp"
@@ -140,7 +142,7 @@
             <RelativeLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="62dp">
+                android:layout_height="64dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -182,7 +184,7 @@
             <RelativeLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="62dp">
+                android:layout_height="64dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -224,7 +226,7 @@
             <RelativeLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="62dp">
+                android:layout_height="64dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -278,6 +280,7 @@
                 android:background="@color/colorGrey"/>
 
             <RelativeLayout
+                android:id="@+id/relaDanhMuc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp">
@@ -285,12 +288,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Danh mục"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="16dp"
                     android:drawableLeft="@drawable/folder"
+                    android:drawablePadding="8dp"
                     android:gravity="center_vertical"
-                    android:drawablePadding="8dp"/>
+                    android:text="Danh mục"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
+                    android:id="@+id/tvDanhMuc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yêu cầu"
@@ -305,6 +314,7 @@
                 android:background="@color/colorGrey"/>
 
             <RelativeLayout
+                android:id="@+id/relaTrangThai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp">
@@ -315,12 +325,15 @@
                     android:text="Trạng thái"
                     android:drawableLeft="@drawable/visibility"
                     android:gravity="center_vertical"
-                    android:drawablePadding="8dp"/>
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
+                    android:id="@+id/tvTrangThai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yêu cầu"
+                    android:textColor="@color/colorRed"
+                    android:hint="Yêu cầu"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"/>
 
@@ -332,6 +345,7 @@
                 android:background="@color/colorGrey"/>
 
             <RelativeLayout
+                android:id="@+id/relaNhanHieu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp">
@@ -342,12 +356,79 @@
                     android:text="Nhãn hiệu"
                     android:drawableLeft="@drawable/tag"
                     android:gravity="center_vertical"
-                    android:drawablePadding="8dp"/>
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/tvNhanHieu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorGrey"/><View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorGrey"/>
+
+            <RelativeLayout
+                android:id="@+id/relaKhoiLuong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="Khối lượng"
+                    android:drawableLeft="@drawable/box_weight"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/tvKhoiLuong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yêu cầu"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorGreyish"/>
+
+            <RelativeLayout
+                android:id="@+id/relaKichThuoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kích thước"
+                    android:drawableLeft="@drawable/size_square"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/tvKichThuoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yêu cầu"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"/>
 
@@ -373,24 +454,30 @@
                 android:background="@color/colorGrey"/>
 
             <RelativeLayout
+                android:id="@+id/relaNoiBan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/tvNoiBan1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nơi bán"
                     android:drawableLeft="@drawable/location_pin"
                     android:gravity="center_vertical"
-                    android:drawablePadding="8dp"/>
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
+                    android:id="@+id/tvNoiBan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@id/tvNoiBan1"
+                    android:layout_marginLeft="5dp"/>
 
             </RelativeLayout>
 
@@ -424,12 +511,14 @@
                     android:text="Giá bán (VNĐ)"
                     android:drawableLeft="@drawable/price"
                     android:gravity="center_vertical"
-                    android:drawablePadding="8dp"/>
+                    android:drawablePadding="8dp"
+                    android:layout_centerVertical="true"/>
 
-                <TextView
+                <EditText
+                    android:id="@+id/edtGiaBan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Giá không tính vận chuyển"
+                    android:hint="Giá không tính vận chuyển"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"/>
 

@@ -21,7 +21,8 @@ public class TrangThaiTimKiemActivity extends AppCompatActivity implements View.
     private ImageButton imgBack;
     private RelativeLayout relaTatCa, relaMoi, relaGanNhuMoi, relaTot, relaKhaTot, relaCu;
     private ImageView imgMoi, imgGanNhuMoi, imgTot, imgKhaTot, imgCu;
-    private int trangThai = 0;
+    private String trangThai = "Tất cả";
+    private boolean themSanPham = false;
 
 
     @Override
@@ -32,11 +33,15 @@ public class TrangThaiTimKiemActivity extends AppCompatActivity implements View.
 
         Intent intent = getIntent();
         String trangThai = intent.getStringExtra("trangThai");
-        if(trangThai.equalsIgnoreCase("Mới")) imgMoi.setVisibility(View.VISIBLE);
-        else if(trangThai.equalsIgnoreCase("Gần như mới")) imgGanNhuMoi.setVisibility(View.VISIBLE);
-        else if(trangThai.equalsIgnoreCase("Tốt")) imgTot.setVisibility(View.VISIBLE);
-        else if(trangThai.equalsIgnoreCase("Khá tốt")) imgKhaTot.setVisibility(View.VISIBLE);
-        else if(trangThai.equalsIgnoreCase("Cũ")) imgCu.setVisibility(View.VISIBLE);
+        themSanPham = intent.getBooleanExtra("themSanPham", false);
+        if (themSanPham) relaTatCa.setVisibility(View.GONE);
+        if (trangThai != null){
+            if(trangThai.equalsIgnoreCase("Mới")) imgMoi.setVisibility(View.VISIBLE);
+            else if(trangThai.equalsIgnoreCase("Gần như mới")) imgGanNhuMoi.setVisibility(View.VISIBLE);
+            else if(trangThai.equalsIgnoreCase("Tốt")) imgTot.setVisibility(View.VISIBLE);
+            else if(trangThai.equalsIgnoreCase("Khá tốt")) imgKhaTot.setVisibility(View.VISIBLE);
+            else if(trangThai.equalsIgnoreCase("Cũ")) imgCu.setVisibility(View.VISIBLE);
+        }
     }
 
     private void anhXa() {
@@ -68,27 +73,27 @@ public class TrangThaiTimKiemActivity extends AppCompatActivity implements View.
                 finish();
                 break;
             case R.id.relaTatCa:
-                trangThai = 1;
+                trangThai = "Tất cả";
                 finish();
                 break;
             case R.id.relaMoi:
-                trangThai = 2;
+                trangThai = "Mới";
                 finish();
                 break;
             case R.id.relaTot:
-                trangThai = 4;
+                trangThai = "Tốt";
                 finish();
                 break;
             case R.id.relaKhaTot:
-                trangThai = 5;
+                trangThai = "Khá tốt";
                 finish();
                 break;
             case R.id.relaGanNhuMoi:
-                trangThai = 3;
+                trangThai = "Gần như mới";
                 finish();
                 break;
             case R.id.relaCu:
-                trangThai = 6;
+                trangThai = "Cũ";
                 finish();
                 break;
         }

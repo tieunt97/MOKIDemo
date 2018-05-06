@@ -200,25 +200,13 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
 
         if(resultCode == RESULT_OK){
             if(requestCode == REQUEST_TRANGTHAI){
-                int trangThai = data.getIntExtra("trangThai", 0);
-                if(trangThai != 0){
-                    if (tvTrangThai.getCurrentTextColor() == getResources().getColor(R.color.colorRed)){
-                        tvTrangThai.setTextColor(getResources().getColor(R.color.colorBlack));
-                    }
+                String trangThai = data.getStringExtra("trangThai");
+                if(!trangThai.equalsIgnoreCase("Tất cả")){
+                    tvTrangThai.setTextColor(getResources().getColor(R.color.colorBlack));
+                }else{
+                    tvTrangThai.setTextColor(getResources().getColor(R.color.colorRed));
                 }
-                if(trangThai == 1){
-                    tvTrangThai.setText("Tất cả");
-                }else if(trangThai == 2){
-                    tvTrangThai.setText("Mới");
-                }else if(trangThai == 3){
-                    tvTrangThai.setText("Gần như mới");
-                }else if(trangThai == 4){
-                    tvTrangThai.setText("Tốt");
-                }else if(trangThai == 5){
-                    tvTrangThai.setText("Khá tốt");
-                }else if(trangThai == 6){
-                    tvTrangThai.setText("Cũ");
-                }
+                tvTrangThai.setText(trangThai);
             }
         }
     }

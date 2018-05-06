@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamList;
+import com.example.tieu_nt.mokidemo.Model.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
@@ -23,11 +25,12 @@ import java.util.List;
  * Created by tieu_nt on 3/12/2018.
  */
 
-public class FragmentBeChoiMaHoc extends FragmentSanPham implements ViewHienThiDanhSachSanPham{
+public class FragmentBeChoiMaHoc extends FragmentSanPham implements ViewHienThiDanhSachSanPham, ILoadMore{
     private RecyclerView recyclerView;
     private PresenterLogicSanPham presenterLogicSanPham;
-    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManagerGrid, layoutManagerLinear;
     private RecyclerView.Adapter adapter;
+    private List<SanPham> dsSanPham;
     private boolean dangList = false;
     private int idKhachHang;
     private String giaTri = "", sapXep = "";
@@ -40,6 +43,8 @@ public class FragmentBeChoiMaHoc extends FragmentSanPham implements ViewHienThiD
         idKhachHang = bundle.getInt("idKhachHang");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
+        layoutManagerGrid = new GridLayoutManager(getContext(), 2);
+        layoutManagerLinear = new LinearLayoutManager(getContext());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 9, 0, idKhachHang, giaTri, sapXep);
         return view;
@@ -47,35 +52,54 @@ public class FragmentBeChoiMaHoc extends FragmentSanPham implements ViewHienThiD
 
     @Override
     public void hienThiDanhSachSanPham(List<SanPham> dsSanPham) {
+        this.dsSanPham = dsSanPham;
         if(!dangList){
-            adapter = new AdapterSanPhamGrid(getContext(), dsSanPham);
-            layoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(layoutManagerGrid);
+            adapter = new AdapterSanPhamGrid(getContext(), this.dsSanPham);
+            recyclerView.setAdapter(adapter);
+            recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerGrid, this));
         }else{
-            adapter = new AdapterSanPhamList(getContext(), dsSanPham);
-            layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManagerLinear);
+            adapter = new AdapterSanPhamList(getContext(),this.dsSanPham);
+            recyclerView.setAdapter(adapter);
+            recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerLinear, this));
         }
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public void setDangList(boolean dangList){
-        if(this.dangList == !dangList){
-            this.dangList = dangList;
-            presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 9, 0, idKhachHang, giaTri, sapXep);
-        }
+        this.dangList = dangList;
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 9, 0, idKhachHang, giaTri, sapXep);
     }
 
     @Override
     public void setGiaTriSapXep() {
-        this.sapXep = "";
         this.giaTri = "";
+        this.sapXep = "";
     }
 
     @Override
-    public void layDanhSachSanPham(String giaTri, String sapXep) {
+    public void loadMore(int tongItem) {
+        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPhamTheoLoaiSP", 9, tongItem, idKhachHang, giaTri, sapXep);
+        if (sanPhamLoadMore.size() > 0){
+            dsSanPham.addAll(sanPhamLoadMore);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void layDanhSachSanPhamSapXep(String giaTri, String sapXep) {
         this.sapXep = sapXep;
         this.giaTri = giaTri;
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 9, 0, idKhachHang, giaTri, sapXep);

@@ -61,8 +61,6 @@ public class ModelKhachHang {
         HashMap<String,String> hsThoiGian = new HashMap<>();
         hsThoiGian.put("thoiGian", binhLuan.getThoiGianBL());
 
-        Log.d("BinhLuan", binhLuan.getIdKhachHang() + "=" + binhLuan.getIdSanPham() + binhLuan.getNoiDungBL() + binhLuan.getThoiGianBL());
-
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
         attrs.add(hsIdSanPham);

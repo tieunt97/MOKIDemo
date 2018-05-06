@@ -29,7 +29,7 @@ import java.util.List;
 public class FragmentTatCa extends FragmentSanPham implements ViewHienThiDanhSachSanPham, ILoadMore{
     private RecyclerView recyclerView;
     private PresenterLogicSanPham presenterLogicSanPham;
-    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManagerLinear, layoutManagerGrid;
     private RecyclerView.Adapter adapter;
     private List<SanPham> dsSanPham;
     private boolean dangList = false;
@@ -44,6 +44,9 @@ public class FragmentTatCa extends FragmentSanPham implements ViewHienThiDanhSac
         idKhachHang = bundle.getInt("idKhachHang");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
+        layoutManagerGrid = new GridLayoutManager(getContext(), 2);
+        layoutManagerLinear = new LinearLayoutManager(getContext());
+
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPham", 0, 0, idKhachHang, giaTri, sapXep);
         return view;
@@ -53,25 +56,28 @@ public class FragmentTatCa extends FragmentSanPham implements ViewHienThiDanhSac
     public void hienThiDanhSachSanPham(List<SanPham> dsSanPham) {
         this.dsSanPham = dsSanPham;
         if(!dangList){
+            recyclerView.setLayoutManager(layoutManagerGrid);
             adapter = new AdapterSanPhamGrid(getContext(), this.dsSanPham);
-            layoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setAdapter(adapter);
+            recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerGrid, this));
         }else{
+            recyclerView.setLayoutManager(layoutManagerLinear);
             adapter = new AdapterSanPhamList(getContext(),this.dsSanPham);
-            layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setAdapter(adapter);
+            recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerLinear, this));
         }
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManager, this));
-        adapter.notifyDataSetChanged();
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public void setDangList(boolean dangList){
-        if(this.dangList == !dangList){
             this.dangList = dangList;
             presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPham", 0, 0, idKhachHang, giaTri, sapXep);
-        }
     }
 
     @Override
@@ -84,16 +90,20 @@ public class FragmentTatCa extends FragmentSanPham implements ViewHienThiDanhSac
     public void loadMore(int tongItem) {
         List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPham", 0, tongItem, idKhachHang, giaTri, sapXep);
         if (sanPhamLoadMore.size() > 0){
-            this.dsSanPham.addAll(sanPhamLoadMore);
-            adapter.notifyItemInserted(tongItem - 1);
-            Log.d("LoadMore",sanPhamLoadMore.size() + " : " + sanPhamLoadMore.get(0).getTenSanPham());
+            dsSanPham.addAll(sanPhamLoadMore);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 
     @Override
-    public void layDanhSachSanPham(String giaTri, String sapXep) {
+    public void layDanhSachSanPhamSapXep(String giaTri, String sapXep) {
         this.sapXep = sapXep;
         this.giaTri = giaTri;
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 0, 0, idKhachHang, giaTri, sapXep);
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPham", 0, 0, idKhachHang, giaTri, sapXep);
     }
 }

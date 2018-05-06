@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
  */
 
 public abstract class FragmentSanPham extends Fragment{
-    public abstract void layDanhSachSanPham(String giaTri, String sapXep);
+    public abstract void layDanhSachSanPhamSapXep(String giaTri, String sapXep);
     public abstract void setDangList(boolean dangList);
     public abstract void setGiaTriSapXep();
 }

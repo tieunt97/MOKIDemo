@@ -8,8 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
@@ -25,6 +29,13 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     private ImageButton imgBack, imgDelete;
     private List<Bitmap> bitmaps = new ArrayList<>();
     private List<ImageView> dsImgView = new ArrayList<>();
+    private EditText edtTenSP, edtMoTaSP, edtGiaBan;
+    private TextView tvDanhMuc, tvTrangThai, tvKhoiLuong, tvKichThuoc, tvNhanHieu, tvNoiBan;
+    private ToggleButton tgMienPhi, tgBanNhanh, tgMacCa;
+    private RelativeLayout relaDanhMuc, relaTrangThai, relaNhanHieu, relaKhoiLuong, relaKichThuoc, relaNoiBan;
+    private final int REQUEST_DANHMUC = 4, REQUEST_TRANGTHAI = 5, REQUEST_NHANHIEU = 6,
+        REQUEST_KHOILUONG = 7, REQUEST_KICHTHUOC = 8, REQUEST_NOIBAN = 9;
+    private int position = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,17 +52,38 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     private void anhXa() {
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         imgDelete = (ImageButton) findViewById(R.id.imgDelete);
-
         dsImgView.add((ImageView) findViewById(R.id.img1));
         dsImgView.add((ImageView) findViewById(R.id.img2));
         dsImgView.add((ImageView) findViewById(R.id.img3));
         dsImgView.add((ImageView) findViewById(R.id.img4));
+        edtTenSP = (EditText) findViewById(R.id.edtTenSP);
+        edtMoTaSP = (EditText) findViewById(R.id.edtMoTaSP);
+        edtGiaBan = (EditText) findViewById(R.id.edtGiaBan);
+        tvDanhMuc = (TextView) findViewById(R.id.tvDanhMuc);
+        tvTrangThai = (TextView) findViewById(R.id.tvTrangThai);
+        tvNhanHieu = (TextView) findViewById(R.id.tvNhanHieu);
+        tvKhoiLuong = (TextView) findViewById(R.id.tvKhoiLuong);
+        tvKichThuoc = (TextView) findViewById(R.id.tvKichThuoc);
+        tvNoiBan = (TextView) findViewById(R.id.tvNoiBan);
+        tgMienPhi = (ToggleButton) findViewById(R.id.tgMienPhi);
+        tgBanNhanh = (ToggleButton) findViewById(R.id.tgBanNhanh);
+        tgMacCa = (ToggleButton) findViewById(R.id.tgMacCa);
+        relaDanhMuc = (RelativeLayout) findViewById(R.id.relaDanhMuc);
+        relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
+        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
+        relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
+        relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
+        relaNoiBan = (RelativeLayout) findViewById(R.id.relaNoiBan);
     }
 
     private void setActions(){
         imgBack.setOnClickListener(this);
         imgDelete.setOnClickListener(this);
         setActionImageView();
+        relaDanhMuc.setOnClickListener(this);
+        relaTrangThai.setOnClickListener(this);
+        relaNhanHieu.setOnClickListener(this);
+        relaNoiBan.setOnClickListener(this);
     }
 
     private void setActionImageView(){
@@ -95,10 +127,26 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
             case R.id.img4:
                 editImage(3);
                 break;
+            case R.id.relaDanhMuc:
+                break;
+            case R.id.relaTrangThai:
+                Intent iTrangThai = new Intent(this, TrangThaiTimKiemActivity.class);
+                iTrangThai.putExtra("themSanPham", true);
+                startActivityForResult(iTrangThai, REQUEST_TRANGTHAI);
+                break;
+            case R.id.relaNhanHieu:
+                break;
+            case R.id.relaKhoiLuong:
+                break;
+            case R.id.relaKichThuoc:
+                break;
+            case R.id.relaNoiBan:
+                break;
         }
     }
 
     private void editImage(final int position){
+        this.position = position;
         if(position >= bitmaps.size()){
             Intent iCamera = new Intent(ThemSanPhamActivity.this, CameraActivity.class);
             iCamera.putExtra("position", position);
@@ -153,20 +201,35 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
-            byte[] byteImage = data.getByteArrayExtra("image");
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
-            if(requestCode > bitmaps.size() - 1){
-                //thêm bimap vào dsBitmap
-                bitmaps.add(bitmap);
-                setActionImageView();
-                if(requestCode < 3){
-                    setImageCapture(requestCode + 1);
+            if(requestCode == this.position ){
+                byte[] byteImage = data.getByteArrayExtra("image");
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+                if(requestCode > bitmaps.size() - 1){
+                    //thêm bimap vào dsBitmap
+                    bitmaps.add(bitmap);
+                    setActionImageView();
+                    if(requestCode < 3){
+                        setImageCapture(requestCode + 1);
+                    }
+                }else{
+                    //thay bitmap vào vị trí yêu cầu chỉnh sửa
+                    bitmaps.set(requestCode, bitmap);
                 }
-            }else{
-                //thay bitmap vào vị trí yêu cầu chỉnh sửa
-                bitmaps.set(requestCode, bitmap);
+                setImageBitMap(requestCode);
+            }else if (requestCode == REQUEST_DANHMUC){
+
+            }else if(requestCode == REQUEST_TRANGTHAI){
+                tvTrangThai.setText(data.getStringExtra("trangThai"));
+            }else if(requestCode == REQUEST_KHOILUONG){
+
+            }else if(requestCode == REQUEST_KICHTHUOC){
+
+            }else if(requestCode == REQUEST_NHANHIEU){
+
+            }else if(requestCode == REQUEST_NOIBAN){
+
             }
-            setImageBitMap(requestCode);
+
         }
     }
 }
