@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -15,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
 
@@ -25,7 +28,7 @@ import java.util.List;
  * Created by tieu_nt on 5/3/2018.
  */
 
-public class ThemSanPhamActivity extends AppCompatActivity implements View.OnClickListener{
+public class ThemSanPhamActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher{
     private ImageButton imgBack, imgDelete;
     private List<Bitmap> bitmaps = new ArrayList<>();
     private List<ImageView> dsImgView = new ArrayList<>();
@@ -36,6 +39,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     private final int REQUEST_DANHMUC = 4, REQUEST_TRANGTHAI = 5, REQUEST_NHANHIEU = 6,
         REQUEST_KHOILUONG = 7, REQUEST_KICHTHUOC = 8, REQUEST_NOIBAN = 9;
     private int position = 0;
+    private DanhMuc danhMuc;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +88,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
         relaTrangThai.setOnClickListener(this);
         relaNhanHieu.setOnClickListener(this);
         relaNoiBan.setOnClickListener(this);
+        edtGiaBan.addTextChangedListener(this);
     }
 
     private void setActionImageView(){
@@ -128,6 +133,12 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
                 editImage(3);
                 break;
             case R.id.relaDanhMuc:
+                Intent iDanhMuc = new Intent(this, DanhMucActivity.class);
+                DanhMuc danhMuc = new DanhMuc();
+                danhMuc.setIdDanhMuc(0);
+                danhMuc.setTenDanhMuc("Danh mục");
+                iDanhMuc.putExtra("danhMuc", danhMuc);
+                startActivityForResult(iDanhMuc, REQUEST_DANHMUC);
                 break;
             case R.id.relaTrangThai:
                 Intent iTrangThai = new Intent(this, TrangThaiTimKiemActivity.class);
@@ -217,7 +228,9 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
                 }
                 setImageBitMap(requestCode);
             }else if (requestCode == REQUEST_DANHMUC){
-
+                danhMuc = (DanhMuc) data.getSerializableExtra("danhMuc");
+                if (danhMuc  != null)
+                    tvDanhMuc.setText(danhMuc.getTenDanhMuc());
             }else if(requestCode == REQUEST_TRANGTHAI){
                 tvTrangThai.setText(data.getStringExtra("trangThai"));
             }else if(requestCode == REQUEST_KHOILUONG){
@@ -231,5 +244,24 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
             }
 
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (edtGiaBan.getText().hashCode() == charSequence.hashCode()){
+            if (charSequence.length() == 1 && charSequence.equals("0")){
+                edtGiaBan.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }

@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 
 public class DanhMuc implements Serializable{
-    int idDanhMuc, idDanhMucCha;
-    String tenDanhMuc;
+    private int idDanhMuc, idDanhMucCha, soDanhMucCon;
+    private String tenDanhMuc;
 
     public int getIdDanhMuc() {
         return idDanhMuc;
@@ -24,6 +24,14 @@ public class DanhMuc implements Serializable{
 
     public void setIdDanhMucCha(int idDanhMucCha) {
         this.idDanhMucCha = idDanhMucCha;
+    }
+
+    public int getSoDanhMucCon() {
+        return soDanhMucCon;
+    }
+
+    public void setSoDanhMucCon(int soDanhMucCon) {
+        this.soDanhMucCon = soDanhMucCon;
     }
 
     public String getTenDanhMuc() {

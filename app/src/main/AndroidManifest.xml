@@ -16,7 +16,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
 
         <activity android:name=".View.ManHinhDangNhap.ManHinhDangNhapActivity"
             android:screenOrientation="portrait">
@@ -118,6 +119,8 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhTrangChu.ThemSanPhamActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".View.ManHinhTrangChu.DanhMucActivity"
             android:screenOrientation="portrait"/>
 
     </application>

@@ -34,6 +34,51 @@ public class ModelSanPham {
         return modelSanPham;
     }
 
+    public List<DanhMuc> layDSDanhMucCon(int idDanhMuc){
+        List<DanhMuc> danhMucs = new ArrayList<>();
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "layDSDanhMucCon");
+
+        HashMap<String,String> hsIdDanhMuc = new HashMap<>();
+        hsIdDanhMuc.put("idLoaiSPCha", String.valueOf(idDanhMuc));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdDanhMuc);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJSON);
+            JSONArray jsonArray = jsonObject.getJSONArray("danhmuc");
+            int length = jsonArray.length();
+            for (int i = 0; i < length; i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                DanhMuc danhMuc = new DanhMuc();
+                danhMuc.setIdDanhMucCha(idDanhMuc);
+                danhMuc.setIdDanhMuc(object.getInt("idLoaiSP"));
+                danhMuc.setTenDanhMuc(object.getString("tenLoaiSP"));
+                danhMuc.setSoDanhMucCon(object.getInt("soLoaiCon"));
+
+                danhMucs.add(danhMuc);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return danhMucs;
+    }
+
     public List<BinhLuan> layDanhSachBinhLuan(int idSanPham){
         List<BinhLuan> dsBinhLuan = new ArrayList<>();
 
@@ -55,7 +100,6 @@ public class ModelSanPham {
         //end phương thức post
         downloadJSON.execute();
 
-        Log.d("idSanPham", idSanPham + "");
         try {
             dataJSON = downloadJSON.get();
             JSONObject jsonObject = new JSONObject(dataJSON);
