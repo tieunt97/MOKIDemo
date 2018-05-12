@@ -16,7 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -36,6 +38,83 @@ public class ModelKhachHang {
         if(modelKhachHang == null) modelKhachHang = new ModelKhachHang();
 
         return modelKhachHang;
+    }
+
+    public boolean themSanPham(int idKhachHang, List<String> dsHinh, int idLoaiSP, List<String> thongTinSP){
+        boolean b = false;
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "themSanPham");
+        attrs.add(hsHam);
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+        attrs.add(hsIdKhachHang);
+
+        HashMap<String,String> hsSoAnh = new HashMap<>();
+        hsSoAnh.put("soAnh", String.valueOf(dsHinh.size()));
+        attrs.add(hsSoAnh);
+
+        HashMap<String,String> hsThoiGian = new HashMap<>();
+        hsThoiGian.put("thoiGian", new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString());
+        attrs.add(hsThoiGian);
+
+        for(int i = 0; i < dsHinh.size(); i++){
+            HashMap<String,String> hsImage = new HashMap<>();
+            hsImage.put("image" + i, dsHinh.get(i));
+            attrs.add(hsImage);
+        }
+
+        HashMap<String,String> hsTenSP = new HashMap<>();
+        hsTenSP.put("tenSP", thongTinSP.get(0));
+        attrs.add(hsTenSP);
+
+        HashMap<String,String> hsMoTaSP = new HashMap<>();
+        hsMoTaSP.put("moTa", thongTinSP.get(1));
+        attrs.add(hsMoTaSP);
+
+        HashMap<String,String> hsGiaSP = new HashMap<>();
+        hsGiaSP.put("giaChuan", thongTinSP.get(2));
+        attrs.add(hsGiaSP);
+
+        HashMap<String,String> hsIdLoaiSP = new HashMap<>();
+        hsIdLoaiSP.put("idLoaiSP", String.valueOf(idLoaiSP));
+        attrs.add(hsIdLoaiSP);
+
+        HashMap<String,String> hsTrangThai = new HashMap<>();
+        hsTrangThai.put("trangThai", thongTinSP.get(3));
+        attrs.add(hsTrangThai);
+
+        HashMap<String,String> hsKhoiLuong = new HashMap<>();
+        hsKhoiLuong.put("khoiLuong", thongTinSP.get(4));
+        attrs.add(hsKhoiLuong);
+
+        HashMap<String,String> hsKichThuoc = new HashMap<>();
+        hsKichThuoc.put("kichThuoc", thongTinSP.get(5));
+        attrs.add(hsKichThuoc);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject object = new JSONObject(dataJSON);
+            int response = object.getInt("response");
+            if (response == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return b;
     }
 
     public boolean guiBinhLuan(BinhLuan binhLuan){
@@ -73,7 +152,6 @@ public class ModelKhachHang {
 
         try {
             dataJSON = downloadJSON.get();
-            Log.d("dataJSOn", dataJSON);
             JSONObject object = new JSONObject(dataJSON);
             int response = object.getInt("response");
             if (response == 1) b = true;

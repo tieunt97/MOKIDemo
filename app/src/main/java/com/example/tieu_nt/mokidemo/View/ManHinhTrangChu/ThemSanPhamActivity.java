@@ -9,18 +9,27 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
+import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicBanSanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangKyActivity;
+import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangNhapActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +37,13 @@ import java.util.List;
  * Created by tieu_nt on 5/3/2018.
  */
 
-public class ThemSanPhamActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher{
+public class ThemSanPhamActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher,
+ViewBanSanPham{
     private ImageButton imgBack, imgDelete;
     private List<Bitmap> bitmaps = new ArrayList<>();
     private List<ImageView> dsImgView = new ArrayList<>();
     private EditText edtTenSP, edtMoTaSP, edtGiaBan;
+    private Button btnBan;
     private TextView tvDanhMuc, tvTrangThai, tvKhoiLuong, tvKichThuoc, tvNhanHieu, tvNoiBan;
     private ToggleButton tgMienPhi, tgBanNhanh, tgMacCa;
     private RelativeLayout relaDanhMuc, relaTrangThai, relaNhanHieu, relaKhoiLuong, relaKichThuoc, relaNoiBan;
@@ -40,6 +51,8 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
         REQUEST_KHOILUONG = 7, REQUEST_KICHTHUOC = 8, REQUEST_NOIBAN = 9;
     private int position = 0;
     private DanhMuc danhMuc;
+    private String trangThai, nhanHieu, khoiLuong, kichThuoc, noiBan;
+    private PresenterLogicBanSanPham presenterLogicBanSanPham;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +64,8 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
         setImageBitMap(0);
         setImageCapture(1);
         setActions();
+        tvNoiBan.setText(ManHinhTrangChuActivity.khachHang.getDiaChi());
+        presenterLogicBanSanPham = new PresenterLogicBanSanPham(this);
     }
 
     private void anhXa() {
@@ -78,6 +93,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
         relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
         relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
         relaNoiBan = (RelativeLayout) findViewById(R.id.relaNoiBan);
+        btnBan = (Button) findViewById(R.id.btnBan);
     }
 
     private void setActions(){
@@ -89,6 +105,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
         relaNhanHieu.setOnClickListener(this);
         relaNoiBan.setOnClickListener(this);
         edtGiaBan.addTextChangedListener(this);
+        btnBan.setOnClickListener(this);
     }
 
     private void setActionImageView(){
@@ -119,6 +136,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
             case R.id.imgDelete:
+                xoaThongTinSanPham();
                 break;
             case R.id.img1:
                 editImage(0);
@@ -153,7 +171,88 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.relaNoiBan:
                 break;
+            case R.id.btnBan:
+                dangBanSanpham();
+                break;
         }
+    }
+
+    private String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    private void dangBanSanpham(){
+        List<String> dsHinh = new ArrayList<>();
+        for(int i = 0; i < bitmaps.size(); i++){
+            dsHinh.add(imageToString(bitmaps.get(i)));
+        }
+        List<String> thongTinSanPham = new ArrayList<>();
+        thongTinSanPham.add(edtTenSP.getText().toString());
+        thongTinSanPham.add(edtMoTaSP.getText().toString());
+        if(danhMuc != null && danhMuc.getIdDanhMuc() == 1){
+            thongTinSanPham.add("0");
+        }else{
+            thongTinSanPham.add(edtGiaBan.getText().toString());
+        }
+        thongTinSanPham.add(tvTrangThai.getText().toString());
+        thongTinSanPham.add(tvKhoiLuong.getText().toString());
+        thongTinSanPham.add(tvKichThuoc.getText().toString());
+        presenterLogicBanSanPham.dangBanSanPham(ManHinhTrangChuActivity.khachHang.getIdKhachHang(), dsHinh, danhMuc, thongTinSanPham);
+    }
+
+    private void xoaThongTinSanPham(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_thongbao_xacnhan, null);
+        Button btnHuy = (Button) view1.findViewById(R.id.btnHuy);
+        Button btnDongY = (Button) view1.findViewById(R.id.btnDongY);
+        btnDongY.setText("Đồng ý");
+        TextView tvNoiDung = (TextView)  view1.findViewById(R.id.tvNoiDung);
+        tvNoiDung.setText("Bạn có muốn xóa thông tin sản phẩm");
+
+        builder.setView(view1);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnDongY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < dsImgView.size(); i++){
+                    setImageNull(i);
+                    if(danhMuc != null){
+                        tvDanhMuc.setText("");
+                        danhMuc = null;
+                    }
+                    edtTenSP.setText("");
+                    edtMoTaSP.setText("");
+                    if(trangThai != null){
+                        tvTrangThai.setText("");
+                        trangThai = null;
+                    }
+                }
+                for(int i = 0; i < bitmaps.size(); i++){
+                    bitmaps.remove(0);
+                }
+                setImageCapture(0);
+                setPosition(0);
+                dsImgView.get(0).setOnClickListener(this);
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void setPosition(int position){
+        this.position = position;
     }
 
     private void editImage(final int position){
@@ -232,7 +331,8 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
                 if (danhMuc  != null)
                     tvDanhMuc.setText(danhMuc.getTenDanhMuc());
             }else if(requestCode == REQUEST_TRANGTHAI){
-                tvTrangThai.setText(data.getStringExtra("trangThai"));
+                trangThai =  data.getStringExtra("trangThai");
+                tvTrangThai.setText(trangThai);
             }else if(requestCode == REQUEST_KHOILUONG){
 
             }else if(requestCode == REQUEST_KICHTHUOC){
@@ -254,7 +354,7 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         if (edtGiaBan.getText().hashCode() == charSequence.hashCode()){
-            if (charSequence.length() == 1 && charSequence.equals("0")){
+            if(charSequence.toString().indexOf("0") == 0){
                 edtGiaBan.setText("");
             }
         }
@@ -263,5 +363,45 @@ public class ThemSanPhamActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    @Override
+    public void dangBanThanhCong() {
+        Toast.makeText(this, "Đăng bán sản phẩm thành công", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void dangBanThatBai(String msg) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ThemSanPhamActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
+        TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
+        tvNoiDung.setText(msg);
+        Button btnDong = (Button) view.findViewById(R.id.btnDong);
+
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        btnDong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        //đóng sau 3s
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                    if(alertDialog.isShowing())
+                        alertDialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }
