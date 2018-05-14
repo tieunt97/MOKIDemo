@@ -1,7 +1,7 @@
 package com.example.tieu_nt.mokidemo.Presenter.TinTuc;
 
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.View.TinTuc.ViewHienThiDanhSachTinTuc;
 
 import java.util.List;

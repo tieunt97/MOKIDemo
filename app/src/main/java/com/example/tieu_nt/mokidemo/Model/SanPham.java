@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class SanPham implements Serializable {
-    private int idSanPham, idNguoiBan, gia, soLuotThich, soBinhLuan;
+    private int idSanPham, gia, soLuotThich, soBinhLuan;
     private String tenSanPham, moTa, hinhLon, hinhNho, NoiBan;
     private boolean yeuThich;
     private ChiTietSanPham chiTietSanPham;
@@ -44,14 +44,6 @@ public class SanPham implements Serializable {
 
     public void setIdSanPham(int idSanPham) {
         this.idSanPham = idSanPham;
-    }
-
-    public int getIdNguoiBan() {
-        return idNguoiBan;
-    }
-
-    public void setIdNguoiBan(int idNguoiBan) {
-        this.idNguoiBan = idNguoiBan;
     }
 
     public String getHinhLon() {
@@ -117,4 +109,5 @@ public class SanPham implements Serializable {
     public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
         this.chiTietSanPham = chiTietSanPham;
     }
+
 }

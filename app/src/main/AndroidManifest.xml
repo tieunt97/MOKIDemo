@@ -120,7 +120,11 @@
 
         <activity android:name=".View.ManHinhTrangChu.ThemSanPhamActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".View.ManHinhTrangChu.DanhMucActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.ManHinhTrangChu.SanPhamTimKiemActivity"
             android:screenOrientation="portrait"/>
 
     </application>

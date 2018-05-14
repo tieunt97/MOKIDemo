@@ -2,8 +2,8 @@ package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
 
 import android.util.Log;
 
-import com.example.tieu_nt.mokidemo.Model.TrangChu.BinhLuan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelSanPham;
+import com.example.tieu_nt.mokidemo.Model.BinhLuan;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelSanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewHienThiDanhSachBinhLuan;
 
 import java.util.List;

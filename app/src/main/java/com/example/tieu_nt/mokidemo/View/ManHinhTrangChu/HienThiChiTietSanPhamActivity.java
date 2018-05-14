@@ -25,7 +25,7 @@ import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentSliderChiTietSanPham;
@@ -52,7 +52,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
     private ImageButton imgBack;
     private ToggleButton tgLike;
     private ViewPager viewPagerSlider;
-    private LinearLayout layoutDots, linearNhanHieu, linearDanhMuc;
+    private LinearLayout layoutDots, linearNhanHieu, linearDanhMuc, linearMua;
     private RelativeLayout relaXemThem, relaTrangThai, relaNhanHieu, relaKichThuoc, relaKhoiLuong;
     private List<Fragment> fragmentList = new ArrayList<>();
     private TextView[] tvDots;
@@ -72,6 +72,9 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         modelKhachHang = ModelKhachHang.getInstance();
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
+        if(ManHinhTrangChuActivity.khachHang != null && ManHinhTrangChuActivity.khachHang.getIdKhachHang() == sanPham.getKhachHang().getIdKhachHang()){
+            linearMua.setVisibility(View.GONE);
+        }
         setActions();
     }
 
@@ -98,6 +101,7 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
         linearDanhMuc = (LinearLayout) findViewById(R.id.linearDanhMuc);
         linearNhanHieu = (LinearLayout) findViewById(R.id.linearNhanHieu);
+        linearMua = (LinearLayout) findViewById(R.id.linearMua);
         relaXemThem = (RelativeLayout) findViewById(R.id.relaXemThem);
         relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
         relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);

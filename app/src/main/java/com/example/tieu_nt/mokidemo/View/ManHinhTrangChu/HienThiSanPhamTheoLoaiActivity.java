@@ -26,7 +26,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
         ViewHienThiDanhSachSanPham{
     private RecyclerView recyclerView;
     private ImageButton imgBack;
-    private TextView tvTenLoaiSP;
+    private TextView tvTenLoaiSP, tvThongBao;
     private AdapterSanPhamGrid adapterSanPham;
     private PresenterLogicSanPham presenterLogicSanPham;
     private DanhMuc danhMuc;
@@ -38,6 +38,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
         setContentView(R.layout.layout_hienthisanphamtheoloai);
         anhXa();
 
+        tvThongBao.setVisibility(View.GONE);
         Intent intent = getIntent();
         danhMuc = (DanhMuc) intent.getSerializableExtra("danhMuc");
         idKhachHang = intent.getIntExtra("idKhachHang", idKhachHang);
@@ -51,6 +52,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
         tvTenLoaiSP = (TextView) findViewById(R.id.tvTenLoaiSP);
+        tvThongBao = (TextView) findViewById(R.id.tvThongBao);
     }
 
     @Override

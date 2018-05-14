@@ -3,16 +3,10 @@ package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.text.method.TextKeyListener;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelDangNhap_DangKy;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhap_DangKy;
 import com.example.tieu_nt.mokidemo.R;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by tieu_nt on 2/9/2018.

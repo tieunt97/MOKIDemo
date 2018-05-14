@@ -1,8 +1,7 @@
-package com.example.tieu_nt.mokidemo.Model.TrangChu;
-
-import android.util.Log;
+package com.example.tieu_nt.mokidemo.Model.Data;
 
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
+import com.example.tieu_nt.mokidemo.Model.BinhLuan;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
@@ -386,7 +385,6 @@ public class ModelKhachHang {
 
         try {
             dataJSON = downloadJSON.get();
-            Log.d("dataJSON", dataJSON);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -406,7 +404,6 @@ public class ModelKhachHang {
 
         HashMap<String,String> hsSoDT = new HashMap<>();
         hsSoDT.put("soDT", taiKhoan.getSoDT());
-        Log.d("soDT", taiKhoan.getSoDT());
 
         attrs.add(hsHam);
         attrs.add(hsSoDT);

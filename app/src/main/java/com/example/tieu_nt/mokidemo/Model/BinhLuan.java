@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.Model.TrangChu;
+package com.example.tieu_nt.mokidemo.Model;
 
 import java.io.Serializable;
 

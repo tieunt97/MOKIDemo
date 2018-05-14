@@ -1,10 +1,7 @@
 package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
 
-import android.graphics.Bitmap;
-
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewBanSanPham;
 
 import java.util.List;

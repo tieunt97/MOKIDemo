@@ -1,6 +1,6 @@
 package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu;
 
-import com.example.tieu_nt.mokidemo.Model.TrangChu.BinhLuan;
+import com.example.tieu_nt.mokidemo.Model.BinhLuan;
 
 import java.util.List;
 

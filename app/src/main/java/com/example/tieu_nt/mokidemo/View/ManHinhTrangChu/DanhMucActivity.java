@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ public class DanhMucActivity extends AppCompatActivity implements View.OnClickLi
     private RecyclerView.LayoutManager layoutManager;
     private AdapterDanhMuc adapterDanhMuc;
     private ImageButton imgBack;
-    private TextView tvTitle;
+    private TextView tvTitle, tvThongBao;
     private DanhMuc danhMuc, danhMucTraVe;
     private PresenterDanhMucSanPham presenterDanhMucSanPham;
 
@@ -36,6 +35,7 @@ public class DanhMucActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_hienthisanphamtheoloai);
         anhXa();
+        tvThongBao.setVisibility(View.GONE);
         danhMuc = (DanhMuc) getIntent().getSerializableExtra("danhMuc");
         tvTitle.setText(danhMuc.getTenDanhMuc());
         presenterDanhMucSanPham = new PresenterDanhMucSanPham(this);
@@ -47,6 +47,7 @@ public class DanhMucActivity extends AppCompatActivity implements View.OnClickLi
         imgBack = (ImageButton) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
         tvTitle = (TextView) findViewById(R.id.tvTenLoaiSP);
+        tvThongBao = (TextView) findViewById(R.id.tvThongBao);
     }
 
     @Override

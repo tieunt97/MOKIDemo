@@ -1,7 +1,7 @@
 package com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelDangNhap_DangKy;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhap_DangKy;
 import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangKy;
 
 /**

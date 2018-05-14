@@ -5,15 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterBinhLuan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.BinhLuan;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.BinhLuan;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterBinhLuan;
 import com.example.tieu_nt.mokidemo.R;
 

@@ -10,16 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterDiaChi;
 import com.example.tieu_nt.mokidemo.Model.BottomSheetCapNhatDiaChi;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.R;
-
-import java.util.List;
 
 /**
  * Created by tieu_nt on 4/13/2018.

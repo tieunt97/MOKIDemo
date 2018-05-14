@@ -22,11 +22,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicBanSanPham;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangKyActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ManHinhDangNhapActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
 
 import java.io.ByteArrayOutputStream;

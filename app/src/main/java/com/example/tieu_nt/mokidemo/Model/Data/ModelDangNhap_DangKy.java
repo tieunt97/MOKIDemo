@@ -1,6 +1,4 @@
-package com.example.tieu_nt.mokidemo.Model.TrangChu;
-
-import android.util.Log;
+package com.example.tieu_nt.mokidemo.Model.Data;
 
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
@@ -61,7 +59,6 @@ public class ModelDangNhap_DangKy {
             JSONArray jsonArray = jsonObject.getJSONArray("taikhoan");
             JSONObject objectTaiKhoan = jsonArray.getJSONObject(0);
             taiKhoan.setSoDT(objectTaiKhoan.getString("soDT"));
-            Log.d("soDT", taiKhoan.getSoDT());
             taiKhoan.setMatKhau(objectTaiKhoan.getString("matKhau"));
             taiKhoan.setTrangThai(objectTaiKhoan.getInt("trangThai"));
             taiKhoan.setNgayKichHoat(objectTaiKhoan.getString("ngayKichHoat"));

@@ -3,10 +3,9 @@ package com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich;
 import android.util.Log;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.Model.TrangChu.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.View.DanhSachYeuThich.ViewDSSanPhamYeuThich;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
