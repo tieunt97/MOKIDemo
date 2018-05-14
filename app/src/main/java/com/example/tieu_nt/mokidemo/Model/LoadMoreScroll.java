@@ -10,9 +10,8 @@ import android.util.Log;
  */
 
 public class LoadMoreScroll extends RecyclerView.OnScrollListener{
-    int itemAnDauTien = 0;
-    int tongItem = 0;
-    int itemLoadTruoc = 4;
+    int visibleItemCount, totalItemCount = 1;
+    int firstVisiblesItems = 0;
     RecyclerView.LayoutManager layoutManager;
     ILoadMore iLoadMore;
 
@@ -23,18 +22,20 @@ public class LoadMoreScroll extends RecyclerView.OnScrollListener{
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        super.onScrolled(recyclerView, dx, dy);
+        if (dy > 0){
+            totalItemCount = layoutManager.getItemCount();
 
-        tongItem = layoutManager.getItemCount();
+            if (layoutManager instanceof LinearLayoutManager){
+                visibleItemCount = ((LinearLayoutManager) layoutManager).getChildCount();
+                firstVisiblesItems = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+            }else if(layoutManager instanceof GridLayoutManager){
+                visibleItemCount = ((GridLayoutManager) layoutManager).getChildCount();
+                firstVisiblesItems = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+            }
 
-        if (layoutManager instanceof LinearLayoutManager){
-            itemAnDauTien = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
-        }else if(layoutManager instanceof GridLayoutManager){
-            itemAnDauTien = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
-        }
-
-        if(tongItem == (itemAnDauTien + itemLoadTruoc)){
-            iLoadMore.loadMore(tongItem);
+            if ((visibleItemCount + firstVisiblesItems) == totalItemCount) {
+                iLoadMore.loadMore(totalItemCount);
+            }
         }
     }
 

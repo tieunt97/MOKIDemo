@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
+import com.example.tieu_nt.mokidemo.Model.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
@@ -23,7 +25,7 @@ import java.util.List;
  */
 
 public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements View.OnClickListener,
-        ViewHienThiDanhSachSanPham{
+        ViewHienThiDanhSachSanPham, ILoadMore{
     private RecyclerView recyclerView;
     private ImageButton imgBack;
     private TextView tvTenLoaiSP, tvThongBao;
@@ -31,6 +33,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
     private PresenterLogicSanPham presenterLogicSanPham;
     private DanhMuc danhMuc;
     private int idKhachHang = 0;
+    private List<SanPham> dsSanPham;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,10 +70,31 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
 
     @Override
     public void hienThiDanhSachSanPham(List<SanPham> dsSanPham) {
+        this.dsSanPham = dsSanPham;
         adapterSanPham = new AdapterSanPhamGrid(this, dsSanPham);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterSanPham);
-        adapterSanPham.notifyDataSetChanged();
+        recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManager, this));
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterSanPham.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void loadMore(int tongItem) {
+        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), tongItem, idKhachHang, "", "");
+        if (sanPhamLoadMore.size() > 0){
+            dsSanPham.addAll(sanPhamLoadMore);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    adapterSanPham.notifyDataSetChanged();
+                }
+            });
+        }
     }
 }
