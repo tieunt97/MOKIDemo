@@ -79,13 +79,19 @@ public class DanhSachBanActivity extends AppCompatActivity implements View.OnCli
             Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
         }
 
-        FragmentSanPham fragmentSanPham = new FragmentSanPham();
+        FragmentSanPhamBan fragmentSanPham = new FragmentSanPhamBan();
         Bundle bundle = new Bundle();
         bundle.putSerializable("khachHang", khachHang);
         fragmentSanPham.setArguments(bundle);
+
+        FragmentDangXuLy fragmentDangXuLy = new FragmentDangXuLy();
+        fragmentDangXuLy.setArguments(bundle);
+
+        FragmentThanhCong fragmentThanhCong = new FragmentThanhCong();
+        fragmentThanhCong.setArguments(bundle);
         list.add(fragmentSanPham);
-        list.add(new FragmentDangXuLy());
-        list.add(new FragmentThanhCong());
+        list.add(fragmentDangXuLy);
+        list.add(fragmentThanhCong);
 
         titles.add("Sản phẩm");
         titles.add("Đang xử lý");

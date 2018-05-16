@@ -21,8 +21,15 @@ public class PresenterSanPhamKhachHangLogic implements IPresenterSanPhamKhachHan
     }
 
     @Override
-    public void layDSSanPham(String ham, KhachHang khachHang) {
-        List<SanPham> dsSanPham = modelKhachHang.layDSSanPhamBan(ham, khachHang);
+    public void layDSSanPham(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai) {
+        List<SanPham> dsSanPham = modelKhachHang.layDSSanPhamMuaBan(ham, khachHang, limit, loaiSanPham, trangThai);
         if (dsSanPham.size() > 0) viewHienThiDSSanPhamKhachHang.hienThiDSSanPham(dsSanPham);
+    }
+
+    @Override
+    public List<SanPham> layDSSanPhamLoadMore(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai) {
+        List<SanPham> sanPhamLoadMore = modelKhachHang.layDSSanPhamMuaBan(ham, khachHang, limit, loaiSanPham, trangThai);
+
+        return sanPhamLoadMore;
     }
 }

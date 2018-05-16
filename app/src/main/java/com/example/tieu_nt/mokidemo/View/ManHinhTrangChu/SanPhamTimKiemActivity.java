@@ -51,6 +51,7 @@ public class SanPhamTimKiemActivity extends AppCompatActivity implements View.On
 
         Intent intent = getIntent();
         tenSP = intent.getStringExtra("tenSP");
+        Log.d("TENSP", tenSP);
         idLoaiSP = intent.getIntExtra("idLoaiSP", 0);
         giaThap = intent.getIntExtra("giaThap", 0);
         giaCao = intent.getIntExtra("giaCao", 0);

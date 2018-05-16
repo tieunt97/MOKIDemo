@@ -99,7 +99,10 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
             binhLuan.setTenKhachHang(ManHinhTrangChuActivity.khachHang.getTenKhachHang());
             binhLuan.setHinhKhachHang(ManHinhTrangChuActivity.khachHang.getAnhInfoKH());
             boolean b = modelKhachHang.guiBinhLuan(binhLuan);
-            if(b) adapterBinhLuan.add(binhLuan);
+            if(b) {
+                adapterBinhLuan.add(binhLuan);
+                edtBinhLuan.setText("");
+            }
         }
     }
 

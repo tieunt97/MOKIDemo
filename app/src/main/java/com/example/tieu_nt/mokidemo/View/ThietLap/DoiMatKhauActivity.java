@@ -67,6 +67,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
     public void doiMatKhauThanhCong(String matKhauMoi) {
         boolean b = modelKhachHang.doiMatKhau("doiMatKhau", khachHang.getIdKhachHang(), matKhauMoi);
         if (b){
+            khachHang.getTaiKhoan().setMatKhau(matKhauMoi);
             Toast.makeText(this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
         }
     }

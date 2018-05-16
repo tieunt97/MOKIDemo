@@ -11,17 +11,8 @@ public class KhachHang implements Serializable{
     private int idKhachHang, diemTinCay, soSanPham;
     private String tenKhachHang, diaChi, anhInfoKH, anhBia, moTa, thoiGianOnline, thoiGianOffline;
     private TaiKhoan taiKhoan;
-    private List<SanPham> dsSanPham;
     private List<DiaChi> dsDiaChi;
 
-
-    public List<SanPham> getDsSanPham() {
-        return dsSanPham;
-    }
-
-    public void setDsSanPham(List<SanPham> dsSanPham) {
-        this.dsSanPham = dsSanPham;
-    }
 
     public String getAnhInfoKH() {
         return anhInfoKH;

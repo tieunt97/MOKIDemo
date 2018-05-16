@@ -171,7 +171,7 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
     }
 
     private void timKiemSanPham() {
-        if(danhMuc == null && trangThai.equals("") && giaThap == 0 && giaCao == 0){
+        if(edtTimKiem.getText().toString().equals("") && danhMuc == null && trangThai.equals("") && giaThap == 0 && giaCao == 0){
             final AlertDialog.Builder builder = new AlertDialog.Builder(TimKiemActivity.this);
             View view = getLayoutInflater().inflate(R.layout.dialog_thongbao_dangnhap, null, false);
             TextView tvNoiDung = (TextView) view.findViewById(R.id.tvNoiDung);
@@ -205,7 +205,7 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
             thread.start();
         }else{
             Intent iTimKiem = new Intent(this, SanPhamTimKiemActivity.class);
-            iTimKiem.putExtra("tenSP", "");
+            iTimKiem.putExtra("tenSP", edtTimKiem.getText().toString());
             if(danhMuc != null){
                 iTimKiem.putExtra("idLoaiSP", danhMuc.getIdDanhMuc());
             }
@@ -254,6 +254,7 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
                 giaCao = 0;
                 giaThap = 0;
                 danhMuc = null;
+                edtTimKiem.setText("");
                 alertDialog.dismiss();
             }
         });

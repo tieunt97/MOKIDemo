@@ -442,9 +442,6 @@ public class ModelKhachHang {
 
             if(dsDiaChi.size() == 0)khachHang.setDiaChi("Chưa có thông tin địa chỉ");
             khachHang.setDsDiaChi(dsDiaChi);
-
-            List<SanPham> dsSanPhamBan = layDSSanPhamBan("layDSSanPhamBan", khachHang);
-            khachHang.setDsSanPham(dsSanPhamBan);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -455,7 +452,7 @@ public class ModelKhachHang {
         return khachHang;
     }
 
-    public List<SanPham> layDSSanPhamBan(String ham, KhachHang khachHang){
+    public List<SanPham> layDSSanPhamMuaBan(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -472,9 +469,21 @@ public class ModelKhachHang {
         HashMap<String,String> hsNoiBan = new HashMap<>();
         hsNoiBan.put("noiBan", khachHang.getDiaChi());
 
+        HashMap<String,String> hsLimit = new HashMap<>();
+        hsLimit.put("limit", String.valueOf(limit));
+
+        HashMap<String,String> hsLoaiSanPham = new HashMap<>();
+        hsLoaiSanPham.put("loaiSanPham", String.valueOf(loaiSanPham));
+
+        HashMap<String,String> hsTrangThai = new HashMap<>();
+        hsTrangThai.put("trangThai", String.valueOf(trangThai));
+
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
         attrs.add(hsNoiBan);
+        attrs.add(hsLimit);
+        attrs.add(hsLoaiSanPham);
+        attrs.add(hsTrangThai);
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
         //end phương thức post
