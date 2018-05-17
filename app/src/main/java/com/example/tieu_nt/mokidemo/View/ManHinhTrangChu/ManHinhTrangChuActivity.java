@@ -34,6 +34,7 @@ import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.CameraTrangChu.CameraActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeAn;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentBeChoiMaHoc;
@@ -60,7 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 2/6/2018.
  */
 
-public class ManHinhTrangChuActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
+public class ManHinhTrangChuActivity extends MainActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
     //may tinh ca nhan
     public static String SERVER = "http://192.168.1.110:8080/webmoki";
     public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
@@ -258,17 +259,6 @@ public class ManHinhTrangChuActivity extends AppCompatActivity implements View.O
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
-        super.onBackPressed();
     }
 
     private void anhXa(){

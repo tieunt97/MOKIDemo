@@ -1,6 +1,7 @@
 package com.example.tieu_nt.mokidemo.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by tieu_nt on 4/18/2018.
@@ -9,7 +10,7 @@ import java.io.Serializable;
 public class BinhLuan implements Serializable{
     private int idKhachHang, idSanPham;
     private String tenKhachHang, noiDungBL, hinhKhachHang;
-    private String thoiGianBL;
+    private Date thoiGianBL;
 
     public int getIdKhachHang() {
         return idKhachHang;
@@ -51,11 +52,11 @@ public class BinhLuan implements Serializable{
         this.hinhKhachHang = hinhKhachHang;
     }
 
-    public String getThoiGianBL() {
+    public Date getThoiGianBL() {
         return thoiGianBL;
     }
 
-    public void setThoiGianBL(String thoiGianBL) {
+    public void setThoiGianBL(Date thoiGianBL) {
         this.thoiGianBL = thoiGianBL;
     }
 }

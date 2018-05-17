@@ -2,6 +2,7 @@ package com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham;
 
 import android.util.Log;
 
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewChiTietSanPham;
@@ -12,11 +13,13 @@ import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewChiTietSanPham;
  */
 
 public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
-    ViewChiTietSanPham viewChiTietSanPham;
+    private ViewChiTietSanPham viewChiTietSanPham;
+    private ModelKhachHang modelKhachHang;
 
 
     public PresenterLogicChiTietSanPham(ViewChiTietSanPham viewChiTietSanPham) {
         this.viewChiTietSanPham = viewChiTietSanPham;
+        this.modelKhachHang = ModelKhachHang.getInstance();
     }
 
     @Override
@@ -33,5 +36,20 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
             viewChiTietSanPham.hienThiSliderSP(linkHinhSP);
             viewChiTietSanPham.hienThiChiTietSanPham(sanPham);
         }
+    }
+
+    @Override
+    public boolean themSanPhamYeuThich(int idKhachHang, int idSanPham) {
+        return modelKhachHang.capNhatSanPhamYeuThich("themSanPhamYeuThich", idKhachHang, idSanPham);
+    }
+
+    @Override
+    public boolean xoaSanPhamYeuThich(int idKhachHang, int idSanPham) {
+        return modelKhachHang.capNhatSanPhamYeuThich("xoaSanPhamYeuThich", idKhachHang, idSanPham);
+    }
+
+    @Override
+    public boolean muaSanPham(int idKhachHang, int idSanPham) {
+        return modelKhachHang.muaSanPham(idKhachHang, idSanPham);
     }
 }

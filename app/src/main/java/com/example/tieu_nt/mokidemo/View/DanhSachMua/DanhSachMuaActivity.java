@@ -20,6 +20,7 @@ import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class DanhSachMuaActivity extends AppCompatActivity implements View.OnClickListener{
+public class DanhSachMuaActivity extends MainActivity implements View.OnClickListener{
     private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -79,6 +80,20 @@ public class DanhSachMuaActivity extends AppCompatActivity implements View.OnCli
             Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
         }
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("khachHang", khachHang);
+
+        FragmentDangXuLy fragmentDangXuLy = new FragmentDangXuLy();
+        fragmentDangXuLy.setArguments(bundle);
+
+        FragmentThanhCong fragmentThanhCong = new FragmentThanhCong();
+        fragmentThanhCong.setArguments(bundle);
+
+        list.add(fragmentDangXuLy);
+        list.add(fragmentThanhCong);
+
+        titles.add("Đang xử lý");
+        titles.add("Thành công");
         viewPagerAdapter = new ViewPagerAdapterTrangChu(getSupportFragmentManager(), list, titles);
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -95,16 +110,6 @@ public class DanhSachMuaActivity extends AppCompatActivity implements View.OnCli
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        super.onBackPressed();
     }
 
     @Override

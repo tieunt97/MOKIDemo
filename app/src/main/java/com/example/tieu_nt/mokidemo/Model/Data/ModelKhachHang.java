@@ -28,6 +28,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelKhachHang {
     private static ModelKhachHang modelKhachHang;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
     private ModelKhachHang(){
 
@@ -37,6 +39,49 @@ public class ModelKhachHang {
         if(modelKhachHang == null) modelKhachHang = new ModelKhachHang();
 
         return modelKhachHang;
+    }
+
+    public boolean muaSanPham(int idKhachHang, int idSanPham){
+        boolean b = false;
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", "muaSanPham");
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+
+        HashMap<String,String> hsIdSanPham = new HashMap<>();
+        hsIdSanPham.put("idSanPham", String.valueOf(idSanPham));
+
+        HashMap<String,String> hsThoiGian = new HashMap<>();
+        hsThoiGian.put("thoiGian", sdf1.format(Calendar.getInstance().getTime()).toString());
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsIdSanPham);
+        attrs.add(hsThoiGian);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject object = new JSONObject(dataJSON);
+            int response = object.getInt("response");
+            if (response == 1) b = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return b;
     }
 
     public boolean themSanPham(int idKhachHang, List<String> dsHinh, int idLoaiSP, List<String> thongTinSP){
@@ -137,7 +182,7 @@ public class ModelKhachHang {
         hsNoiDung.put("noiDung", binhLuan.getNoiDungBL());
 
         HashMap<String,String> hsThoiGian = new HashMap<>();
-        hsThoiGian.put("thoiGian", binhLuan.getThoiGianBL());
+        hsThoiGian.put("thoiGian", sdf.format(binhLuan.getThoiGianBL()).toString());
 
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
@@ -452,7 +497,7 @@ public class ModelKhachHang {
         return khachHang;
     }
 
-    public List<SanPham> layDSSanPhamMuaBan(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai){
+    public List<SanPham> layDSSanPhamMuaBan(String ham, int idKhacHang, int limit, int loaiSanPham, int trangThai){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -464,10 +509,7 @@ public class ModelKhachHang {
         hsHam.put("ham", ham);
 
         HashMap<String,String> hsIdKhachHang = new HashMap<>();
-        hsIdKhachHang.put("idKhachHang", String.valueOf(khachHang.getIdKhachHang()));
-
-        HashMap<String,String> hsNoiBan = new HashMap<>();
-        hsNoiBan.put("noiBan", khachHang.getDiaChi());
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhacHang));
 
         HashMap<String,String> hsLimit = new HashMap<>();
         hsLimit.put("limit", String.valueOf(limit));
@@ -480,7 +522,6 @@ public class ModelKhachHang {
 
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
-        attrs.add(hsNoiBan);
         attrs.add(hsLimit);
         attrs.add(hsLoaiSanPham);
         attrs.add(hsTrangThai);
@@ -491,7 +532,6 @@ public class ModelKhachHang {
 
         try {
             dataJSON = downloadJSON.get();
-
             JSONObject jsonObject = new JSONObject(dataJSON);
             JSONArray jsonArrayDanhSachSanPham = jsonObject.getJSONArray("danhsachsanpham");
             int count = jsonArrayDanhSachSanPham.length();
@@ -499,6 +539,16 @@ public class ModelKhachHang {
                 SanPham sanpham = new SanPham();
                 JSONObject object = jsonArrayDanhSachSanPham.getJSONObject(i);
                 sanpham.setIdSanPham(object.getInt("idSanPham"));
+
+                KhachHang khachHang = new KhachHang();
+                JSONArray arrayKhachHang = object.getJSONArray("thongTinNguoiBan");
+                JSONObject objectKhachHang = arrayKhachHang.getJSONObject(0);
+                khachHang.setIdKhachHang(objectKhachHang.getInt("idKhachHang"));
+                khachHang.setTenKhachHang(objectKhachHang.getString("tenKhachHang"));
+                khachHang.setAnhInfoKH(objectKhachHang.getString("anhInfoKH"));
+                khachHang.setDiemTinCay(objectKhachHang.getInt("diemTinCay"));
+                khachHang.setSoSanPham(objectKhachHang.getInt("soSanPham"));
+                sanpham.setKhachHang(khachHang);
 
                 sanpham.setGia(object.getInt("giaChuan"));
                 sanpham.setSoLuotThich(object.getInt("soLuotThich"));
@@ -508,7 +558,9 @@ public class ModelKhachHang {
                 sanpham.setHinhLon(object.getString("hinhLon"));
                 sanpham.setHinhNho(object.getString("hinhNho"));
                 sanpham.setNoiBan(object.getString("noiBan"));
-                sanpham.setKhachHang(khachHang);
+                if(idKhacHang != 0){
+                    sanpham.setYeuThich(object.getBoolean("yeuThich"));
+                }
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                 List<DanhMuc> danhMucList = new ArrayList<>();
                 chiTietSanPham.setKhoiLuong(object.getString("khoiLuong"));

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnClickListener {
+public class TrungTamHoTroActivity extends MainActivity implements View.OnClickListener {
     private FrameLayout frameLayout;
     private RelativeLayout relaCall, relaSendMail, relaHuongDanSD, relaChat;
     private DrawerLayout drawerLayout;
@@ -87,16 +88,6 @@ public class TrungTamHoTroActivity extends AppCompatActivity implements View.OnC
         relaChat.setOnClickListener(this);
         relaSendMail = (RelativeLayout) findViewById(R.id.relaSendMail);
         relaSendMail.setOnClickListener(this);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        super.onBackPressed();
     }
 
     @Override

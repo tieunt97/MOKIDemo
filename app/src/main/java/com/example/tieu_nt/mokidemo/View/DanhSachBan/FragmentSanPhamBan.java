@@ -41,7 +41,7 @@ public class FragmentSanPhamBan extends Fragment implements ViewHienThiDSSanPham
         Bundle bundle = getArguments();
         khachHang = (KhachHang) bundle.getSerializable("khachHang");
         presenterSanPhamKhachHangLogic = new PresenterSanPhamKhachHangLogic(this);
-        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", khachHang, 0, 1, 0);
+        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), 0, 1, 0);
 
         return view;
     }
@@ -64,7 +64,7 @@ public class FragmentSanPhamBan extends Fragment implements ViewHienThiDSSanPham
 
     @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", khachHang, tongItem, 1, 0);
+        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), tongItem, 1, 0);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {

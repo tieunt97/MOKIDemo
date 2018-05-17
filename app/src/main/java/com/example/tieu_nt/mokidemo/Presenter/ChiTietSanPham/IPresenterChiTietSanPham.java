@@ -8,4 +8,7 @@ import com.example.tieu_nt.mokidemo.Model.SanPham;
 
 public interface IPresenterChiTietSanPham {
     void layDanhSachHinhSP(SanPham sanPham);
+    boolean themSanPhamYeuThich(int idKhachHang, int idSanPham);
+    boolean xoaSanPhamYeuThich(int idKhachHang, int idSanPham);
+    boolean muaSanPham(int idKhachHang, int idSanPham);
 }

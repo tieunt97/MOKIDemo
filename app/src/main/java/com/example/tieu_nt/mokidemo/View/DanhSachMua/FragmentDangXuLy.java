@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.DanhSachBan;
+package com.example.tieu_nt.mokidemo.View.DanhSachMua;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by tieu_nt on 4/21/2018.
  */
 
-public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamKhachHang, ILoadMore {
+public class FragmentDangXuLy extends Fragment implements ViewHienThiDSSanPhamKhachHang, ILoadMore {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
@@ -41,7 +41,7 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
         Bundle bundle = getArguments();
         khachHang = (KhachHang) bundle.getSerializable("khachHang");
         presenterSanPhamKhachHangLogic = new PresenterSanPhamKhachHangLogic(this);
-        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), 0, 1, 2);
+        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), 0, 2, 1);
 
         return view;
     }
@@ -64,7 +64,7 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
 
     @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), tongItem, 1, 2);
+        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), tongItem, 2, 1);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {

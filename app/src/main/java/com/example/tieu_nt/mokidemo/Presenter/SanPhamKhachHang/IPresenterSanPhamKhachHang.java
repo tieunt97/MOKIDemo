@@ -10,6 +10,6 @@ import java.util.List;
  */
 
 public interface IPresenterSanPhamKhachHang {
-    void layDSSanPham(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai);
-    List<SanPham> layDSSanPhamLoadMore(String ham, KhachHang khachHang, int limit, int loaiSanPham, int trangThai);
+    void layDSSanPham(String ham, int idKhachHang, int limit, int loaiSanPham, int trangThai);
+    List<SanPham> layDSSanPhamLoadMore(String ham, int idKhachHang, int limit, int loaiSanPham, int trangThai);
 }

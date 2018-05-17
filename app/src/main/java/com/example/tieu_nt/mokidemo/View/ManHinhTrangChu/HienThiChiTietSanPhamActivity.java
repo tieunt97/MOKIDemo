@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterViewPagerSlider;
@@ -129,6 +130,15 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
                 startActivity(iBinhLuan);
                 break;
             case R.id.btnMua:
+                if(ManHinhTrangChuActivity.idKhachHang == 0){
+                    Toast.makeText(this, "Bạn phải đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (presenterLogicChiTietSanPham.muaSanPham(ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham())){
+                        Toast.makeText(this, "Sản phẩm đã được đặt, vui lòng đợi thông báo từ hệ thống", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 break;
         }
     }
@@ -299,13 +309,19 @@ public class HienThiChiTietSanPhamActivity extends AppCompatActivity implements 
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if(ManHinhTrangChuActivity.idKhachHang == 0){
+            Toast.makeText(this, "Bạn phải đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(b) {
-            boolean b1 = modelKhachHang.capNhatSanPhamYeuThich("themSanPhamYeuThich", ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham());
-            if (b1) tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
+            if (presenterLogicChiTietSanPham.themSanPhamYeuThich(ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham())) {
+                tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
+            }
         }
         else {
-            boolean b1 = modelKhachHang.capNhatSanPhamYeuThich("xoaSanPhamYeuThich", ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham());
-            if (b1) tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
+            if (presenterLogicChiTietSanPham.xoaSanPhamYeuThich(ManHinhTrangChuActivity.idKhachHang, sanPham.getIdSanPham())) {
+                tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
+            }
         }
     }
 }

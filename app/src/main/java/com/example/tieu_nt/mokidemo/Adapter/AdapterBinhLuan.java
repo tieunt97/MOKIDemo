@@ -12,6 +12,7 @@ import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,6 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHolder>{
     private Context context;
     private List<BinhLuan> dsBinhLuan;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy (hh:mm)");
 
 
     public AdapterBinhLuan(Context context, List<BinhLuan> dsBinhLuan) {
@@ -44,11 +46,7 @@ public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHo
         Picasso.get().load(ManHinhTrangChuActivity.SERVER + binhLuan.getHinhKhachHang()).into(holder.imgKH);
         holder.tvTenKH.setText(binhLuan.getTenKhachHang());
         holder.tvNoiDung.setText(binhLuan.getNoiDungBL());
-        String datetime[] = binhLuan.getThoiGianBL().split(" ");
-        String ngayBL[] = datetime[0].split("-");
-        String thoiGian[] = datetime[1].split(":");
-        holder.tvThoiGian.setText(ngayBL[2] + "/" + ngayBL[1] + "/" + ngayBL[0]
-            + " ("+ thoiGian[0] + ":" + thoiGian[1] + ")");
+        holder.tvThoiGian.setText(sdf.format(binhLuan.getThoiGianBL()).toString());
     }
 
     public void add(BinhLuan binhLuan) {

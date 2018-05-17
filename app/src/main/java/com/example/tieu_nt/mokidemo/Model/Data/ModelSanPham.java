@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelSanPham {
     private static ModelSanPham modelSanPham;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     private ModelSanPham(){
 
@@ -226,7 +229,7 @@ public class ModelSanPham {
                 binhLuan.setTenKhachHang(object.getString("tenKhachHang"));
                 binhLuan.setHinhKhachHang(object.getString("anhInfoKH"));
                 binhLuan.setNoiDungBL(object.getString("noiDung"));
-                binhLuan.setThoiGianBL(object.getString("thoiGian"));
+                binhLuan.setThoiGianBL(sdf.parse(object.getString("thoiGian")));
 
                 dsBinhLuan.add(binhLuan);
             }
@@ -235,6 +238,8 @@ public class ModelSanPham {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

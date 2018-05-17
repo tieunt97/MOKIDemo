@@ -19,6 +19,7 @@ import com.example.tieu_nt.mokidemo.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -91,7 +92,7 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
         if (noiDung.length() == 0) return;
         else{
             BinhLuan binhLuan = new BinhLuan();
-            String thoiGian = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            Date thoiGian = Calendar.getInstance().getTime();
             binhLuan.setIdKhachHang(ManHinhTrangChuActivity.idKhachHang);
             binhLuan.setIdSanPham(idSanPham);
             binhLuan.setNoiDungBL(noiDung);

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class ThietLapActivity extends AppCompatActivity implements View.OnClickListener{
+public class ThietLapActivity extends MainActivity implements View.OnClickListener{
     private FrameLayout frameLayout;
     private RelativeLayout relaTrangCuaToi, relaDiaChi, relaDoiMatKhau, relaDSChan, relaTaiKhoan, relaCaiDatThongBao;
     private DrawerLayout drawerLayout;
@@ -85,16 +86,6 @@ public class ThietLapActivity extends AppCompatActivity implements View.OnClickL
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        super.onBackPressed();
     }
 
     @Override

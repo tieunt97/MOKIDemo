@@ -20,6 +20,7 @@ import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich.PresenterDanhSachYeuThich;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 4/11/2018.
  */
 
-public class DanhSachYeuThichActivity extends AppCompatActivity implements View.OnClickListener, ViewDSSanPhamYeuThich{
+public class DanhSachYeuThichActivity extends MainActivity implements View.OnClickListener, ViewDSSanPhamYeuThich{
     private FrameLayout frameLayout;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -91,16 +92,6 @@ public class DanhSachYeuThichActivity extends AppCompatActivity implements View.
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewSPYeuThich = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        super.onBackPressed();
     }
 
     @Override
