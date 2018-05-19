@@ -3,6 +3,7 @@ package com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,9 +27,6 @@ import java.util.List;
  */
 
 public class FragmentBeAn extends FragmentSanPham implements ViewHienThiDanhSachSanPham, ILoadMore{
-    private PresenterLogicSanPham presenterLogicSanPham;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManagerLinear, layoutManagerGrid;
     private RecyclerView.Adapter adapter;
     private List<SanPham> dsSanPham;
     private boolean dangList = false;
@@ -42,11 +40,20 @@ public class FragmentBeAn extends FragmentSanPham implements ViewHienThiDanhSach
         Bundle bundle = getArguments();
         idKhachHang = bundle.getInt("idKhachHang");
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         layoutManagerGrid = new GridLayoutManager(getContext(), 2);
         layoutManagerLinear = new LinearLayoutManager(getContext());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
         presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 2, 0, idKhachHang, giaTri, sapXep);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItems("layDanhSachSanPhamTheoLoaiSP", 2);
+            }
+        });
+
         return view;
     }
 
@@ -57,19 +64,15 @@ public class FragmentBeAn extends FragmentSanPham implements ViewHienThiDanhSach
             recyclerView.setLayoutManager(layoutManagerGrid);
             adapter = new AdapterSanPhamGrid(getContext(), this.dsSanPham);
             recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
             recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerGrid, this));
         }else{
             recyclerView.setLayoutManager(layoutManagerLinear);
             adapter = new AdapterSanPhamList(getContext(),this.dsSanPham);
             recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
             recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManagerLinear, this));
         }
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     @Override
