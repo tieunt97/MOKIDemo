@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.HienThiChiTietSanPhamActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.ChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -77,7 +77,7 @@ public class AdapterSanPhamList extends RecyclerView.Adapter<AdapterSanPhamList.
         holder.linearSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSanPham = new Intent(context, HienThiChiTietSanPhamActivity.class);
+                Intent intentSanPham = new Intent(context, ChiTietSanPhamActivity.class);
                 intentSanPham.putExtra("sanPham", sanPham);
                 context.startActivity(intentSanPham);
             }

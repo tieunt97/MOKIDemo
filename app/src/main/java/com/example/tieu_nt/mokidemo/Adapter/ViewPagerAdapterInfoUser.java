@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentTheoDoi;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.Fragment.FragmentUserSanPham;
+import com.example.tieu_nt.mokidemo.View.TrangChu.Fragment.FragmentTheoDoi;
+import com.example.tieu_nt.mokidemo.View.TrangChu.Fragment.FragmentUserSanPham;
 
 import java.util.ArrayList;
 import java.util.List;

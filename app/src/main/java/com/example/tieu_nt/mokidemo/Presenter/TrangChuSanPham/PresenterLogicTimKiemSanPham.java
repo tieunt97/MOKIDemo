@@ -2,7 +2,7 @@ package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
 
 import com.example.tieu_nt.mokidemo.Model.Data.ModelSanPham;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewHienThiDanhSachSanPham;
+import com.example.tieu_nt.mokidemo.View.TrangChu.ViewHienThiDanhSachSanPham;
 
 import java.util.List;
 

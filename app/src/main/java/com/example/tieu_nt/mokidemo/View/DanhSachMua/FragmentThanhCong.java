@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.ILoadMore;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang.PresenterSanPhamKhachHangLogic;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.example.tieu_nt.mokidemo.View.ViewHienThiDSSanPhamKhachHang;
 
 import java.util.List;
@@ -30,7 +30,6 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
     private RecyclerView.Adapter adapter;
     private PresenterSanPhamKhachHangLogic presenterSanPhamKhachHangLogic;
     private List<SanPham> dsSanPham;
-    private KhachHang khachHang;
 
     @Nullable
     @Override
@@ -38,10 +37,8 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
         View view = inflater.inflate(R.layout.layout_sanpham, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
 
-        Bundle bundle = getArguments();
-        khachHang = (KhachHang) bundle.getSerializable("khachHang");
         presenterSanPhamKhachHangLogic = new PresenterSanPhamKhachHangLogic(this);
-        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), 0, 2, 2);
+        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", TrangChuActivity.khachHang.getIdKhachHang(), 0, 2, 2);
 
         return view;
     }
@@ -64,7 +61,7 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
 
     @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", khachHang.getIdKhachHang(), tongItem, 2, 2);
+        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", TrangChuActivity.khachHang.getIdKhachHang(), tongItem, 2, 2);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {

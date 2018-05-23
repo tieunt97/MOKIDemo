@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhap_DangKy;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhapDangKy;
 import com.example.tieu_nt.mokidemo.R;
 
 /**
@@ -28,7 +28,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
     private Button btnGuiLai;
     private ImageButton imgBack;
     private TaiKhoan taiKhoan;
-    private ModelDangNhap_DangKy modelDangNhap_dangKy;
+    private ModelDangNhapDangKy modelDangNhap_dangKy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.xacnhandangky_layout);
         Intent intent = getIntent();
         taiKhoan = (TaiKhoan) intent.getSerializableExtra("taiKhoan");
-        modelDangNhap_dangKy = ModelDangNhap_DangKy.getInstance();
+        modelDangNhap_dangKy = ModelDangNhapDangKy.getInstance();
         AnhXa();
         setActions();
     }
@@ -142,7 +142,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onClick(View view) {
                         alertDialog.dismiss();
-                        Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, ManHinhDangNhapActivity.class);
+                        Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, DangNhapActivity.class);
                         iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(iDangNhap);
                     }
@@ -156,7 +156,7 @@ public class XacNhanDangKyActivity extends AppCompatActivity implements View.OnC
                             Thread.sleep(3000);
                             if(alertDialog.isShowing())
                                 alertDialog.dismiss();
-                            Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, ManHinhDangNhapActivity.class);
+                            Intent iDangNhap = new Intent(XacNhanDangKyActivity.this, DangNhapActivity.class);
                             iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(iDangNhap);
                         } catch (InterruptedException e) {

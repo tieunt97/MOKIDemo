@@ -14,9 +14,9 @@ import android.widget.ImageButton;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterDiaChi;
 import com.example.tieu_nt.mokidemo.Model.BottomSheetCapNhatDiaChi;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
 /**
  * Created by tieu_nt on 4/13/2018.
@@ -28,7 +28,6 @@ public class DiaChiActivity extends AppCompatActivity implements View.OnClickLis
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private AdapterDiaChi adapterDiaChi;
-    private KhachHang khachHang;
     private ModelKhachHang modelKhachHang;
     public static int THEM_DIA_CHI = 1, CAP_NHAT_DIA_CHI = 0;
 
@@ -40,8 +39,7 @@ public class DiaChiActivity extends AppCompatActivity implements View.OnClickLis
         anhXa();
         modelKhachHang = ModelKhachHang.getInstance();
 
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        adapterDiaChi = new AdapterDiaChi(DiaChiActivity.this, khachHang.getDsDiaChi());
+        adapterDiaChi = new AdapterDiaChi(DiaChiActivity.this, TrangChuActivity.khachHang.getDsDiaChi());
         layoutManager = new LinearLayoutManager(DiaChiActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterDiaChi);
@@ -66,7 +64,6 @@ public class DiaChiActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnThemDiaChi:
                 Intent iThemDiaChiMoi = new Intent(DiaChiActivity.this, ThemDiaChiMoiActivity.class);
                 iThemDiaChiMoi.putExtra("themDiaChi", true);
-                iThemDiaChiMoi.putExtra("khachHang", khachHang);
                 startActivityForResult(iThemDiaChiMoi, THEM_DIA_CHI);
                 break;
         }
@@ -74,36 +71,34 @@ public class DiaChiActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void xoaDiaChi(int position) {
-        DiaChi diaChi = khachHang.getDsDiaChi().get(position);
-        khachHang.getDsDiaChi().remove(position);
-        boolean b = modelKhachHang.capNhatDiaChi("xoaDiaChi", khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), 0);
+        DiaChi diaChi = TrangChuActivity.khachHang.getDsDiaChi().get(position);
+        TrangChuActivity.khachHang.getDsDiaChi().remove(position);
+        boolean b = modelKhachHang.capNhatDiaChi("xoaDiaChi", TrangChuActivity.khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), 0);
         adapterDiaChi.notifyDataSetChanged();
-
         if (b) Log.d("thanhCong", "xoa");
     }
 
     @Override
     public void suaDiaChi(int position) {
-        DiaChi diaChi = khachHang.getDsDiaChi().get(position);
+        DiaChi diaChi = TrangChuActivity.khachHang.getDsDiaChi().get(position);
         Intent iDiaChiMoi = new Intent(DiaChiActivity.this, ThemDiaChiMoiActivity.class);
         iDiaChiMoi.putExtra("themDiaChi", false);
-        iDiaChiMoi.putExtra("khachHang", khachHang);
         iDiaChiMoi.putExtra("position", position);
         startActivityForResult(iDiaChiMoi, CAP_NHAT_DIA_CHI);
     }
 
     @Override
     public void datMacDinh(int position) {
-        DiaChi diaChi = khachHang.getDsDiaChi().get(position);
-        khachHang.setDiaChi(diaChi.getDiaChi());
-        for(int i = 0; i < khachHang.getDsDiaChi().size(); i++){
-            if(i != position && khachHang.getDsDiaChi().get(i).getTrangThai() == 1){
-                khachHang.getDsDiaChi().get(i).setTrangThai(0);
+        DiaChi diaChi = TrangChuActivity.khachHang.getDsDiaChi().get(position);
+        TrangChuActivity.khachHang.setDiaChi(diaChi.getDiaChi());
+        for(int i = 0; i < TrangChuActivity.khachHang.getDsDiaChi().size(); i++){
+            if(i != position && TrangChuActivity.khachHang.getDsDiaChi().get(i).getTrangThai() == 1){
+                TrangChuActivity.khachHang.getDsDiaChi().get(i).setTrangThai(0);
                 break;
             }
         }
-        khachHang.getDsDiaChi().get(position).setTrangThai(1);
-        boolean b = modelKhachHang.capNhatDiaChi("datDiaChiMacDinh", khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), 1);
+        TrangChuActivity.khachHang.getDsDiaChi().get(position).setTrangThai(1);
+        boolean b = modelKhachHang.capNhatDiaChi("datDiaChiMacDinh", TrangChuActivity.khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), 1);
         if (b) Log.d("thanhCong", "datMacDinh");
         adapterDiaChi.notifyDataSetChanged();
     }

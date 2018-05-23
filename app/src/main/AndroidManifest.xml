@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
 
-        <activity android:name=".View.ManHinhDangNhap.ManHinhDangNhapActivity"
+        <activity android:name=".View.ManHinhDangNhap.LoadingActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -30,28 +30,31 @@
 
         </activity>
 
-        <activity android:name=".View.ManHinhDangNhap.ManHinhDangKyActivity"
+        <activity android:name=".View.ManHinhDangNhap.DangNhapActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.ManHinhTrangChuActivity"
+        <activity android:name=".View.ManHinhDangNhap.DangKyActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".View.TrangChu.TrangChuActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhDangNhap.XacNhanDangKyActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.CameraTrangChu.CameraActivity"
+        <activity android:name=".View.TrangChu.CameraTrangChu.CameraActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.ManHinhDangNhap.QuenMatKhauActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.HienThiChiTietSanPhamActivity"
+        <activity android:name=".View.TrangChu.ChiTietSanPhamActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.HienThiSanPhamTheoLoaiActivity"
+        <activity android:name=".View.TrangChu.HienThiSanPhamTheoLoaiActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.ThongTinNguoiDungActivity"
+        <activity android:name=".View.TrangChu.ThongTinNguoiDungActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrungTamHoTro.TrungTamHoTroActivity"
@@ -106,25 +109,25 @@
         <activity android:name=".View.ThietLap.ThemDiaChiMoiActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.BinhLuanActivity"
+        <activity android:name=".View.TrangChu.BinhLuanActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.TimKiemActivity"
+        <activity android:name=".View.TrangChu.TimKiemActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.TrangThaiTimKiemActivity"
+        <activity android:name=".View.TrangChu.TrangThaiTimKiemActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrungTamHoTro.HuongDanSuDungActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.ThemSanPhamActivity"
+        <activity android:name=".View.TrangChu.ThemSanPhamActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.DanhMucActivity"
+        <activity android:name=".View.TrangChu.DanhMucActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhTrangChu.SanPhamTimKiemActivity"
+        <activity android:name=".View.TrangChu.SanPhamTimKiemActivity"
             android:screenOrientation="portrait"/>
 
     </application>

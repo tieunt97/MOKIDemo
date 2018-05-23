@@ -19,10 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Model.BottomSheetThayAnhNen;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterCapNhatThongTin;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -45,21 +44,21 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
     private CircleImageView imgKhachHang;
     private boolean visible = false;
     private Bitmap bitmapKH, bitmapAnhBia;
-    private KhachHang khachHang;
-    private ModelKhachHang modelKhachHang;
+    private PresenterCapNhatThongTin presenterCapNhatThongTin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_trangcuatoi);
         anhXa();
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        if (!khachHang.getAnhInfoKH().equals("null"))
-            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
-        if (!khachHang.getAnhBia().equals("null"))Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhBia()).into(imgAnhBia);
-        if (!khachHang.getMoTa().equals("null"))
-            edtThongTin.setText(khachHang.getMoTa());
-        modelKhachHang = ModelKhachHang.getInstance();
+        if (!TrangChuActivity.khachHang.getAnhInfoKH().equals("null"))
+            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgKhachHang);
+        if (!TrangChuActivity.khachHang.getAnhBia().equals("null"))Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhBia()).into(imgAnhBia);
+        if (!TrangChuActivity.khachHang.getMoTa().equals("null"))
+            edtThongTin.setText(TrangChuActivity.khachHang.getMoTa());
+
+        presenterCapNhatThongTin = new PresenterCapNhatThongTin();
+
         bottomSheetThayAnhNen = new BottomSheetThayAnhNen();
 
         edtThongTin.addTextChangedListener(new TextWatcher() {
@@ -126,18 +125,17 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
             case R.id.btnCapNhat:
                 String name = "", image = "", nameAnhBia = "", imageAnhBia = "", moTa = "";
                 if (bitmapKH != null) {
-                    name = khachHang.getIdKhachHang() + "AnhKhachHang";
+                    name = TrangChuActivity.khachHang.getIdKhachHang() + "AnhKhachHang";
                     image = imageToString(bitmapKH);
                 }
                 if (bitmapAnhBia != null) {
-                    nameAnhBia = khachHang.getIdKhachHang() + "AnhBia";
+                    nameAnhBia = TrangChuActivity.khachHang.getIdKhachHang() + "AnhBia";
                     imageAnhBia = imageToString(bitmapAnhBia);
                 }
                 if (edtThongTin.getText().toString().length() > 0) {
                     moTa = edtThongTin.getText().toString();
                 }
-                modelKhachHang.capNhatThongTinKhachHang("capNhatThongTinKhachHang", khachHang.getIdKhachHang(),
-                        name, image, nameAnhBia, imageAnhBia, moTa);
+                presenterCapNhatThongTin.capNhatThongTin(name, image, nameAnhBia, imageAnhBia, moTa);
                 Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.edtThongTin:

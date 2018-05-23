@@ -1,6 +1,5 @@
 package com.example.tieu_nt.mokidemo.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.DanhMucActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.DanhMucActivity;
 
 import java.util.List;
 

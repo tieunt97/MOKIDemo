@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ViewChiTietSanPham;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.ViewChiTietSanPham;
 
 
 /**
@@ -29,7 +29,7 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
             String[] linkHinhSP = new String[hinhNho.length + 1];
             linkHinhSP[0] = sanPham.getHinhLon();
             for(int i = 1; i < linkHinhSP.length; i++){
-                linkHinhSP[i] = ManHinhTrangChuActivity.SERVER + hinhNho[i -1];
+                linkHinhSP[i] = TrangChuActivity.SERVER + hinhNho[i -1];
                 Log.d("HINHSP", linkHinhSP[i]);
             }
 

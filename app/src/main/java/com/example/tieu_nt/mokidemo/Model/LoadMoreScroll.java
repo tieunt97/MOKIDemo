@@ -33,6 +33,8 @@ public class LoadMoreScroll extends RecyclerView.OnScrollListener{
                 firstVisiblesItems = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
             }
 
+            Log.d("DEMO", totalItemCount + " : " + firstVisiblesItems + " + " + visibleItemCount);
+
             if ((visibleItemCount + firstVisiblesItems) == totalItemCount) {
                 iLoadMore.loadMore(totalItemCount);
             }

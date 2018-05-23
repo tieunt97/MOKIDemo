@@ -8,7 +8,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,10 +17,9 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,7 +45,6 @@ public class DanhSachMuaActivity extends MainActivity implements View.OnClickLis
     private ViewPagerAdapterTrangChu viewPagerAdapter;
     private List<Fragment> list = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
-    private KhachHang khachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,27 +67,17 @@ public class DanhSachMuaActivity extends MainActivity implements View.OnClickLis
         actionBarDrawerToggle.syncState();
 
         //set viewpager
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        adapter = new AdapterMenu(DanhSachMuaActivity.this, 4, drawerLayout, khachHang);
+        adapter = new AdapterMenu(DanhSachMuaActivity.this, 4, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(khachHang  != null && !khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
         }
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("khachHang", khachHang);
-
-        FragmentDangXuLy fragmentDangXuLy = new FragmentDangXuLy();
-        fragmentDangXuLy.setArguments(bundle);
-
-        FragmentThanhCong fragmentThanhCong = new FragmentThanhCong();
-        fragmentThanhCong.setArguments(bundle);
-
-        list.add(fragmentDangXuLy);
-        list.add(fragmentThanhCong);
+        list.add(new FragmentDangXuLy());
+        list.add(new FragmentThanhCong());
 
         titles.add("Đang xử lý");
         titles.add("Thành công");

@@ -17,6 +17,7 @@ import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterThemDiaChi;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
 /**
  * Created by tieu_nt on 4/13/2018.
@@ -29,7 +30,6 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
     private CheckBox cbMacDinh;
     private Button btnThemDiaChi;
     private boolean themDiaChi;
-    private KhachHang khachHang;
     private ModelKhachHang modelKhachHang;
     private int position;
     private PresenterThemDiaChi presenterThemDiaChi;
@@ -45,13 +45,12 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
         modelKhachHang = ModelKhachHang.getInstance();
         themDiaChi = getIntent().getBooleanExtra("themDiaChi", false);
         position = getIntent().getIntExtra("position", 0);
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
 
-        if(themDiaChi && khachHang.getDsDiaChi().size() == 0){
+        if(themDiaChi && TrangChuActivity.khachHang.getDsDiaChi().size() == 0){
             cbMacDinh.setVisibility(View.GONE);
         }
         if(!themDiaChi) {
-            diaChi = khachHang.getDsDiaChi().get(position);
+            diaChi = TrangChuActivity.khachHang.getDsDiaChi().get(position);
             tvThemDiaChi.setText("Chỉnh Sửa Địa Chỉ");
             String diaChiS[] = diaChi.getDiaChi().split("-");
             edtTinhTP.setText(diaChiS[3]);
@@ -101,13 +100,13 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
     @Override
     public void themDiaChiThanhCong(DiaChi diaChi) {
         if(themDiaChi) {
-            boolean b = modelKhachHang.capNhatDiaChi("themDiaChi", khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), diaChi.getTrangThai());
+            boolean b = modelKhachHang.capNhatDiaChi("themDiaChi", TrangChuActivity.khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), diaChi.getTrangThai());
             if(b){
                 ((KhachHang) getIntent().getSerializableExtra("khachHang")).getDsDiaChi().add(diaChi);
                 finish();
             }
         }else{
-            boolean b = modelKhachHang.capNhatDiaChi("suaDiaChi", khachHang.getIdKhachHang(), this.diaChi.getDiaChi(), diaChi.getDiaChi(), diaChi.getTrangThai());
+            boolean b = modelKhachHang.capNhatDiaChi("suaDiaChi", TrangChuActivity.khachHang.getIdKhachHang(), this.diaChi.getDiaChi(), diaChi.getDiaChi(), diaChi.getTrangThai());
             if(b){
                 finish();
             }

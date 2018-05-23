@@ -11,10 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterDoiMatKhau;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
 /**
  * Created by tieu_nt on 4/12/2018.
@@ -25,9 +24,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
     private Button btnCapNhat;
     private ImageButton imgBack;
     private PresenterDoiMatKhau presenterDoiMatKhau;
-    private KhachHang khachHang;
     private AlertDialog.Builder builder;
-    private ModelKhachHang modelKhachHang;
 
 
     @Override
@@ -35,9 +32,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_doimatkhau);
         anhXa();
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        modelKhachHang = ModelKhachHang.getInstance();
-        presenterDoiMatKhau = new PresenterDoiMatKhau(this);
+        presenterDoiMatKhau = new PresenterDoiMatKhau(this, TrangChuActivity.khachHang.getIdKhachHang());
     }
 
     private void anhXa() {
@@ -57,7 +52,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.btnCapNhat:
-                presenterDoiMatKhau.doiMatKhau(khachHang.getTaiKhoan().getMatKhau(), edtMatKhauCu.getText().toString(),
+                presenterDoiMatKhau.doiMatKhau(TrangChuActivity.khachHang.getTaiKhoan().getMatKhau(), edtMatKhauCu.getText().toString(),
                         edtMatKhauMoi.getText().toString(), edtXacNhanMKMoi.getText().toString());
                 break;
         }
@@ -65,11 +60,8 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void doiMatKhauThanhCong(String matKhauMoi) {
-        boolean b = modelKhachHang.doiMatKhau("doiMatKhau", khachHang.getIdKhachHang(), matKhauMoi);
-        if (b){
-            khachHang.getTaiKhoan().setMatKhau(matKhauMoi);
-            Toast.makeText(this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-        }
+        TrangChuActivity.khachHang.getTaiKhoan().setMatKhau(matKhauMoi);
+        Toast.makeText(this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override

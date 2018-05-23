@@ -26,11 +26,7 @@ public class ChiTietTinTucActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.layout_chitiettintuc);
         anhXa();
         setActions();
-        TinTuc tinTuc = (TinTuc) getIntent().getSerializableExtra("tinTuc");
-        tvTieuDe.setText(tinTuc.getTieuDe());
-        String ngayDang = "Ngày " + tinTuc.getNgayDang()[2] + " Tháng " + tinTuc.getNgayDang()[1] + " Năm" + tinTuc.getNgayDang()[0];
-        tvNgayDang.setText(ngayDang);
-        tvNoiDung.setText(tinTuc.getNoiDung());
+        hienThiTinTuc();
     }
 
     private void anhXa(){
@@ -44,8 +40,12 @@ public class ChiTietTinTucActivity extends AppCompatActivity implements View.OnC
         imgBack.setOnClickListener(this);
     }
 
-    private void guiLai(){
-        Toast.makeText(this, "Gửi lại", Toast.LENGTH_SHORT).show();
+    private void hienThiTinTuc(){
+        TinTuc tinTuc = (TinTuc) getIntent().getSerializableExtra("tinTuc");
+        tvTieuDe.setText(tinTuc.getTieuDe());
+        String ngayDang = "Ngày " + tinTuc.getNgayDang()[2] + " Tháng " + tinTuc.getNgayDang()[1] + " Năm" + tinTuc.getNgayDang()[0];
+        tvNgayDang.setText(ngayDang);
+        tvNoiDung.setText(tinTuc.getNoiDung());
     }
 
     @Override

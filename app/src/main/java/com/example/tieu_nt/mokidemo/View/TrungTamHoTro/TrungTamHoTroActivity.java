@@ -10,7 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,10 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,7 +39,6 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
     private AdapterMenu adapter;
     private CircleImageView imgUserInfo;
     private ImageButton imgMenu;
-    private KhachHang khachHang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,14 +58,13 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        adapter = new AdapterMenu(TrungTamHoTroActivity.this, 7, drawerLayout, khachHang);
+        adapter = new AdapterMenu(TrungTamHoTroActivity.this, 7, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(khachHang  != null && !khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
         }
     }
 

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,12 +13,11 @@ import android.widget.ImageButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterTinTuc;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
-import com.example.tieu_nt.mokidemo.Presenter.TinTuc.PresenterTinTuc;
+import com.example.tieu_nt.mokidemo.Presenter.TinTuc.PresenterLogicTinTuc;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,8 +37,7 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
     private CircleImageView imgUserInfo;
     private ImageButton imgMenu;
     private AdapterTinTuc adapterTinTuc;
-    private KhachHang khachHang;
-    private PresenterTinTuc presenterTinTuc;
+    private PresenterLogicTinTuc presenterTinTuc;
 
 
     @Override
@@ -62,19 +59,18 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
         actionBarDrawerToggle.syncState();
 
         //set viewpager
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        adapter = new AdapterMenu(TinTucActivity.this, 1, drawerLayout, khachHang);
+        adapter = new AdapterMenu(TinTucActivity.this, 1, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(khachHang  != null && !khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(ManHinhTrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
         }
 
         recyclerViewTinTuc.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTinTuc.setHasFixedSize(true);
-        presenterTinTuc = new PresenterTinTuc(this);
+        presenterTinTuc = new PresenterLogicTinTuc(this);
         presenterTinTuc.layDanhSachTinTuc(0);
     }
 

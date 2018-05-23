@@ -6,7 +6,7 @@ import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
-import com.example.tieu_nt.mokidemo.View.ManHinhTrangChu.ManHinhTrangChuActivity;
+import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +43,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDSSanPhamTimKiem");
@@ -158,7 +158,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDSDanhMucCon");
@@ -203,7 +203,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDanhSachBinhLuan");
@@ -252,7 +252,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = ManHinhTrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);

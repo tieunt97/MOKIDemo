@@ -1,7 +1,7 @@
 package com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhap_DangKy;
+import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhapDangKy;
 import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangKy;
 
 /**
@@ -10,12 +10,12 @@ import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangKy;
 
 public class PresenterLogicDangKy implements IPresenterDangKy{
     private ViewDangKy viewDangKy;
-    private ModelDangNhap_DangKy modelDangNhap_dangKy;
+    private ModelDangNhapDangKy modelDangNhap_dangKy;
 
 
     public PresenterLogicDangKy(ViewDangKy viewDangKy) {
         this.viewDangKy = viewDangKy;
-        modelDangNhap_dangKy = ModelDangNhap_DangKy.getInstance();
+        modelDangNhap_dangKy = ModelDangNhapDangKy.getInstance();
     }
 
     @Override
