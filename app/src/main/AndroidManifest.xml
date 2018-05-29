@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
 
-        <activity android:name=".View.ManHinhDangNhap.LoadingActivity"
+        <activity android:name=".View.DangNhapDangKy.LoadingActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -30,22 +30,22 @@
 
         </activity>
 
-        <activity android:name=".View.ManHinhDangNhap.DangNhapActivity"
+        <activity android:name=".View.DangNhapDangKy.DangNhapActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhDangNhap.DangKyActivity"
+        <activity android:name=".View.DangNhapDangKy.DangKyActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrangChu.TrangChuActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhDangNhap.XacNhanDangKyActivity"
+        <activity android:name=".View.DangNhapDangKy.XacNhanDangKyActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrangChu.CameraTrangChu.CameraActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".View.ManHinhDangNhap.QuenMatKhauActivity"
+        <activity android:name=".View.DangNhapDangKy.QuenMatKhauActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrangChu.ChiTietSanPhamActivity"

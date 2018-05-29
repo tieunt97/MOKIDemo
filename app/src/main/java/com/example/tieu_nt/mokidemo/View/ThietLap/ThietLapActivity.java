@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -58,8 +59,8 @@ public class ThietLapActivity extends MainActivity implements View.OnClickListen
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
     }
 

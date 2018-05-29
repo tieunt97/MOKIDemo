@@ -5,5 +5,6 @@ package com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham;
  */
 
 public interface IPresenterSanPham {
-    void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep);
+    void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri,
+                            String sapXep, int giaThap, int giaCao);
 }

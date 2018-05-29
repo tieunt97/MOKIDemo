@@ -10,14 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamList;
-import com.example.tieu_nt.mokidemo.Model.ILoadMore;
-import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
+import com.example.tieu_nt.mokidemo.Model.Constants;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.TrangChu.LocSanPham;
 import com.example.tieu_nt.mokidemo.View.TrangChu.ViewHienThiDanhSachSanPham;
 
 import java.util.List;
@@ -31,7 +34,6 @@ public class FragmentBeMac extends FragmentSanPham implements ViewHienThiDanhSac
     private List<SanPham> dsSanPham;
     private boolean dangList = false;
     private int idKhachHang;
-    private String giaTri = "", sapXep = "";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,17 +41,21 @@ public class FragmentBeMac extends FragmentSanPham implements ViewHienThiDanhSac
         Bundle bundle = getArguments();
         idKhachHang = bundle.getInt("idKhachHang");
 
+        setIdLoaiSP(Constants.ID_BEMAC);
+
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
         layoutManagerGrid = new GridLayoutManager(getContext(), 2);
         layoutManagerLinear = new LinearLayoutManager(getContext());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 3, 0, idKhachHang, giaTri, sapXep);
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", idLoaiSP, 0,
+                idKhachHang, giaTri, sapXep, giaThap, giaCao);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshItems("layDanhSachSanPhamTheoLoaiSP", 3);
+                setIdLoaiSP(Constants.ID_BEMAC);
+                refreshItems("layDanhSachSanPhamTheoLoaiSP");
             }
         });
 
@@ -75,22 +81,21 @@ public class FragmentBeMac extends FragmentSanPham implements ViewHienThiDanhSac
     }
 
     @Override
-    public void setDangList(boolean dangList){
-        this.dangList = dangList;
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 3,
-                0, idKhachHang, giaTri, sapXep);
+    public void hienThiThatBai(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void setGiaTriSapXep() {
-        this.giaTri = "";
-        this.sapXep = "";
+    public void setDangList(boolean dangList){
+        this.dangList = dangList;
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", idLoaiSP,
+                0, idKhachHang, giaTri, sapXep, giaThap, giaCao);
     }
 
     @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore(
-                "layDanhSachSanPhamTheoLoaiSP", 3, tongItem, idKhachHang, giaTri, sapXep);
+        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPhamTheoLoaiSP",
+                idLoaiSP, tongItem, idKhachHang, giaTri, sapXep, giaThap, giaCao);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {
@@ -106,7 +111,14 @@ public class FragmentBeMac extends FragmentSanPham implements ViewHienThiDanhSac
     public void layDanhSachSanPhamSapXep(String giaTri, String sapXep) {
         this.sapXep = sapXep;
         this.giaTri = giaTri;
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", 3,
-                0, idKhachHang, giaTri, sapXep);
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", idLoaiSP,
+                0, idKhachHang, giaTri, sapXep, giaThap, giaCao);
+    }
+
+    @Override
+    public void locSanPham(int idLoaiSP, int giaThap, int giaCao) {
+        this.idLoaiSP = idLoaiSP;
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", idLoaiSP, 0,
+                idKhachHang, giaTri, sapXep, giaThap, giaCao);
     }
 }

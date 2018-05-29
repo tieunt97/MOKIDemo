@@ -1,5 +1,6 @@
 package com.example.tieu_nt.mokidemo.Presenter.ThietLap;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
@@ -17,7 +18,7 @@ public class PresenterCapNhatThongTin implements IPresenterCapNhatThongTin{
 
     @Override
     public void capNhatThongTin(String name, String image, String nameAnhBia, String imageAnhBia, String moTa) {
-        modelKhachHang.capNhatThongTinKhachHang("capNhatThongTinKhachHang", TrangChuActivity.khachHang.getIdKhachHang(),
+        modelKhachHang.capNhatThongTinKhachHang("capNhatThongTinKhachHang", DangNhap.getInstance().getKhachHang().getIdKhachHang(),
                 name, image, nameAnhBia, imageAnhBia, moTa);
     }
 }

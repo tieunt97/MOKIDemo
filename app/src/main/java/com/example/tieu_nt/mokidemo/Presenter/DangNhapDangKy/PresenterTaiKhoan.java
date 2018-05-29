@@ -24,13 +24,11 @@ public class PresenterTaiKhoan {
 
     public boolean themTaiKhoan(TaiKhoan taiKhoan){
         boolean b = modelTaiKhoan.themTaiKhoan(taiKhoan);
-        Log.d("TAIKHOANTHEM", String.valueOf(b));
         return b;
     }
 
     public boolean xoaTaiKhoan(){
         boolean b = modelTaiKhoan.xoaTaiKhoan();
-        Log.d("TAIKHOANXOA", String.valueOf(b));
         return b;
     }
 

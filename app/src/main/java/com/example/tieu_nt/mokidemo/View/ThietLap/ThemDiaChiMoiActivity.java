@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
@@ -46,11 +47,11 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
         themDiaChi = getIntent().getBooleanExtra("themDiaChi", false);
         position = getIntent().getIntExtra("position", 0);
 
-        if(themDiaChi && TrangChuActivity.khachHang.getDsDiaChi().size() == 0){
+        if(themDiaChi && DangNhap.getInstance().getKhachHang().getDsDiaChi().size() == 0){
             cbMacDinh.setVisibility(View.GONE);
         }
         if(!themDiaChi) {
-            diaChi = TrangChuActivity.khachHang.getDsDiaChi().get(position);
+            diaChi = DangNhap.getInstance().getKhachHang().getDsDiaChi().get(position);
             tvThemDiaChi.setText("Chỉnh Sửa Địa Chỉ");
             String diaChiS[] = diaChi.getDiaChi().split("-");
             edtTinhTP.setText(diaChiS[3]);
@@ -100,13 +101,13 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
     @Override
     public void themDiaChiThanhCong(DiaChi diaChi) {
         if(themDiaChi) {
-            boolean b = modelKhachHang.capNhatDiaChi("themDiaChi", TrangChuActivity.khachHang.getIdKhachHang(), "", diaChi.getDiaChi(), diaChi.getTrangThai());
+            boolean b = modelKhachHang.capNhatDiaChi("themDiaChi", DangNhap.getInstance().getKhachHang().getIdKhachHang(), "", diaChi.getDiaChi(), diaChi.getTrangThai());
             if(b){
                 ((KhachHang) getIntent().getSerializableExtra("khachHang")).getDsDiaChi().add(diaChi);
                 finish();
             }
         }else{
-            boolean b = modelKhachHang.capNhatDiaChi("suaDiaChi", TrangChuActivity.khachHang.getIdKhachHang(), this.diaChi.getDiaChi(), diaChi.getDiaChi(), diaChi.getTrangThai());
+            boolean b = modelKhachHang.capNhatDiaChi("suaDiaChi", DangNhap.getInstance().getKhachHang().getIdKhachHang(), this.diaChi.getDiaChi(), diaChi.getDiaChi(), diaChi.getTrangThai());
             if(b){
                 finish();
             }

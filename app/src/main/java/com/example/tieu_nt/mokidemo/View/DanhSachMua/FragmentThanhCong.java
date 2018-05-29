@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
-import com.example.tieu_nt.mokidemo.Model.ILoadMore;
-import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang.PresenterSanPhamKhachHangLogic;
 import com.example.tieu_nt.mokidemo.R;
@@ -38,7 +39,7 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
 
         presenterSanPhamKhachHangLogic = new PresenterSanPhamKhachHangLogic(this);
-        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", TrangChuActivity.khachHang.getIdKhachHang(), 0, 2, 2);
+        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", DangNhap.getInstance().getKhachHang().getIdKhachHang(), 0, 2, 2);
 
         return view;
     }
@@ -61,7 +62,8 @@ public class FragmentThanhCong extends Fragment implements ViewHienThiDSSanPhamK
 
     @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan", TrangChuActivity.khachHang.getIdKhachHang(), tongItem, 2, 2);
+        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan",
+                DangNhap.getInstance().getKhachHang().getIdKhachHang(), tongItem, 2, 2);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {

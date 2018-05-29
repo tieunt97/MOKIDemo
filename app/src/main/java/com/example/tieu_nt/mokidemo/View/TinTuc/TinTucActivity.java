@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterTinTuc;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.Presenter.TinTuc.PresenterLogicTinTuc;
 import com.example.tieu_nt.mokidemo.R;
@@ -64,8 +65,8 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
 
         recyclerViewTinTuc.setLayoutManager(new LinearLayoutManager(this));

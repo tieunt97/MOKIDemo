@@ -1,10 +1,11 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
+package com.example.tieu_nt.mokidemo.View.DangNhapDangKy;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterTaiKhoan;
@@ -27,9 +28,9 @@ public class LoadingActivity extends AppCompatActivity{
         TaiKhoan taiKhoan = presenterTaiKhoan.layTaiKhoan();
         if(taiKhoan.getSoDT() != null){
             KhachHang khachHang = presenterTaiKhoan.layThongTinKhachHang(taiKhoan);
+            DangNhap.getInstance().setKhachHang(khachHang);
             Intent iTrangChu = new Intent(this, TrangChuActivity.class);
             iTrangChu.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            iTrangChu.putExtra("khachHang", khachHang);
             startActivity(iTrangChu);
         }else{
             Intent intent = new Intent(this, DangNhapActivity.class);

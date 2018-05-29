@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterBinhLuan;
 import com.example.tieu_nt.mokidemo.Model.BinhLuan;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterBinhLuan;
 import com.example.tieu_nt.mokidemo.R;
@@ -91,8 +92,8 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
             binhLuan.setIdSanPham(idSanPham);
             binhLuan.setNoiDungBL(noiDung);
             binhLuan.setThoiGianBL(thoiGian);
-            binhLuan.setTenKhachHang(TrangChuActivity.khachHang.getTenKhachHang());
-            binhLuan.setHinhKhachHang(TrangChuActivity.khachHang.getAnhInfoKH());
+            binhLuan.setTenKhachHang(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            binhLuan.setHinhKhachHang(DangNhap.getInstance().getKhachHang().getAnhInfoKH());
             boolean b = modelKhachHang.guiBinhLuan(binhLuan);
             if(b) {
                 adapterBinhLuan.add(binhLuan);

@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tieu_nt.mokidemo.Model.BottomSheetThayAnhNen;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterCapNhatThongTin;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -51,11 +51,12 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_trangcuatoi);
         anhXa();
-        if (!TrangChuActivity.khachHang.getAnhInfoKH().equals("null"))
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgKhachHang);
-        if (!TrangChuActivity.khachHang.getAnhBia().equals("null"))Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhBia()).into(imgAnhBia);
-        if (!TrangChuActivity.khachHang.getMoTa().equals("null"))
-            edtThongTin.setText(TrangChuActivity.khachHang.getMoTa());
+        if (!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
+        if (!DangNhap.getInstance().getKhachHang().getAnhBia().equals("null"))Picasso.get().load(TrangChuActivity.SERVER +
+                DangNhap.getInstance().getKhachHang().getAnhBia()).into(imgAnhBia);
+        if (!DangNhap.getInstance().getKhachHang().getMoTa().equals("null"))
+            edtThongTin.setText(DangNhap.getInstance().getKhachHang().getMoTa());
 
         presenterCapNhatThongTin = new PresenterCapNhatThongTin();
 
@@ -125,11 +126,11 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
             case R.id.btnCapNhat:
                 String name = "", image = "", nameAnhBia = "", imageAnhBia = "", moTa = "";
                 if (bitmapKH != null) {
-                    name = TrangChuActivity.khachHang.getIdKhachHang() + "AnhKhachHang";
+                    name = DangNhap.getInstance().getKhachHang().getIdKhachHang() + "AnhKhachHang";
                     image = imageToString(bitmapKH);
                 }
                 if (bitmapAnhBia != null) {
-                    nameAnhBia = TrangChuActivity.khachHang.getIdKhachHang() + "AnhBia";
+                    nameAnhBia = DangNhap.getInstance().getKhachHang().getIdKhachHang() + "AnhBia";
                     imageAnhBia = imageToString(bitmapAnhBia);
                 }
                 if (edtThongTin.getText().toString().length() > 0) {

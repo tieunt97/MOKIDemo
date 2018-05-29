@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
-import com.example.tieu_nt.mokidemo.Model.ILoadMore;
-import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
@@ -47,7 +47,7 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
         idKhachHang = intent.getIntExtra("idKhachHang", idKhachHang);
         tvTenLoaiSP.setText(danhMuc.getTenDanhMuc());
         presenterLogicSanPham = new PresenterLogicSanPham(this);
-        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), 0, idKhachHang, "", "");
+        presenterLogicSanPham.layDanhSachSanPham("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), 0, idKhachHang, "", "",  0, 0);
     }
 
     private void anhXa(){
@@ -85,8 +85,13 @@ public class HienThiSanPhamTheoLoaiActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void hienThiThatBai(String msg) {
+
+    }
+
+    @Override
     public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), tongItem, idKhachHang, "", "");
+        List<SanPham> sanPhamLoadMore = presenterLogicSanPham.layDanhSachSanPhamLoadMore("layDanhSachSanPhamTheoLoaiSP", danhMuc.getIdDanhMuc(), tongItem, idKhachHang, "", "", 0, 0);
         if (sanPhamLoadMore.size() > 0){
             dsSanPham.addAll(sanPhamLoadMore);
             recyclerView.post(new Runnable() {

@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -63,8 +64,8 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
     }
 

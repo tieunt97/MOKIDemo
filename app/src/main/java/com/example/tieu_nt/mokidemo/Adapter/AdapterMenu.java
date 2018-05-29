@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.DrawerItem;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterTaiKhoan;
 import com.example.tieu_nt.mokidemo.Presenter.ItemClickListener;
@@ -22,7 +22,7 @@ import com.example.tieu_nt.mokidemo.View.DanhSachBan.DanhSachBanActivity;
 import com.example.tieu_nt.mokidemo.View.DanhSachMua.DanhSachMuaActivity;
 import com.example.tieu_nt.mokidemo.View.DanhSachYeuThich.DanhSachYeuThichActivity;
 import com.example.tieu_nt.mokidemo.View.GioiThieuMOKI.GioiThieuMOKIActivity;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.DangNhapActivity;
+import com.example.tieu_nt.mokidemo.View.DangNhapDangKy.DangNhapActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.example.tieu_nt.mokidemo.View.ThietLap.ThietLapActivity;
 import com.example.tieu_nt.mokidemo.View.TinTuc.TinTucActivity;
@@ -55,7 +55,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
         this.drawerLayout = drawerLayout;
 
         int length = tenItems.length;
-        if (TrangChuActivity.khachHang != null) tenItems[length - 1] = "Đăng xuất";
+        if (DangNhap.getInstance().getKhachHang() != null) tenItems[length - 1] = "Đăng xuất";
         else tenItems[length - 1] = "Đăng nhập";
 
         for (int i = 0; i < length; i++){
@@ -151,7 +151,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                             break;
                         case 9:
                             //Đăng xuất, Đăng nhập
-                            if(TrangChuActivity.khachHang != null){
+                            if(DangNhap.getInstance().getKhachHang() != null){
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                 View view1 = LayoutInflater.from(context).inflate(R.layout.dialog_thongbao_xacnhan, null);
                                 Button btnHuy = (Button) view1.findViewById(R.id.btnHuy);
@@ -171,11 +171,12 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                                 btnDongY.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Log.d("TAIKHOAN", TrangChuActivity.khachHang.getTaiKhoan().getSoDT());
-                                        presenterTaiKhoan.xoaTaiKhoan();
-                                        Intent iDangNhap = new Intent(context, DangNhapActivity.class);
-                                        iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        context.startActivity(iDangNhap);
+                                        if(presenterTaiKhoan.xoaTaiKhoan()){
+                                            DangNhap.getInstance().setKhachHang(null);
+                                            Intent iDangNhap = new Intent(context, DangNhapActivity.class);
+                                            iDangNhap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            context.startActivity(iDangNhap);
+                                        }
                                     }
                                 });
                             }else{
@@ -191,7 +192,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
     }
 
     private boolean checkDangNhap(){
-        if(TrangChuActivity.khachHang == null)
+        if(DangNhap.getInstance().getKhachHang() == null)
             return false;
         else
             return true;

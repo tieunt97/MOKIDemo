@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
+package com.example.tieu_nt.mokidemo.View.DangNhapDangKy;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 

@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterViewPagerSlider;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
@@ -73,7 +74,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
         modelKhachHang = ModelKhachHang.getInstance();
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
-        if(TrangChuActivity.khachHang != null && TrangChuActivity.khachHang.getIdKhachHang() == sanPham.getKhachHang().getIdKhachHang()){
+        if(DangNhap.getInstance().getKhachHang() != null && DangNhap.getInstance().getKhachHang().getIdKhachHang() == sanPham.getKhachHang().getIdKhachHang()){
             linearMua.setVisibility(View.GONE);
         }
         setActions();

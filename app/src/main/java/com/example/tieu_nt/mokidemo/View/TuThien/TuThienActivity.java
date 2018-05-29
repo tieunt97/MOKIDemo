@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -73,8 +74,8 @@ public class TuThienActivity extends MainActivity implements View.OnClickListene
 
         tabLayout.setupWithViewPager(viewPager);
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
     }
 

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicBanSanPham;
 import com.example.tieu_nt.mokidemo.R;
@@ -61,7 +62,7 @@ ViewBanSanPham{
         setImageBitMap(0);
         setImageCapture(1);
         setActions();
-        tvNoiBan.setText(TrangChuActivity.khachHang.getDiaChi());
+        tvNoiBan.setText(DangNhap.getInstance().getKhachHang().getDiaChi());
         presenterLogicBanSanPham = new PresenterLogicBanSanPham(this);
     }
 
@@ -199,7 +200,7 @@ ViewBanSanPham{
         thongTinSanPham.add(tvKhoiLuong.getText().toString());
         thongTinSanPham.add(tvKichThuoc.getText().toString());
         if(kiemTraDuLieuHopLe(dsHinh, danhMuc, thongTinSanPham)){
-            presenterLogicBanSanPham.dangBanSanPham(TrangChuActivity.khachHang.getIdKhachHang(), dsHinh, danhMuc, thongTinSanPham);
+            presenterLogicBanSanPham.dangBanSanPham(DangNhap.getInstance().getKhachHang().getIdKhachHang(), dsHinh, danhMuc, thongTinSanPham);
         }
     }
 

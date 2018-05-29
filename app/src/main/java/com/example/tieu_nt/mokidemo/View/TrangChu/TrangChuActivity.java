@@ -1,7 +1,6 @@
 package com.example.tieu_nt.mokidemo.View.TrangChu;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +30,8 @@ import android.widget.ViewFlipper;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
+import com.example.tieu_nt.mokidemo.Model.Constants;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.CameraTrangChu.CameraActivity;
@@ -60,7 +60,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tieu_nt on 2/6/2018.
  */
 
-public class TrangChuActivity extends MainActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
+public class TrangChuActivity extends MainActivity implements View.OnClickListener, ViewPager.OnPageChangeListener,
+LocSanPham{
     //may tinh ca nhan
     public static String SERVER = "http://192.168.1.110:8080/webmoki";
     public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
@@ -96,14 +97,10 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
     private TextView tvTenKhachHang;
     private FloatingActionButton fab;
     private float x1, x2;
-    private final int IMG_REQUEST = 1;
     private boolean dangList = false;
-    private Bitmap bitmap;
     private ViewPagerAdapterTrangChu viewPagerAdapter;
     private List<Fragment> list = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
-    private  AlertDialog.Builder builder;
-    public static KhachHang khachHang;
     public static int idKhachHang = 0;
     private ImageView[] imgSapXep = new ImageView[5];
     private RelativeLayout[] relaSapXep = new RelativeLayout[5];
@@ -113,6 +110,7 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
 
     private String sapXep = "", giaTri = "";
     private int position = 0;
+    private DialogLoc dialogLoc;
 
 
     @Override
@@ -139,12 +137,11 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        khachHang = (KhachHang) getIntent().getSerializableExtra("khachHang");
-        if (khachHang != null){
-            tvTenKhachHang.setText(khachHang.getTenKhachHang());
-            idKhachHang = khachHang.getIdKhachHang();
-            if(!khachHang.getAnhInfoKH().equals("null"))
-                Picasso.get().load(SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
+        if (DangNhap.getInstance().getKhachHang() != null){
+            tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            idKhachHang = DangNhap.getInstance().getKhachHang().getIdKhachHang();
+            if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+                Picasso.get().load(SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
         adapter = new AdapterMenu(TrangChuActivity.this, 0, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -313,6 +310,7 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
                 sapXep();
                 break;
             case R.id.btnLoc:
+                loc();
                 break;
             case R.id.btnXung:
                 Toast.makeText(TrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
@@ -322,6 +320,52 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void loc(){
+        int idLoaiSP = 0;
+        switch (position){
+            case 0:
+                break;
+            case 1:
+                idLoaiSP = Constants.ID_MIENPHI;
+                break;
+            case 2:
+                idLoaiSP = Constants.ID_BEAN;
+                break;
+            case 3:
+                idLoaiSP = Constants.ID_BEMAC;
+                break;
+            case 4:
+                idLoaiSP = Constants.ID_BENGU;
+                break;
+            case 5:
+                idLoaiSP = Constants.ID_BETAM;
+                break;
+            case 6:
+                idLoaiSP = Constants.ID_BEVESINH;
+                break;
+            case 7:
+                idLoaiSP = Constants.ID_BEKHOEANTOAN;
+                break;
+            case 8:
+                idLoaiSP = Constants.ID_BEDIRANGOAI;
+                break;
+            case 9:
+                idLoaiSP = Constants.ID_BECHOIMAHOC;
+                break;
+            case 10:
+                idLoaiSP = Constants.ID_DANHCHOME;
+                break;
+            case 11:
+                idLoaiSP = Constants.ID_DODUNGGIADINH;
+                break;
+            case 12:
+                idLoaiSP = Constants.ID_SANPHAMKHAC;
+                break;
+        }
+        dialogLoc = new DialogLoc(this, this, idLoaiSP);
+        dialogLoc.show();
     }
 
     private void sapXep(){
@@ -465,7 +509,7 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
         if(this.position != position){
             this.giaTri = "";
             this.sapXep = "";
-            getFragment(this.position).setGiaTriSapXep();
+            getFragment(this.position).setGiaTriSapXepLoc();
             this.position = position;
             this.viTriSapXep = -1;
             setHienThiDanhSachSanPham(position);
@@ -484,5 +528,10 @@ public class TrangChuActivity extends MainActivity implements View.OnClickListen
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void locSanPham(int idLoaiSP, int giaThap, int giaCao) {
+        getFragment(position).locSanPham(idLoaiSP, giaThap, giaCao);
     }
 }

@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface ViewHienThiDanhSachSanPham {
     void hienThiDanhSachSanPham(List<SanPham> dsSanPham);
+    void hienThiThatBai(String msg);
 }

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tieu_nt.mokidemo.Model.BottomSheetCapNhatDiaChi;
+import com.example.tieu_nt.mokidemo.View.ThietLap.BottomSheetCapNhatDiaChi;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
 import com.example.tieu_nt.mokidemo.R;
 

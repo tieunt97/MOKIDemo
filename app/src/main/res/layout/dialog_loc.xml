@@ -18,22 +18,81 @@
         android:textColor="@color/colorRed"
         android:textStyle="bold"
         android:textSize="17sp"
-        android:padding="8dp"/>
+        android:padding="10dp"/>
 
     <View android:layout_height="1.5dp"
         android:layout_width="match_parent"
         android:background="@color/colorBlack"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Danh mục"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp" />
 
-    </android.support.v7.widget.RecyclerView>
+        <Spinner
+            android:id="@+id/spinerDanhMuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2dp"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="2dp"
+            android:background="@drawable/custom_edt">
+
+        </Spinner>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giá (đ)"
+        android:textColor="@color/colorBlack"
+        android:textSize="17sp"
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtToiThieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/custom_edt"
+            android:hint="Tối thiểu"
+            android:inputType="number"
+            android:padding="8dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src="@drawable/minus" />
+
+        <EditText
+            android:id="@+id/edtToiDa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/custom_edt"
+            android:hint="Tối đa"
+            android:inputType="number"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:background="@color/colorGreyish">
 
@@ -44,7 +103,13 @@
             android:layout_weight="1"
             android:textAllCaps="false"
             android:text="Hủy"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorGreyish"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGrey"/>
 
         <Button
             android:id="@+id/btnApDung"
@@ -54,7 +119,7 @@
             android:layout_weight="1"
             android:text="Áp dụng"
             android:textColor="@color/colorBlack"
-            android:layout_marginLeft="1dp"/>
+            android:background="@color/colorGreyish"/>
 
     </LinearLayout>
 

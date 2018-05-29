@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.Model;
+package com.example.tieu_nt.mokidemo.Model.LoadMore;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

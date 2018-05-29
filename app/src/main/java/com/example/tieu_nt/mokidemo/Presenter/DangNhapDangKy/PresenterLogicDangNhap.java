@@ -1,8 +1,10 @@
 package com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy;
 
+import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
+import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhapDangKy;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangNhap;
+import com.example.tieu_nt.mokidemo.View.DangNhapDangKy.ViewDangNhap;
 
 /**
  * Created by tieu_nt on 4/3/2018.
@@ -11,10 +13,12 @@ import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangNhap;
 public class PresenterLogicDangNhap implements IPresenterDangNhap{
     private ViewDangNhap viewDangNhap;
     private ModelDangNhapDangKy modelDangNhap;
+    private ModelKhachHang modelKhachHang;
 
     public PresenterLogicDangNhap(ViewDangNhap viewDangNhap) {
         this.viewDangNhap = viewDangNhap;
         modelDangNhap = ModelDangNhapDangKy.getInstance();
+        modelKhachHang = ModelKhachHang.getInstance();
     }
 
     @Override
@@ -45,7 +49,8 @@ public class PresenterLogicDangNhap implements IPresenterDangNhap{
                     viewDangNhap.dangNhapThatBai("Tài khoản chưa được kích hoạt");
                     return;
                 }else if(taiKhoan.getTrangThai() == 1){
-                    viewDangNhap.dangNhapThanhCong(taiKhoan);
+                    KhachHang khachHang = modelKhachHang.layThongTinKhachHang("layThongTinKhachHang", taiKhoan);
+                    viewDangNhap.dangNhapThanhCong(khachHang);
                     return;
                 }
             }else{

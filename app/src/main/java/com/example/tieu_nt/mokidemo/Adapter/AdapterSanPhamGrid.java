@@ -3,6 +3,7 @@ package com.example.tieu_nt.mokidemo.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,8 @@ public class AdapterSanPhamGrid extends RecyclerView.Adapter<AdapterSanPhamGrid.
 
             }
         });
+
+        Log.d("DUONGDAN", sanPham.getHinhLon());
         String tenSP = sanPham.getTenSanPham();
         if(tenSP.length() > 27){
             tenSP = tenSP.substring(0, 27) + "...";

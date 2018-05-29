@@ -12,8 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
-import com.example.tieu_nt.mokidemo.Model.ILoadMore;
-import com.example.tieu_nt.mokidemo.Model.LoadMoreScroll;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.ILoadMore;
+import com.example.tieu_nt.mokidemo.Model.LoadMore.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicTimKiemSanPham;
 import com.example.tieu_nt.mokidemo.R;
@@ -43,8 +44,8 @@ public class SanPhamTimKiemActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.layout_hienthisanphamtheoloai);
         anhXa();
 
-        if(TrangChuActivity.khachHang != null){
-            idKhachHang = TrangChuActivity.khachHang.getIdKhachHang();
+        if(DangNhap.getInstance().getKhachHang() != null){
+            idKhachHang = DangNhap.getInstance().getKhachHang().getIdKhachHang();
         }
 
         tvTitle.setText("Sản phẩm tìm kiếm");
@@ -99,6 +100,11 @@ public class SanPhamTimKiemActivity extends AppCompatActivity implements View.On
                 adapterSanPham.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void hienThiThatBai(String msg) {
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.tieu_nt.mokidemo.View.GioiThieuMOKI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
@@ -10,8 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -31,6 +34,7 @@ public class GioiThieuMOKIActivity extends MainActivity implements View.OnClickL
     private AdapterMenu adapter;
     private CircleImageView imgUserInfo;
     private ImageButton imgMenu;
+    private RelativeLayout relaShare;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +59,22 @@ public class GioiThieuMOKIActivity extends MainActivity implements View.OnClickL
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang() != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
+
+        relaShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String body = "Cùng MOKI kết nối những bà mẹ";
+                String sub = "Ứng dụng di động MOKI";
+                intent.putExtra(Intent.EXTRA_SUBJECT, sub);
+                intent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(intent, "Chia sẻ MOKi với"));
+            }
+        });
     }
 
     private void anhXa(){
@@ -67,6 +84,7 @@ public class GioiThieuMOKIActivity extends MainActivity implements View.OnClickL
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        relaShare = (RelativeLayout) findViewById(R.id.relaShare);
     }
 
     @Override

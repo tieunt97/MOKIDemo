@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
+package com.example.tieu_nt.mokidemo.View.DangNhapDangKy;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,15 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
-import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterLogicDangNhap;
 import com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy.PresenterTaiKhoan;
 import com.example.tieu_nt.mokidemo.R;
@@ -121,13 +119,10 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void dangNhapThanhCong(TaiKhoan taiKhoan) {
-        presenterTaiKhoan.themTaiKhoan(taiKhoan);
-        Log.d("TAIKHOAN", taiKhoan.getSoDT());
+    public void dangNhapThanhCong(KhachHang khachHang) {
+        presenterTaiKhoan.themTaiKhoan(khachHang.getTaiKhoan());
+        DangNhap.getInstance().setKhachHang(khachHang);
         Intent iTrangChu = new Intent(DangNhapActivity.this, TrangChuActivity.class);
-        ModelKhachHang modelKhachHang = ModelKhachHang.getInstance();
-        KhachHang khachHang = modelKhachHang.layThongTinKhachHang("layThongTinKhachHang", taiKhoan);
-        iTrangChu.putExtra("khachHang", khachHang);
         startActivity(iTrangChu);
     }
 

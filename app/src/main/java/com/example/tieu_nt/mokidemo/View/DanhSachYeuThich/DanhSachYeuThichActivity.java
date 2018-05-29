@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamYeuThich;
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich.PresenterDanhSachYeuThich;
 import com.example.tieu_nt.mokidemo.R;
@@ -69,12 +70,12 @@ public class DanhSachYeuThichActivity extends MainActivity implements View.OnCli
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        if(TrangChuActivity.khachHang  != null && !TrangChuActivity.khachHang.getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + TrangChuActivity.khachHang.getAnhInfoKH()).into(imgUserInfo);
+        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
+            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
         }
 
         presenterDanhSachYeuThich = new PresenterDanhSachYeuThich(this);
-        presenterDanhSachYeuThich.layDSSanPhamYeuThich("layDSSanPhamYeuThich", TrangChuActivity.khachHang.getIdKhachHang(), 0);
+        presenterDanhSachYeuThich.layDSSanPhamYeuThich("layDSSanPhamYeuThich", DangNhap.getInstance().getKhachHang().getIdKhachHang(), 0);
     }
 
     private void anhXa(){

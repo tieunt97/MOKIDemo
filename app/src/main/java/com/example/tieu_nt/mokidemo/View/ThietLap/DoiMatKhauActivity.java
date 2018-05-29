@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterDoiMatKhau;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
@@ -32,7 +33,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_doimatkhau);
         anhXa();
-        presenterDoiMatKhau = new PresenterDoiMatKhau(this, TrangChuActivity.khachHang.getIdKhachHang());
+        presenterDoiMatKhau = new PresenterDoiMatKhau(this, DangNhap.getInstance().getKhachHang().getIdKhachHang());
     }
 
     private void anhXa() {
@@ -52,7 +53,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.btnCapNhat:
-                presenterDoiMatKhau.doiMatKhau(TrangChuActivity.khachHang.getTaiKhoan().getMatKhau(), edtMatKhauCu.getText().toString(),
+                presenterDoiMatKhau.doiMatKhau(DangNhap.getInstance().getKhachHang().getTaiKhoan().getMatKhau(), edtMatKhauCu.getText().toString(),
                         edtMatKhauMoi.getText().toString(), edtXacNhanMKMoi.getText().toString());
                 break;
         }
@@ -60,7 +61,7 @@ public class DoiMatKhauActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void doiMatKhauThanhCong(String matKhauMoi) {
-        TrangChuActivity.khachHang.getTaiKhoan().setMatKhau(matKhauMoi);
+        DangNhap.getInstance().getKhachHang().getTaiKhoan().setMatKhau(matKhauMoi);
         Toast.makeText(this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
     }
 

@@ -21,15 +21,21 @@ public class PresenterLogicSanPham implements IPresenterSanPham{
     }
 
     @Override
-    public void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep) {
-         List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
+    public void layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri,
+                                   String sapXep, int giaThap, int giaCao) {
+         List<SanPham> dsSanPham = modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang,
+                 giaTri, sapXep, giaThap, giaCao);
         if (dsSanPham.size() > 0){
             viewHienThiDanhSachSanPham.hienThiDanhSachSanPham(dsSanPham);
+        }else{
+            viewHienThiDanhSachSanPham.hienThiThatBai("Không tìm thấy sản phẩm phù hợp");
         }
     }
 
-    public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep) {
-        List<SanPham> dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang, giaTri, sapXep);
+    public List<SanPham> layDanhSachSanPhamLoadMore(String ham, int idLoaiSP, int limit, int idKhachHang,
+                                                    String giaTri, String sapXep, int giaThap, int giaCao) {
+        List<SanPham> dsSanPham =  modelSanPham.layDanhSachSanPham(ham, idLoaiSP, limit, idKhachHang,
+                giaTri, sapXep, giaThap, giaCao);
 
         return dsSanPham;
     }

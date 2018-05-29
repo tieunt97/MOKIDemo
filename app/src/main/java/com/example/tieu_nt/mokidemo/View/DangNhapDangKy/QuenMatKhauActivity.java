@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.View.ManHinhDangNhap;
+package com.example.tieu_nt.mokidemo.View.DangNhapDangKy;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

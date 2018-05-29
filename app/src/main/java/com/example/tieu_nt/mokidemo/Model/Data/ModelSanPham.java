@@ -246,7 +246,8 @@ public class ModelSanPham {
         return dsBinhLuan;
     }
 
-    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang, String giaTri, String sapXep){
+    public List<SanPham> layDanhSachSanPham(String ham, int idLoaiSP, int limit, int idKhachHang,
+                                            String giaTri, String sapXep, int giaThap, int giaCao){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -282,6 +283,16 @@ public class ModelSanPham {
             HashMap<String,String> hsIdKhachHang = new HashMap<>();
             hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
             attrs.add(hsIdKhachHang);
+        }
+
+        if(giaThap < giaCao){
+            HashMap<String,String> hsGiaThap = new HashMap<>();
+            hsGiaThap.put("giaThap", String.valueOf(giaThap));
+            attrs.add(hsGiaThap);
+
+            HashMap<String,String> hsGiaCao = new HashMap<>();
+            hsGiaCao.put("giaCao", String.valueOf(giaCao));
+            attrs.add(hsGiaCao);
         }
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);

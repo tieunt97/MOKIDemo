@@ -2,7 +2,7 @@ package com.example.tieu_nt.mokidemo.Presenter.DangNhapDangKy;
 
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelDangNhapDangKy;
-import com.example.tieu_nt.mokidemo.View.ManHinhDangNhap.ViewDangKy;
+import com.example.tieu_nt.mokidemo.View.DangNhapDangKy.ViewDangKy;
 
 /**
  * Created by tieu_nt on 4/18/2018.

@@ -1,4 +1,4 @@
-package com.example.tieu_nt.mokidemo.Model;
+package com.example.tieu_nt.mokidemo.View.ThietLap;
 
 import android.app.Activity;
 import android.content.Context;

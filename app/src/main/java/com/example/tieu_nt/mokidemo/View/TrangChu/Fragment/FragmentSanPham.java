@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
+import com.example.tieu_nt.mokidemo.View.TrangChu.LocSanPham;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 
 import java.util.List;
@@ -21,13 +22,27 @@ public abstract class FragmentSanPham extends Fragment{
     protected RecyclerView.LayoutManager layoutManagerLinear, layoutManagerGrid;
     protected RecyclerView.Adapter adapter;
     protected List<SanPham> dsSanPham;
+    protected String giaTri = "", sapXep = "";
+    protected int idLoaiSP = 0, giaThap = 0, giaCao = 0;
 
     public abstract void layDanhSachSanPhamSapXep(String giaTri, String sapXep);
     public abstract void setDangList(boolean dangList);
-    public abstract void setGiaTriSapXep();
+    public abstract void locSanPham(int idLoaiSP, int giaThap, int giaCao);
 
-    void refreshItems(String ham, int idLoaiSP) {
-        presenterLogicSanPham.layDanhSachSanPham(ham, idLoaiSP,0, TrangChuActivity.idKhachHang, "", "");
+    public void setGiaTriSapXepLoc(){
+        this.giaTri = "";
+        this.sapXep = "";
+        this.giaThap = 0;
+        this.giaCao = 0;
+    }
+
+    void refreshItems(String ham) {
+        presenterLogicSanPham.layDanhSachSanPham(ham, idLoaiSP,0, TrangChuActivity.idKhachHang,
+                "", "", 0, 0);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void setIdLoaiSP(int idLoaiSP) {
+        this.idLoaiSP = idLoaiSP;
     }
 }
