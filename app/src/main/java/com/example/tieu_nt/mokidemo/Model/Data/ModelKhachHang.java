@@ -3,6 +3,7 @@ package com.example.tieu_nt.mokidemo.Model.Data;
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.BinhLuan;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
@@ -46,7 +47,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "muaSanPham");
@@ -89,7 +90,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "themSanPham");
@@ -167,7 +168,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "guiBinhLuan");
@@ -215,7 +216,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDSTinTuc");
@@ -263,7 +264,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -302,7 +303,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -349,7 +350,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -388,7 +389,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -442,7 +443,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -503,7 +504,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);
@@ -597,7 +598,7 @@ public class ModelKhachHang {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_KHACHHANG;
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);

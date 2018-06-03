@@ -14,12 +14,12 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamYeuThich;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Presenter.DanhSachYeuThich.PresenterDanhSachYeuThich;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,7 +36,8 @@ public class DanhSachYeuThichActivity extends MainActivity implements View.OnCli
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView recyclerView, recyclerViewSPYeuThich;
     private AdapterMenu adapter;
-    private CircleImageView imgUserInfo;
+    private CircleImageView imgKhachHang;
+    private TextView tvTenKhachHang;
     private ImageButton imgMenu;
     private TextView tvTitle;
     private AdapterSanPhamYeuThich adapterSanPhamYeuThich;
@@ -70,8 +71,10 @@ public class DanhSachYeuThichActivity extends MainActivity implements View.OnCli
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
+        if (DangNhap.getInstance().getKhachHang() != null){
+            tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+                Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
 
         presenterDanhSachYeuThich = new PresenterDanhSachYeuThich(this);
@@ -84,7 +87,8 @@ public class DanhSachYeuThichActivity extends MainActivity implements View.OnCli
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewSPYeuThich = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
     }

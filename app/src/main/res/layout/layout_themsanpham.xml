@@ -142,131 +142,131 @@
                     android:layout_height="0.5dp"
                     android:background="@color/colorGrey"/>
 
-                <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Miễn phí"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorBlack"
-                            android:layout_margin="5dp"
-                            android:textStyle="bold"/>
+                <!--<RelativeLayout-->
+                    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="64dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Miễn phí"-->
+                            <!--android:textSize="16sp"-->
+                            <!--android:textColor="@color/colorBlack"-->
+                            <!--android:layout_margin="5dp"-->
+                            <!--android:textStyle="bold"/>-->
 
-                        <TextView
-                            android:layout_width="220dp"
-                            android:layout_height="wrap_content"
-                            android:text="Bật ON, hàng được cho miễn phí, không phụ thuộc tiền"
-                            android:layout_marginLeft="5dp"/>
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="220dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Bật ON, hàng được cho miễn phí, không phụ thuộc tiền"-->
+                            <!--android:layout_marginLeft="5dp"/>-->
+                    <!--</LinearLayout>-->
 
-                    <ToggleButton
-                        android:id="@+id/tgMienPhi"
-                        android:layout_width="64dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/custom_switch"
-                        android:textOff=""
-                        android:textOn=""
-                        android:checked="true"/>
+                    <!--<ToggleButton-->
+                        <!--android:id="@+id/tgMienPhi"-->
+                        <!--android:layout_width="64dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:background="@drawable/custom_switch"-->
+                        <!--android:textOff=""-->
+                        <!--android:textOn=""-->
+                        <!--android:checked="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGrey"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGrey"/>-->
 
-                <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Bán nhanh"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorBlack"
-                            android:layout_margin="5dp"
-                            android:textStyle="bold"/>
+                <!--<RelativeLayout-->
+                    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="64dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Bán nhanh"-->
+                            <!--android:textSize="16sp"-->
+                            <!--android:textColor="@color/colorBlack"-->
+                            <!--android:layout_margin="5dp"-->
+                            <!--android:textStyle="bold"/>-->
 
-                        <TextView
-                            android:layout_width="220dp"
-                            android:layout_height="wrap_content"
-                            android:text="Tự động bán khi có yêu cầu mua hoặc không"
-                            android:layout_marginLeft="5dp"/>
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="220dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Tự động bán khi có yêu cầu mua hoặc không"-->
+                            <!--android:layout_marginLeft="5dp"/>-->
+                    <!--</LinearLayout>-->
 
-                    <ToggleButton
-                        android:id="@+id/tgBanNhanh"
-                        android:layout_width="64dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/custom_switch"
-                        android:textOff=""
-                        android:textOn=""
-                        android:checked="true"/>
+                    <!--<ToggleButton-->
+                        <!--android:id="@+id/tgBanNhanh"-->
+                        <!--android:layout_width="64dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:background="@drawable/custom_switch"-->
+                        <!--android:textOff=""-->
+                        <!--android:textOn=""-->
+                        <!--android:checked="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGrey"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGrey"/>-->
 
-                <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cho phép mặc cả"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorBlack"
-                            android:layout_margin="5dp"
-                            android:textStyle="bold"/>
+                <!--<RelativeLayout-->
+                    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="64dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Cho phép mặc cả"-->
+                            <!--android:textSize="16sp"-->
+                            <!--android:textColor="@color/colorBlack"-->
+                            <!--android:layout_margin="5dp"-->
+                            <!--android:textStyle="bold"/>-->
 
-                        <TextView
-                            android:layout_width="220dp"
-                            android:layout_height="wrap_content"
-                            android:text="Cho phép người mua mặc cả giá hoặc không"
-                            android:layout_marginLeft="5dp"/>
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="220dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Cho phép người mua mặc cả giá hoặc không"-->
+                            <!--android:layout_marginLeft="5dp"/>-->
+                    <!--</LinearLayout>-->
 
-                    <ToggleButton
-                        android:id="@+id/tgMacCa"
-                        android:layout_width="64dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/custom_switch"
-                        android:textOff=""
-                        android:textOn=""
-                        android:checked="true"/>
+                    <!--<ToggleButton-->
+                        <!--android:id="@+id/tgMacCa"-->
+                        <!--android:layout_width="64dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:background="@drawable/custom_switch"-->
+                        <!--android:textOff=""-->
+                        <!--android:textOn=""-->
+                        <!--android:checked="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGrey"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGrey"/>-->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -344,96 +344,96 @@
                     android:layout_height="0.5dp"
                     android:background="@color/colorGrey"/>
 
-                <RelativeLayout
-                    android:id="@+id/relaNhanHieu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/relaNhanHieu"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:padding="8dp">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nhãn hiệu"
-                        android:drawableLeft="@drawable/tag"
-                        android:gravity="center_vertical"
-                        android:drawablePadding="8dp"
-                        android:layout_centerVertical="true"/>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Nhãn hiệu"-->
+                        <!--android:drawableLeft="@drawable/tag"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:drawablePadding="8dp"-->
+                        <!--android:layout_centerVertical="true"/>-->
 
-                    <TextView
-                        android:id="@+id/tvNhanHieu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/colorRed"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tvNhanHieu"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text=""-->
+                        <!--android:textColor="@color/colorRed"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGrey"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGrey"/>-->
 
-                <RelativeLayout
-                    android:id="@+id/relaKhoiLuong"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/relaKhoiLuong"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:padding="8dp">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Khối lượng"
-                        android:drawableLeft="@drawable/box_weight"
-                        android:gravity="center_vertical"
-                        android:drawablePadding="8dp"
-                        android:layout_centerVertical="true"/>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Khối lượng"-->
+                        <!--android:drawableLeft="@drawable/box_weight"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:drawablePadding="8dp"-->
+                        <!--android:layout_centerVertical="true"/>-->
 
-                    <TextView
-                        android:id="@+id/tvKhoiLuong"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorRed"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tvKhoiLuong"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/colorRed"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGreyish"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGreyish"/>-->
 
-                <RelativeLayout
-                    android:id="@+id/relaKichThuoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/relaKichThuoc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:padding="8dp">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kích thước"
-                        android:drawableLeft="@drawable/size_square"
-                        android:gravity="center_vertical"
-                        android:drawablePadding="8dp"
-                        android:layout_centerVertical="true"/>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Kích thước"-->
+                        <!--android:drawableLeft="@drawable/size_square"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:drawablePadding="8dp"-->
+                        <!--android:layout_centerVertical="true"/>-->
 
-                    <TextView
-                        android:id="@+id/tvKichThuoc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorRed"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tvKichThuoc"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/colorRed"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_alignParentRight="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorGrey"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="@color/colorGrey"/>-->
 
                 <TextView
                     android:layout_width="match_parent"

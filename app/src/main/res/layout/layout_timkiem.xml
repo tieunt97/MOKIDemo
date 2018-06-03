@@ -117,75 +117,75 @@
 
         </RelativeLayout>
 
-        <!--Layout nhãn hiệu-->
-        <RelativeLayout
-            android:id="@+id/relaNhanHieu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@color/colorWhite"
-            android:layout_marginTop="1dp">
+        <!--&lt;!&ndash;Layout nhãn hiệu&ndash;&gt;-->
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/relaNhanHieu"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10dp"-->
+            <!--android:background="@color/colorWhite"-->
+            <!--android:layout_marginTop="1dp">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/tag"
-                android:drawablePadding="15dp"
-                android:text="Nhãn hiệu"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"
-                android:layout_centerVertical="true"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableLeft="@drawable/tag"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:text="Nhãn hiệu"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/colorBlack"-->
+                <!--android:layout_centerVertical="true"/>-->
 
-            <TextView
-                android:id="@+id/tvNhanHieuTimKiem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:drawableRight="@drawable/next_black"
-                android:gravity="center"
-                android:text="Tất cả"
-                android:textColor="@color/colorRed"
-                android:layout_centerVertical="true"
-                android:drawablePadding="5dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tvNhanHieuTimKiem"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:drawableRight="@drawable/next_black"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Tất cả"-->
+                <!--android:textColor="@color/colorRed"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:drawablePadding="5dp"/>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <!--Layout kích cỡ-->
-        <RelativeLayout
-            android:id="@+id/relaKichCoTimKiem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@color/colorWhite"
-            android:layout_marginTop="1dp">
+        <!--&lt;!&ndash;Layout kích cỡ&ndash;&gt;-->
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/relaKichCoTimKiem"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10dp"-->
+            <!--android:background="@color/colorWhite"-->
+            <!--android:layout_marginTop="1dp">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/size_square"
-                android:drawablePadding="15dp"
-                android:text="Kích cỡ"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"
-                android:layout_centerVertical="true"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableLeft="@drawable/size_square"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:text="Kích cỡ"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/colorBlack"-->
+                <!--android:layout_centerVertical="true"/>-->
 
-            <TextView
-                android:id="@+id/tvKichCoTimKiem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:drawableRight="@drawable/next_black"
-                android:gravity="center"
-                android:text="Tất cả"
-                android:textColor="@color/colorRed"
-                android:layout_centerVertical="true"
-                android:drawablePadding="5dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tvKichCoTimKiem"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:drawableRight="@drawable/next_black"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Tất cả"-->
+                <!--android:textColor="@color/colorRed"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:drawablePadding="5dp"/>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
         <!--Layout giá-->
         <RelativeLayout
@@ -215,9 +215,9 @@
                 android:drawableRight="@drawable/expand_arrow_16"
                 android:gravity="center"
                 android:layout_centerVertical="true"
-                android:drawablePadding="20dp"
-                android:background="@drawable/custom_stroke_view"
-                android:padding="10dp"/>
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                android:background="@drawable/custom_stroke_view"/>
 
         </RelativeLayout>
 

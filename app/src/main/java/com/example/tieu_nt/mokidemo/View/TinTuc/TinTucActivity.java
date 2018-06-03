@@ -10,15 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.AdapterTinTuc;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.TinTuc;
 import com.example.tieu_nt.mokidemo.Presenter.TinTuc.PresenterLogicTinTuc;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,7 +36,8 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView recyclerView, recyclerViewTinTuc;
     private AdapterMenu adapter;
-    private CircleImageView imgUserInfo;
+    private CircleImageView imgKhachHang;
+    private TextView tvTenKhachHang;
     private ImageButton imgMenu;
     private AdapterTinTuc adapterTinTuc;
     private PresenterLogicTinTuc presenterTinTuc;
@@ -65,8 +67,10 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
+        if (DangNhap.getInstance().getKhachHang() != null){
+            tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+                Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
 
         recyclerViewTinTuc.setLayoutManager(new LinearLayoutManager(this));
@@ -80,7 +84,8 @@ public class TinTucActivity extends MainActivity implements View.OnClickListener
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerViewTinTuc = (RecyclerView) findViewById(R.id.recyclerViewTinTuc);
     }

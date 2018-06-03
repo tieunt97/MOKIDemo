@@ -3,6 +3,7 @@ package com.example.tieu_nt.mokidemo.Model.Data;
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.BinhLuan;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
@@ -43,7 +44,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = Constants.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDSSanPhamTimKiem");
@@ -158,7 +159,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = Constants.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDSDanhMucCon");
@@ -203,7 +204,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = Constants.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", "layDanhSachBinhLuan");
@@ -253,7 +254,7 @@ public class ModelSanPham {
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
 
-        String duongdan = TrangChuActivity.SERVER_NAME_SANPHAM;
+        String duongdan = Constants.SERVER_NAME_SANPHAM;
 
         HashMap<String,String> hsHam = new HashMap<>();
         hsHam.put("ham", ham);

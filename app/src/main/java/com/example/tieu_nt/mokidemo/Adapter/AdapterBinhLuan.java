@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Model.BinhLuan;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
@@ -43,7 +44,7 @@ public class AdapterBinhLuan extends RecyclerView.Adapter<AdapterBinhLuan.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         BinhLuan binhLuan = dsBinhLuan.get(position);
-        Picasso.get().load(TrangChuActivity.SERVER + binhLuan.getHinhKhachHang()).into(holder.imgKH);
+        Picasso.get().load(Constants.SERVER + binhLuan.getHinhKhachHang()).into(holder.imgKH);
         holder.tvTenKH.setText(binhLuan.getTenKhachHang());
         holder.tvNoiDung.setText(binhLuan.getNoiDungBL());
         holder.tvThoiGian.setText(sdf.format(binhLuan.getThoiGianBL()).toString());

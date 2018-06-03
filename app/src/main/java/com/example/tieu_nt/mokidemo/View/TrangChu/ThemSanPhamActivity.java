@@ -42,14 +42,14 @@ ViewBanSanPham{
     private List<ImageView> dsImgView = new ArrayList<>();
     private EditText edtTenSP, edtMoTaSP, edtGiaBan;
     private Button btnBan;
-    private TextView tvDanhMuc, tvTrangThai, tvKhoiLuong, tvKichThuoc, tvNhanHieu, tvNoiBan;
-    private ToggleButton tgMienPhi, tgBanNhanh, tgMacCa;
-    private RelativeLayout relaDanhMuc, relaTrangThai, relaNhanHieu, relaKhoiLuong, relaKichThuoc, relaNoiBan;
+    private TextView tvDanhMuc, tvTrangThai, tvNoiBan;
+//    private ToggleButton tgMienPhi, tgBanNhanh, tgMacCa;
+    private RelativeLayout relaDanhMuc, relaTrangThai, relaNoiBan;
     private final int REQUEST_DANHMUC = 4, REQUEST_TRANGTHAI = 5, REQUEST_NHANHIEU = 6,
         REQUEST_KHOILUONG = 7, REQUEST_KICHTHUOC = 8, REQUEST_NOIBAN = 9;
     private int position = 0;
     private DanhMuc danhMuc;
-    private String trangThai, nhanHieu, khoiLuong, kichThuoc, noiBan;
+    private String trangThai, khoiLuong = "", kichThuoc = "", noiBan;
     private PresenterLogicBanSanPham presenterLogicBanSanPham;
 
     @Override
@@ -78,18 +78,18 @@ ViewBanSanPham{
         edtGiaBan = (EditText) findViewById(R.id.edtGiaBan);
         tvDanhMuc = (TextView) findViewById(R.id.tvDanhMuc);
         tvTrangThai = (TextView) findViewById(R.id.tvTrangThai);
-        tvNhanHieu = (TextView) findViewById(R.id.tvNhanHieu);
-        tvKhoiLuong = (TextView) findViewById(R.id.tvKhoiLuong);
-        tvKichThuoc = (TextView) findViewById(R.id.tvKichThuoc);
+//        tvNhanHieu = (TextView) findViewById(R.id.tvNhanHieu);
+//        tvKhoiLuong = (TextView) findViewById(R.id.tvKhoiLuong);
+//        tvKichThuoc = (TextView) findViewById(R.id.tvKichThuoc);
         tvNoiBan = (TextView) findViewById(R.id.tvNoiBan);
-        tgMienPhi = (ToggleButton) findViewById(R.id.tgMienPhi);
-        tgBanNhanh = (ToggleButton) findViewById(R.id.tgBanNhanh);
-        tgMacCa = (ToggleButton) findViewById(R.id.tgMacCa);
+//        tgMienPhi = (ToggleButton) findViewById(R.id.tgMienPhi);
+//        tgBanNhanh = (ToggleButton) findViewById(R.id.tgBanNhanh);
+//        tgMacCa = (ToggleButton) findViewById(R.id.tgMacCa);
         relaDanhMuc = (RelativeLayout) findViewById(R.id.relaDanhMuc);
         relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
-        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
-        relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
-        relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
+//        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
+//        relaKhoiLuong = (RelativeLayout) findViewById(R.id.relaKhoiLuong);
+//        relaKichThuoc = (RelativeLayout) findViewById(R.id.relaKichThuoc);
         relaNoiBan = (RelativeLayout) findViewById(R.id.relaNoiBan);
         btnBan = (Button) findViewById(R.id.btnBan);
     }
@@ -100,7 +100,7 @@ ViewBanSanPham{
         setActionImageView();
         relaDanhMuc.setOnClickListener(this);
         relaTrangThai.setOnClickListener(this);
-        relaNhanHieu.setOnClickListener(this);
+//        relaNhanHieu.setOnClickListener(this);
         relaNoiBan.setOnClickListener(this);
         edtGiaBan.addTextChangedListener(this);
         btnBan.setOnClickListener(this);
@@ -161,12 +161,12 @@ ViewBanSanPham{
                 iTrangThai.putExtra("themSanPham", true);
                 startActivityForResult(iTrangThai, REQUEST_TRANGTHAI);
                 break;
-            case R.id.relaNhanHieu:
-                break;
-            case R.id.relaKhoiLuong:
-                break;
-            case R.id.relaKichThuoc:
-                break;
+//            case R.id.relaNhanHieu:
+//                break;
+//            case R.id.relaKhoiLuong:
+//                break;
+//            case R.id.relaKichThuoc:
+//                break;
             case R.id.relaNoiBan:
                 break;
             case R.id.btnBan:
@@ -197,8 +197,8 @@ ViewBanSanPham{
             thongTinSanPham.add(edtGiaBan.getText().toString());
         }
         thongTinSanPham.add(tvTrangThai.getText().toString());
-        thongTinSanPham.add(tvKhoiLuong.getText().toString());
-        thongTinSanPham.add(tvKichThuoc.getText().toString());
+        thongTinSanPham.add(khoiLuong);
+        thongTinSanPham.add(kichThuoc);
         if(kiemTraDuLieuHopLe(dsHinh, danhMuc, thongTinSanPham)){
             presenterLogicBanSanPham.dangBanSanPham(DangNhap.getInstance().getKhachHang().getIdKhachHang(), dsHinh, danhMuc, thongTinSanPham);
         }

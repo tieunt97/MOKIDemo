@@ -18,10 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Presenter.ThietLap.PresenterCapNhatThongTin;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -52,8 +52,8 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.layout_trangcuatoi);
         anhXa();
         if (!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
-            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
-        if (!DangNhap.getInstance().getKhachHang().getAnhBia().equals("null"))Picasso.get().load(TrangChuActivity.SERVER +
+            Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
+        if (!DangNhap.getInstance().getKhachHang().getAnhBia().equals("null"))Picasso.get().load(Constants.SERVER +
                 DangNhap.getInstance().getKhachHang().getAnhBia()).into(imgAnhBia);
         if (!DangNhap.getInstance().getKhachHang().getMoTa().equals("null"))
             edtThongTin.setText(DangNhap.getInstance().getKhachHang().getMoTa());

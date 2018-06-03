@@ -25,10 +25,9 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
         View.OnClickListener{
     private  NumberPicker npNho, npLon;
     private BottomSheetBehavior behavior;
-    private TextView tvGiaTimKiem, tvThoat, tvChon, tvTrangThai, tvTimKiemDanhMuc, tvTimKiemNhanHieu,
-        tvTimKiemKichCo;
+    private TextView tvGiaTimKiem, tvThoat, tvChon, tvTrangThai, tvTimKiemDanhMuc;
     private EditText edtTimKiem;
-    private RelativeLayout relaDanhMuc, relaNhanHieu, relaKichCo, relaTrangThai;
+    private RelativeLayout relaDanhMuc, relaTrangThai;
     private ImageButton imgBack, imgDelete, imgVoice;
     private Button btnTimKiem, btnHuongDanTimKiem;
     private  AlertDialog.Builder builder;
@@ -83,15 +82,15 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
         tvThoat.setOnClickListener(this);
         tvTrangThai = (TextView) findViewById(R.id.tvTrangThai);
         tvTimKiemDanhMuc = (TextView) findViewById(R.id.tvDanhMucTimKiem);
-        tvTimKiemNhanHieu = (TextView) findViewById(R.id.tvNhanHieuTimKiem);
-        tvTimKiemKichCo = (TextView) findViewById(R.id.tvKichCoTimKiem);
+//        tvTimKiemNhanHieu = (TextView) findViewById(R.id.tvNhanHieuTimKiem);
+//        tvTimKiemKichCo = (TextView) findViewById(R.id.tvKichCoTimKiem);
         edtTimKiem = (EditText) findViewById(R.id.edtTimKiem);
         relaDanhMuc = (RelativeLayout) findViewById(R.id.relaDanhMuc);
         relaDanhMuc.setOnClickListener(this);
-        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
-        relaNhanHieu.setOnClickListener(this);
-        relaKichCo = (RelativeLayout) findViewById(R.id.relaKichCoTimKiem);
-        relaKichCo.setOnClickListener(this);
+//        relaNhanHieu = (RelativeLayout) findViewById(R.id.relaNhanHieu);
+//        relaNhanHieu.setOnClickListener(this);
+//        relaKichCo = (RelativeLayout) findViewById(R.id.relaKichCoTimKiem);
+//        relaKichCo.setOnClickListener(this);
         relaTrangThai = (RelativeLayout) findViewById(R.id.relaTrangThai);
         relaTrangThai.setOnClickListener(this);
         btnTimKiem = (Button) findViewById(R.id.btnTimKiem);
@@ -129,10 +128,10 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
                 iDanhMuc.putExtra("danhMuc", danhMuc);
                 startActivityForResult(iDanhMuc, REQUEST_DANHMUC);
                 break;
-            case R.id.relaNhanHieu:
-                break;
-            case R.id.relaKichCoTimKiem:
-                break;
+//            case R.id.relaNhanHieu:
+//                break;
+//            case R.id.relaKichCoTimKiem:
+//                break;
             case R.id.relaTrangThai:
                 Intent iTrangThai = new Intent(TimKiemActivity.this, TrangThaiTimKiemActivity.class);
                 iTrangThai.putExtra("trangThai", tvTrangThai.getText());
@@ -247,10 +246,10 @@ public class TimKiemActivity extends AppCompatActivity implements NumberPicker.O
                 edtTimKiem.setText("");
                 tvTimKiemDanhMuc.setTextColor(getResources().getColor(R.color.colorRed));
                 tvTimKiemDanhMuc.setText("Tất cả");
-                tvTimKiemNhanHieu.setTextColor(getResources().getColor(R.color.colorRed));
-                tvTimKiemNhanHieu.setText("Tất cả");
-                tvTimKiemKichCo.setTextColor(getResources().getColor(R.color.colorRed));
-                tvTimKiemKichCo.setText("Tất cả");
+//                tvTimKiemNhanHieu.setTextColor(getResources().getColor(R.color.colorRed));
+//                tvTimKiemNhanHieu.setText("Tất cả");
+//                tvTimKiemKichCo.setTextColor(getResources().getColor(R.color.colorRed));
+//                tvTimKiemKichCo.setText("Tất cả");
                 tvGiaTimKiem.setText("");
                 tvTrangThai.setTextColor(getResources().getColor(R.color.colorRed));
                 tvTrangThai.setText("Tất cả");

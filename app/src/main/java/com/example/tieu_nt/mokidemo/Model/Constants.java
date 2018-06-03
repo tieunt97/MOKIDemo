@@ -18,4 +18,11 @@ public class Constants {
     public static final int ID_DODUNGGIADINH = 11;
     public static final int ID_SANPHAMKHAC = 12;
     public static final int ID_BEKHOEANTOAN = 7;
+
+    //may tinh ca nhan
+    public static final String SERVER = "http://192.168.1.111:8080/webmoki";
+    public static final String SERVER_NAME_SANPHAM = SERVER + "/laydssanpham.php";
+    public static final String SERVER_NAME_DANGNHAP_DANGKY = SERVER + "/dangnhap_dangky.php";
+    public static final String SERVER_NAME_KHACHHANG = SERVER + "/khachhang.php";
+
 }

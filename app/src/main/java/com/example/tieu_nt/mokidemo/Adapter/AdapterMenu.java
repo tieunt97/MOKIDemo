@@ -44,9 +44,10 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
     private PresenterTaiKhoan presenterTaiKhoan;
 
     private String[] tenItems = {"Trang chủ", "Tin tức", "Danh sách yêu thích", "Danh sách bán", "Danh sách mua",
-            "Từ thiện", "Thiết lập", "Trung tâm hỗ trợ", "Giới thiệu MOKI", "Đăng xuất"};
+
+            "Thiết lập", "Trung tâm hỗ trợ", "Giới thiệu MOKI", "Đăng xuất"};
     private int[] hinhItems = {R.drawable.home, R.drawable.newspaper, R.drawable.like, R.drawable.clipboards,
-            R.drawable.shopping_cart, R.drawable.charity, R.drawable.settings, R.drawable.mail,
+            R.drawable.shopping_cart, R.drawable.settings, R.drawable.mail,
             R.drawable.info, R.drawable.logout};
 
     public AdapterMenu(Context context, int position, DrawerLayout drawerLayout){
@@ -125,12 +126,12 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                                 context.startActivity(iDSMua);
                             }
                             break;
+//                        case 5:
+//                            //Từ thiện
+//                            Intent iTuThien = new Intent(context, TuThienActivity.class);
+//                            context.startActivity(iTuThien);
+//                            break;
                         case 5:
-                            //Từ thiện
-                            Intent iTuThien = new Intent(context, TuThienActivity.class);
-                            context.startActivity(iTuThien);
-                            break;
-                        case 6:
                             //Thiết lập
                             if(!checkDangNhap()){
                                 Toast.makeText(context, "Bạn cần đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
@@ -139,17 +140,17 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.RecyclerViewHo
                                 context.startActivity(iThietLap);
                             }
                             break;
-                        case 7:
+                        case 6:
                             //Trung tâm hỗ trợ
                             Intent iTrungTamHoTro = new Intent(context, TrungTamHoTroActivity.class);
                             context.startActivity(iTrungTamHoTro);
                             break;
-                        case 8:
+                        case 7:
                             //Giới thiệu MOKI
                             Intent iGioiThieu = new Intent(context, GioiThieuMOKIActivity.class);
                             context.startActivity(iGioiThieu);
                             break;
-                        case 9:
+                        case 8:
                             //Đăng xuất, Đăng nhập
                             if(DangNhap.getInstance().getKhachHang() != null){
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);

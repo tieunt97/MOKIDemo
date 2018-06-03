@@ -62,25 +62,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TrangChuActivity extends MainActivity implements View.OnClickListener, ViewPager.OnPageChangeListener,
 LocSanPham{
-    //may tinh ca nhan
-    public static String SERVER = "http://192.168.1.110:8080/webmoki";
-    public static String SERVER_NAME_SANPHAM = "http://192.168.1.110:8080/webmoki/laydssanpham.php";
-    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://192.168.1.110:8080/webmoki/dangnhap_dangky.php";
-    public static String SERVER_NAME_KHACHHANG = "http://192.168.1.110:8080/webmoki/khachhang.php";
-
-
-    //Genymotion
-//    public static String SERVER = "http://10.0.3.2:8080/webmoki";
-//    public static String SERVER_NAME_SANPHAM = "http://10.0.3.2:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.0.3.2:8080/webmoki/dangnhap_dangky.php";
-//    public static String SERVER_NAME_KHACHHANG = "http://10.0.3.2:8080/webmoki/khachhang.php";
-
-    //Wifi HUST
-//    public static String SERVER = "http://10.11.203.188:8080/webmoki";
-//    public static String SERVER_NAME_SANPHAM = "http://10.11.203.188:8080/webmoki/laydssanpham.php";
-//    public static String SERVER_NAME_DANGNHAP_DANGKY = "http://10.11.203.188:8080/webmoki/dangnhap_dangky.php";
-//    public static String SERVER_NAME_KHACHHANG = "http://10.11.203.188:8080/webmoki/khachhang.php";
-
 
     private FrameLayout trangChu;
     private LinearLayout linearUser;
@@ -141,7 +122,7 @@ LocSanPham{
             tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
             idKhachHang = DangNhap.getInstance().getKhachHang().getIdKhachHang();
             if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
-                Picasso.get().load(SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
+                Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
         adapter = new AdapterMenu(TrangChuActivity.this, 0, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

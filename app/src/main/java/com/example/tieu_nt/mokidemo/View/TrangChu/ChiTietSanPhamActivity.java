@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterViewPagerSlider;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
@@ -206,7 +207,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
         KhachHang khachHang = sanPham.getKhachHang();
         Log.d("InfoKH", khachHang.getAnhInfoKH());
         if(!khachHang.getAnhInfoKH().equalsIgnoreCase("null"))
-            Picasso.get().load(TrangChuActivity.SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
+            Picasso.get().load(Constants.SERVER + khachHang.getAnhInfoKH()).into(imgKhachHang);
         tvTenKhachHang.setText(khachHang.getTenKhachHang());
         tvDiem.setText(String.valueOf(khachHang.getDiemTinCay()));
         tvSoSP.setText(String.valueOf(khachHang.getSoSanPham()));

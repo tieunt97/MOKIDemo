@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
 import com.example.tieu_nt.mokidemo.Adapter.ViewPagerAdapterTrangChu;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,7 +38,8 @@ public class DanhSachBanActivity extends MainActivity implements View.OnClickLis
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView recyclerView;
     private AdapterMenu adapter;
-    private CircleImageView imgUserInfo;
+    private CircleImageView imgKhachHang;
+    private TextView tvTenKhachHang;
     private TextView tvTitle;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -73,8 +74,10 @@ public class DanhSachBanActivity extends MainActivity implements View.OnClickLis
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
+        if (DangNhap.getInstance().getKhachHang() != null){
+            tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+                Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
 
         list.add(new FragmentSanPhamBan());
@@ -96,7 +99,8 @@ public class DanhSachBanActivity extends MainActivity implements View.OnClickLis
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);

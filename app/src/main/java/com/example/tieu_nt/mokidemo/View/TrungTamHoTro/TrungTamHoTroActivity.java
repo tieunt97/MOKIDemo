@@ -16,13 +16,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterMenu;
+import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
 import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.MainActivity;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,7 +39,8 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView recyclerView;
     private AdapterMenu adapter;
-    private CircleImageView imgUserInfo;
+    private CircleImageView imgKhachHang;
+    private TextView tvTenKhachHang;
     private ImageButton imgMenu;
 
     @Override
@@ -59,13 +61,15 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        adapter = new AdapterMenu(TrungTamHoTroActivity.this, 7, drawerLayout);
+        adapter = new AdapterMenu(TrungTamHoTroActivity.this, 6, drawerLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if(DangNhap.getInstance().getKhachHang()  != null && !DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null")){
-            Picasso.get().load(TrangChuActivity.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgUserInfo);
+        if (DangNhap.getInstance().getKhachHang() != null){
+            tvTenKhachHang.setText(DangNhap.getInstance().getKhachHang().getTenKhachHang());
+            if(!DangNhap.getInstance().getKhachHang().getAnhInfoKH().equals("null"))
+                Picasso.get().load(Constants.SERVER + DangNhap.getInstance().getKhachHang().getAnhInfoKH()).into(imgKhachHang);
         }
     }
 
@@ -74,8 +78,8 @@ public class TrungTamHoTroActivity extends MainActivity implements View.OnClickL
         imgMenu = (ImageButton) findViewById(R.id.imgMenu);
         imgMenu.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        imgUserInfo = (CircleImageView) findViewById(R.id.imgKhachHang);
-        imgUserInfo.setOnClickListener(this);
+        imgKhachHang = (CircleImageView) findViewById(R.id.imgKhachHang);
+        tvTenKhachHang = (TextView) findViewById(R.id.tvTenKhachHang);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         relaCall = (RelativeLayout) findViewById(R.id.relaCall);
         relaCall.setOnClickListener(this);
