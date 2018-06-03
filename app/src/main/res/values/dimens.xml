@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="iconCamera42">42dp</dimen>
-    <dimen name="actionBarSize">42dp</dimen>
-    <dimen name="tabLayout">38dp</dimen>
-    <dimen name="sizeTenSP">15sp</dimen>
-    <dimen name="sizeImgUser">45dp</dimen>
-</resources>
