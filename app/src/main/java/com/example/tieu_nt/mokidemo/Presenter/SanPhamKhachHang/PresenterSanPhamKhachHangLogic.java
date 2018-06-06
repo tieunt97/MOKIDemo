@@ -1,9 +1,8 @@
 package com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang;
 
-import com.example.tieu_nt.mokidemo.Model.KhachHang;
-import com.example.tieu_nt.mokidemo.Model.SanPham;
+import com.example.tieu_nt.mokidemo.Model.DonHang;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
-import com.example.tieu_nt.mokidemo.View.ViewHienThiDSSanPhamKhachHang;
+import com.example.tieu_nt.mokidemo.View.ViewHienThiDSDonHang;
 
 import java.util.List;
 
@@ -12,24 +11,24 @@ import java.util.List;
  */
 
 public class PresenterSanPhamKhachHangLogic implements IPresenterSanPhamKhachHang{
-    private ViewHienThiDSSanPhamKhachHang viewHienThiDSSanPhamKhachHang;
+    private ViewHienThiDSDonHang viewHienThiDSDonHang;
     private ModelKhachHang modelKhachHang;
 
-    public PresenterSanPhamKhachHangLogic(ViewHienThiDSSanPhamKhachHang viewHienThiDSSanPhamKhachHang) {
-        this.viewHienThiDSSanPhamKhachHang = viewHienThiDSSanPhamKhachHang;
+    public PresenterSanPhamKhachHangLogic(ViewHienThiDSDonHang viewHienThiDSDonHang) {
+        this.viewHienThiDSDonHang = viewHienThiDSDonHang;
         modelKhachHang = ModelKhachHang.getInstance();
     }
 
     @Override
-    public void layDSSanPham(String ham, int idKhacHang, int limit, int loaiSanPham, int trangThai) {
-        List<SanPham> dsSanPham = modelKhachHang.layDSSanPhamMuaBan(ham, idKhacHang, limit, loaiSanPham, trangThai);
-        if (dsSanPham.size() > 0) viewHienThiDSSanPhamKhachHang.hienThiDSSanPham(dsSanPham);
+    public void layDSDonHang(String ham, int idKhachHang, int limit, int trangThai) {
+        List<DonHang> dsDonHang = modelKhachHang.layDSDonHang(ham, idKhachHang, limit, trangThai);
+        if(dsDonHang.size() > 0){
+            viewHienThiDSDonHang.hienThiDSSanPham(dsDonHang);
+        }
     }
 
     @Override
-    public List<SanPham> layDSSanPhamLoadMore(String ham, int idKhacHang, int limit, int loaiSanPham, int trangThai) {
-        List<SanPham> sanPhamLoadMore = modelKhachHang.layDSSanPhamMuaBan(ham, idKhacHang, limit, loaiSanPham, trangThai);
-
-        return sanPhamLoadMore;
+    public List<DonHang> layDSDonHangLoadMore(String ham, int idKhachHang, int limit, int trangThai) {
+        return modelKhachHang.layDSDonHang(ham, idKhachHang, limit, trangThai);
     }
 }

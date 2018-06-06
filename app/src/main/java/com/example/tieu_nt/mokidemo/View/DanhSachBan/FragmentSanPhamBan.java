@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 
 import com.example.tieu_nt.mokidemo.Adapter.AdapterSanPhamGrid;
 import com.example.tieu_nt.mokidemo.Model.DangNhap;
+import com.example.tieu_nt.mokidemo.Model.DonHang;
 import com.example.tieu_nt.mokidemo.Model.LoadMore.ILoadMore;
 import com.example.tieu_nt.mokidemo.Model.LoadMore.LoadMoreScroll;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
+import com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang.PresenterLogicSanPhamBan;
 import com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang.PresenterSanPhamKhachHangLogic;
+import com.example.tieu_nt.mokidemo.Presenter.TrangChuSanPham.PresenterLogicSanPham;
 import com.example.tieu_nt.mokidemo.R;
-import com.example.tieu_nt.mokidemo.View.TrangChu.TrangChuActivity;
-import com.example.tieu_nt.mokidemo.View.ViewHienThiDSSanPhamKhachHang;
+import com.example.tieu_nt.mokidemo.View.TrangChu.ViewHienThiDanhSachSanPham;
+import com.example.tieu_nt.mokidemo.View.ViewHienThiDSDonHang;
 
 import java.util.List;
 
@@ -25,12 +28,13 @@ import java.util.List;
  * Created by tieu_nt on 4/21/2018.
  */
 
-public class FragmentSanPhamBan extends Fragment implements ViewHienThiDSSanPhamKhachHang, ILoadMore{
+public class FragmentSanPhamBan extends Fragment implements ViewHienThiDanhSachSanPham, ILoadMore{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    private PresenterSanPhamKhachHangLogic presenterSanPhamKhachHangLogic;
     private List<SanPham> dsSanPham;
+    private PresenterLogicSanPhamBan presenterLogicSanPhamBan;
+    private int idKhachHang;
 
     @Nullable
     @Override
@@ -38,17 +42,34 @@ public class FragmentSanPhamBan extends Fragment implements ViewHienThiDSSanPham
         View view = inflater.inflate(R.layout.layout_sanpham, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSanPham);
 
-        presenterSanPhamKhachHangLogic = new PresenterSanPhamKhachHangLogic(this);
-        presenterSanPhamKhachHangLogic.layDSSanPham("layDSSanPhamMuaBan", DangNhap.getInstance().getKhachHang().getIdKhachHang(), 0, 1, 0);
+        idKhachHang = DangNhap.getInstance().getKhachHang().getIdKhachHang();
+
+        presenterLogicSanPhamBan = new PresenterLogicSanPhamBan(this);
+        presenterLogicSanPhamBan.layDSSanPhamBan("layDSSanPhamBan", idKhachHang, 0);
 
         return view;
     }
 
     @Override
-    public void hienThiDSSanPham(List<SanPham> dsSanPhams) {
-        this.dsSanPham = dsSanPhams;
+    public void loadMore(int tongItem) {
+        List<SanPham> sanPhamLoadMore = presenterLogicSanPhamBan.layDSSanPhamBanLoadMore("layDSSanPhamBan",
+                idKhachHang, tongItem);
+        if (sanPhamLoadMore.size() > 0){
+            dsSanPham.addAll(sanPhamLoadMore);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void hienThiDanhSachSanPham(List<SanPham> dsSanPham) {
+        this.dsSanPham = dsSanPham;
         layoutManager = new GridLayoutManager(getContext(), 2);
-        adapter = new AdapterSanPhamGrid(getContext(), dsSanPhams);
+        adapter = new AdapterSanPhamGrid(getContext(), this.dsSanPham);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManager, this));
@@ -61,17 +82,7 @@ public class FragmentSanPhamBan extends Fragment implements ViewHienThiDSSanPham
     }
 
     @Override
-    public void loadMore(int tongItem) {
-        List<SanPham> sanPhamLoadMore = presenterSanPhamKhachHangLogic.layDSSanPhamLoadMore("layDSSanPhamMuaBan",
-                DangNhap.getInstance().getKhachHang().getIdKhachHang(), tongItem, 1, 0);
-        if (sanPhamLoadMore.size() > 0){
-            dsSanPham.addAll(sanPhamLoadMore);
-            recyclerView.post(new Runnable() {
-                @Override
-                public void run() {
-                    adapter.notifyDataSetChanged();
-                }
-            });
-        }
+    public void hienThiThatBai(String msg) {
+
     }
 }

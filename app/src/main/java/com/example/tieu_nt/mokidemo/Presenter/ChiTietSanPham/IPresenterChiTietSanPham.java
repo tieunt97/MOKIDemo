@@ -10,5 +10,5 @@ public interface IPresenterChiTietSanPham {
     void layDanhSachHinhSP(SanPham sanPham);
     boolean themSanPhamYeuThich(int idKhachHang, int idSanPham);
     boolean xoaSanPhamYeuThich(int idKhachHang, int idSanPham);
-    boolean muaSanPham(int idKhachHang, int idSanPham);
+    boolean muaSanPham(int idKhachHang, int idSanPham, String soDT, String diaChi);
 }

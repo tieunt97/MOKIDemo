@@ -6,6 +6,7 @@ import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
 import com.example.tieu_nt.mokidemo.Model.Constants;
 import com.example.tieu_nt.mokidemo.Model.DanhMuc;
 import com.example.tieu_nt.mokidemo.Model.DiaChi;
+import com.example.tieu_nt.mokidemo.Model.DonHang;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.TaiKhoan;
@@ -16,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +32,6 @@ import java.util.concurrent.ExecutionException;
 public class ModelKhachHang {
     private static ModelKhachHang modelKhachHang;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
     private ModelKhachHang(){
 
@@ -42,7 +43,7 @@ public class ModelKhachHang {
         return modelKhachHang;
     }
 
-    public boolean muaSanPham(int idKhachHang, int idSanPham){
+    public boolean muaSanPham(int idKhachHang, int idSanPham, String soDT, String diaChi){
         boolean b = false;
         List<HashMap<String,String>> attrs = new ArrayList<>();
         String dataJSON = "";
@@ -58,13 +59,21 @@ public class ModelKhachHang {
         HashMap<String,String> hsIdSanPham = new HashMap<>();
         hsIdSanPham.put("idSanPham", String.valueOf(idSanPham));
 
+        HashMap<String,String> hsSoDT = new HashMap<>();
+        hsSoDT.put("soDT", soDT);
+
+        HashMap<String,String> hsDiaChi = new HashMap<>();
+        hsDiaChi.put("diaChi", diaChi);
+
         HashMap<String,String> hsThoiGian = new HashMap<>();
-        hsThoiGian.put("thoiGian", sdf1.format(Calendar.getInstance().getTime()).toString());
+        hsThoiGian.put("thoiGian", sdf.format(Calendar.getInstance().getTime()).toString());
 
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
         attrs.add(hsIdSanPham);
         attrs.add(hsThoiGian);
+        attrs.add(hsSoDT);
+        attrs.add(hsDiaChi);
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
         //end phương thức post
@@ -498,7 +507,110 @@ public class ModelKhachHang {
         return khachHang;
     }
 
-    public List<SanPham> layDSSanPhamMuaBan(String ham, int idKhacHang, int limit, int loaiSanPham, int trangThai){
+    public List<DonHang> layDSDonHang(String ham, int idKhachHang, int limit, int trangThai){
+        List<DonHang> dsDonHang = new ArrayList<>();
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        String dataJSON = "";
+
+        String duongdan = Constants.SERVER_NAME_KHACHHANG;
+
+        HashMap<String,String> hsHam = new HashMap<>();
+        hsHam.put("ham", ham);
+
+        HashMap<String,String> hsIdKhachHang = new HashMap<>();
+        hsIdKhachHang.put("idKhachHang", String.valueOf(idKhachHang));
+
+        HashMap<String,String> hsLimit = new HashMap<>();
+        hsLimit.put("limit", String.valueOf(limit));
+
+        HashMap<String,String> hsTrangThai = new HashMap<>();
+        hsTrangThai.put("trangThai", String.valueOf(trangThai));
+
+        attrs.add(hsHam);
+        attrs.add(hsIdKhachHang);
+        attrs.add(hsLimit);
+        attrs.add(hsTrangThai);
+
+        DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
+        //end phương thức post
+        downloadJSON.execute();
+
+        try {
+            dataJSON = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJSON);
+            JSONArray jsonArrayDSDonHang = jsonObject.getJSONArray("danhsachdonhang");
+            int count = jsonArrayDSDonHang.length();
+            for(int i = 0; i < count; i++){
+                JSONObject object = jsonArrayDSDonHang.getJSONObject(i);
+                DonHang donHang = new DonHang();
+                donHang.setSoDT(object.getString("soDT"));
+                donHang.setDiaChi(object.getString("diaChi"));
+                donHang.setNgayDat(sdf.parse(object.getString("ngayDat")));
+                if(!object.getString("ngayGiao").equals("null")){
+                    donHang.setNgayGiao(sdf.parse(object.getString("ngayGiao")));
+                }
+
+                SanPham sanpham = new SanPham();
+                sanpham.setIdSanPham(object.getInt("idSanPham"));
+
+                KhachHang khachHang = new KhachHang();
+                JSONArray arrayKhachHang = object.getJSONArray("thongTinNguoiBan");
+                JSONObject objectKhachHang = arrayKhachHang.getJSONObject(0);
+                khachHang.setIdKhachHang(objectKhachHang.getInt("idKhachHang"));
+                khachHang.setTenKhachHang(objectKhachHang.getString("tenKhachHang"));
+                khachHang.setAnhInfoKH(objectKhachHang.getString("anhInfoKH"));
+                khachHang.setDiemTinCay(objectKhachHang.getInt("diemTinCay"));
+                khachHang.setSoSanPham(objectKhachHang.getInt("soSanPham"));
+                sanpham.setKhachHang(khachHang);
+
+                sanpham.setGia(object.getInt("giaChuan"));
+                sanpham.setSoLuotThich(object.getInt("soLuotThich"));
+                sanpham.setSoBinhLuan(object.getInt("soBinhLuan"));
+                sanpham.setTenSanPham(object.getString("tenSanPham"));
+                sanpham.setMoTa(object.getString("moTa"));
+                sanpham.setHinhLon(object.getString("hinhLon"));
+                sanpham.setHinhNho(object.getString("hinhNho"));
+                sanpham.setNoiBan(object.getString("noiBan"));
+                if(idKhachHang != 0){
+                    sanpham.setYeuThich(object.getBoolean("yeuThich"));
+                }
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                List<DanhMuc> danhMucList = new ArrayList<>();
+                chiTietSanPham.setKhoiLuong(object.getString("khoiLuong"));
+                chiTietSanPham.setKichThuoc(object.getString("kichThuoc"));
+                chiTietSanPham.setTrangThai(object.getString("trangThai"));
+
+                JSONArray jsonArrayLoaiSP = object.getJSONArray("loaiSP");
+                for (int j = 0; j < jsonArrayLoaiSP.length(); j++){
+                    JSONObject jsonObject1 = jsonArrayLoaiSP.getJSONObject(j);
+                    DanhMuc danhMuc = new DanhMuc();
+                    danhMuc.setIdDanhMuc(jsonObject1.getInt("idLoaiSP"));
+                    danhMuc.setTenDanhMuc(jsonObject1.getString("tenLoaiSP"));
+                    danhMuc.setIdDanhMucCha(jsonObject1.getInt("idLoaiSPCha"));
+
+                    danhMucList.add(danhMuc);
+                }
+
+                chiTietSanPham.setDanhMucList(danhMucList);
+                sanpham.setChiTietSanPham(chiTietSanPham);
+                donHang.setSanPham(sanpham);
+
+                dsDonHang.add(donHang);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return  dsDonHang;
+    }
+
+    public List<SanPham> layDSSanPhamBan(String ham, int idKhacHang, int limit){
         List<SanPham> dsSanPham = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
@@ -515,17 +627,9 @@ public class ModelKhachHang {
         HashMap<String,String> hsLimit = new HashMap<>();
         hsLimit.put("limit", String.valueOf(limit));
 
-        HashMap<String,String> hsLoaiSanPham = new HashMap<>();
-        hsLoaiSanPham.put("loaiSanPham", String.valueOf(loaiSanPham));
-
-        HashMap<String,String> hsTrangThai = new HashMap<>();
-        hsTrangThai.put("trangThai", String.valueOf(trangThai));
-
         attrs.add(hsHam);
         attrs.add(hsIdKhachHang);
         attrs.add(hsLimit);
-        attrs.add(hsLoaiSanPham);
-        attrs.add(hsTrangThai);
 
         DownloadJSON downloadJSON = new DownloadJSON(duongdan,attrs);
         //end phương thức post

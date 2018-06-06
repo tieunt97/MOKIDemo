@@ -49,7 +49,7 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
     }
 
     @Override
-    public boolean muaSanPham(int idKhachHang, int idSanPham) {
-        return modelKhachHang.muaSanPham(idKhachHang, idSanPham);
+    public boolean muaSanPham(int idKhachHang, int idSanPham, String soDT, String diaChi) {
+        return modelKhachHang.muaSanPham(idKhachHang, idSanPham, soDT, diaChi);
     }
 }

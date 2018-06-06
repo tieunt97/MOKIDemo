@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -31,6 +33,7 @@ import com.example.tieu_nt.mokidemo.Model.SanPham;
 import com.example.tieu_nt.mokidemo.Model.Data.ModelKhachHang;
 import com.example.tieu_nt.mokidemo.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.tieu_nt.mokidemo.R;
+import com.example.tieu_nt.mokidemo.View.DangNhapDangKy.DangKyActivity;
 import com.example.tieu_nt.mokidemo.View.TrangChu.Fragment.FragmentSliderChiTietSanPham;
 import com.squareup.picasso.Picasso;
 
@@ -62,8 +65,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
     private PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
     private boolean xemThem = true;
     private Button[] danhMuc;
-    private ModelKhachHang modelKhachHang;
     private int idSanPham;
+    private KhachHang khachHang;
+    private String soDT, diaChi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,8 +75,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.layout_chitietsanpham);
         anhXa();
         Intent intent = getIntent();
+        khachHang = DangNhap.getInstance().getKhachHang();
         sanPham = (SanPham) intent.getSerializableExtra("sanPham");
-        modelKhachHang = ModelKhachHang.getInstance();
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layDanhSachHinhSP(sanPham);
         if(DangNhap.getInstance().getKhachHang() != null && DangNhap.getInstance().getKhachHang().getIdKhachHang() == sanPham.getKhachHang().getIdKhachHang()){
@@ -127,7 +131,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
                 finish();
                 break;
             case R.id.btnBinhLuan:
-                if(TrangChuActivity.idKhachHang == 0){
+                if(khachHang == null){
                     Toast.makeText(this, "Bạn phải đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
                 }else{
                     Intent iBinhLuan = new Intent(ChiTietSanPhamActivity.this, BinhLuanActivity.class);
@@ -136,16 +140,72 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
                 }
                 break;
             case R.id.btnMua:
-                if(TrangChuActivity.idKhachHang == 0){
+                if(khachHang == null){
                     Toast.makeText(this, "Bạn phải đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (presenterLogicChiTietSanPham.muaSanPham(TrangChuActivity.idKhachHang, sanPham.getIdSanPham())){
-                        Toast.makeText(this, "Sản phẩm đã được đặt, vui lòng đợi thông báo từ hệ thống", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
-                    }
+                    muaHang();
                 }
                 break;
+        }
+    }
+
+    private void muaHang(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ChiTietSanPhamActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.layout_xacnhanmuahang, null, false);
+        final EditText edtSoDT = view.findViewById(R.id.edtSoDT);
+        final EditText edtDiaChi = view.findViewById(R.id.edtDiaChi);
+        Button btnHuy = view.findViewById(R.id.btnHuy);
+        Button btnXacNhan = view.findViewById(R.id.btnXacNhan);
+
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        soDT = khachHang.getTaiKhoan().getSoDT();
+
+        if(khachHang.getDsDiaChi().size() > 0){
+            diaChi = khachHang.getDsDiaChi().get(0).getDiaChi();
+        }else{
+            diaChi = "";
+        }
+        edtSoDT.setText(soDT);
+        edtDiaChi.setText(diaChi);
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnXacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soDT = edtSoDT.getText().toString();
+                diaChi = edtDiaChi.getText().toString();
+                if(kiemTraThongTin(soDT, diaChi)){
+                    if (presenterLogicChiTietSanPham.muaSanPham(khachHang.getIdKhachHang(), sanPham.getIdSanPham(), soDT, diaChi)){
+                        alertDialog.dismiss();
+                        Toast.makeText(ChiTietSanPhamActivity.this, "Sản phẩm đã được đặt, vui lòng đợi thông báo từ hệ thống", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(ChiTietSanPhamActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean kiemTraThongTin(String soDT, String diaChi){
+        if(soDT.equals("")){
+            Toast.makeText(this, "Số điện thoại trống", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(diaChi.equals("")){
+            Toast.makeText(this, "Địa chỉ trống", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(soDT.length() < 10){
+            Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
         }
     }
 
@@ -315,18 +375,20 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(TrangChuActivity.idKhachHang == 0){
+        if(khachHang == null){
             Toast.makeText(this, "Bạn phải đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
             return;
         }
         if(b) {
             if (presenterLogicChiTietSanPham.themSanPhamYeuThich(TrangChuActivity.idKhachHang, sanPham.getIdSanPham())) {
                 tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) + 1));
+                Toast.makeText(this, "Đã thêm vào sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
             }
         }
         else {
             if (presenterLogicChiTietSanPham.xoaSanPhamYeuThich(TrangChuActivity.idKhachHang, sanPham.getIdSanPham())) {
                 tvSoLuotThich.setText(String.valueOf(Integer.parseInt(tvSoLuotThich.getText().toString()) - 1));
+                Toast.makeText(this, "Đã xóa khỏi sản phẩm yêu thích", Toast.LENGTH_SHORT).show();
             }
         }
     }

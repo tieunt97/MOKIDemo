@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="Thông tin nhận: "
+        android:textStyle="bold"
+        android:textSize="17sp"/>
+    <EditText
+        android:id="@+id/edtSoDT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại"
+        android:textColor="@color/colorBlack"
+        android:background="@drawable/custom_edt"
+        android:layout_marginVertical="10dp"/>
+
+    <EditText
+        android:id="@+id/edtDiaChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Địa chỉ"
+        android:textColor="@color/colorBlack"
+        android:background="@drawable/custom_edt"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="Hủy"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/custom_btn_huy"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnXacNhan"
+            android:layout_width="105dp"
+            android:layout_height="32dp"
+            android:text="Xác nhận"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/custom_btn_dangxuat"
+            android:layout_marginBottom="8dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

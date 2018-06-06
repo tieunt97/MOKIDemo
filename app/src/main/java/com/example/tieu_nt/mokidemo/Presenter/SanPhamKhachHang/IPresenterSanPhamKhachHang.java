@@ -1,5 +1,6 @@
 package com.example.tieu_nt.mokidemo.Presenter.SanPhamKhachHang;
 
+import com.example.tieu_nt.mokidemo.Model.DonHang;
 import com.example.tieu_nt.mokidemo.Model.KhachHang;
 import com.example.tieu_nt.mokidemo.Model.SanPham;
 
@@ -10,6 +11,6 @@ import java.util.List;
  */
 
 public interface IPresenterSanPhamKhachHang {
-    void layDSSanPham(String ham, int idKhachHang, int limit, int loaiSanPham, int trangThai);
-    List<SanPham> layDSSanPhamLoadMore(String ham, int idKhachHang, int limit, int loaiSanPham, int trangThai);
+    void layDSDonHang(String ham, int idKhachHang, int limit, int trangThai);
+    List<DonHang> layDSDonHangLoadMore(String ham, int idKhachHang, int limit, int trangThai);
 }
