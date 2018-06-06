@@ -26,13 +26,15 @@ CREATE TABLE `hoadon` (
   `idHoaDon` int(11) NOT NULL AUTO_INCREMENT,
   `idKhachHang` int(11) NOT NULL,
   `idSanPham` int(11) NOT NULL,
-  `ngayDatHang` date DEFAULT NULL,
-  `ngayGiaoHang` date DEFAULT NULL,
+  `soDT` varchar(45) DEFAULT NULL,
+  `diaChi` varchar(45) DEFAULT NULL,
+  `ngayDatHang` datetime DEFAULT NULL,
+  `ngayGiaoHang` datetime DEFAULT NULL,
   `trangThai` int(11) DEFAULT NULL COMMENT '1 - đã đặt hàng, 2 - đang giao hàng, 3 - giao hàng hủy, 4 - giao hàng thành công',
   PRIMARY KEY (`idHoaDon`),
   KEY `keyHoaDon_KhachHang_idx` (`idKhachHang`),
   CONSTRAINT `keyHoaDon_KhachHang` FOREIGN KEY (`idKhachHang`) REFERENCES `khachhang` (`idKhachHang`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +43,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES (1,1,2,'2018-05-16',NULL,1),(2,1,3,'2018-05-16',NULL,2),(3,1,4,'2018-04-12','2018-05-02',4),(4,2,5,'2018-05-16',NULL,1),(5,1,2,'2018-05-17',NULL,1),(6,1,12,'2018-05-17',NULL,1);
+INSERT INTO `hoadon` VALUES (1,1,2,'0123456789','Tiền Yên-Hoài Đức-Hà Nội','2018-05-16 00:00:00',NULL,1),(2,1,3,'0123456789','Tiền Yên-Hoài Đức-Hà Nội','2018-05-16 00:00:00',NULL,2),(3,1,4,'0123456789','Tiền Yên-Hoài Đức-Hà Nội','2018-04-12 00:00:00','2018-05-02 00:00:00',4),(4,2,5,'0174884710','Song Phương-Hoài Đức-Hà Nội','2018-05-16 00:00:00',NULL,1),(5,1,2,'0123456789','Tiền Yên-Hoài Đức-Hà Nội','2018-05-17 00:00:00',NULL,1),(6,1,12,'0123456789','Tiền Yên-Hoài Đức-Hà Nội','2018-05-17 00:00:00',NULL,1),(7,2,13,'0174884710','Phương Bảng-Song Phương-Hoài Đức-Hà Nội','2018-06-06 01:49:41',NULL,1);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-03 16:42:19
+-- Dump completed on 2018-06-06 13:59:24

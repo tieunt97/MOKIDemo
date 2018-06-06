@@ -33,7 +33,7 @@ CREATE TABLE `binhluan` (
   KEY `keyBinhLuan_SanPham_idx` (`idSanPham`),
   CONSTRAINT `keyBinhLuan_KhachHang` FOREIGN KEY (`idKhachHang`) REFERENCES `khachhang` (`idKhachHang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `keyBinhLuan_SanPham` FOREIGN KEY (`idSanPham`) REFERENCES `sanpham` (`idSanPham`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `binhluan` (
 
 LOCK TABLES `binhluan` WRITE;
 /*!40000 ALTER TABLE `binhluan` DISABLE KEYS */;
-INSERT INTO `binhluan` VALUES (1,1,2,'Bạn giảm giá chút đc ko','2018-04-28 09:52:00'),(2,1,2,'hihi','2018-05-02 21:24:26'),(3,1,2,'haha','2018-05-02 21:31:26'),(5,1,2,'ahaha','2018-05-02 21:48:45'),(6,2,2,'.','2018-05-02 21:57:07'),(7,1,2,'ahaha','2018-05-02 21:48:45'),(8,1,2,'tbt','2018-05-02 22:06:22'),(9,1,2,'haha','2018-05-02 22:10:26'),(11,1,3,'haha','2018-05-03 07:22:43'),(12,1,1,'haha','2018-05-03 07:24:11'),(13,1,4,'haha','2018-05-03 07:28:44'),(14,1,1,'hihi','2018-05-03 07:34:47'),(15,1,5,'hihi','2018-05-03 07:35:19'),(16,1,4,'giảm giá chút bạn ơi','2018-05-03 07:38:50'),(17,1,6,'.','2018-05-03 07:41:35'),(18,1,2,'hello','2018-05-12 20:21:17'),(19,1,2,'hello','2018-05-12 20:21:18'),(20,1,2,'demo','2018-05-17 21:05:51'),(21,1,2,'hehe','2018-05-17 09:19:24');
+INSERT INTO `binhluan` VALUES (1,1,2,'Bạn giảm giá chút đc ko','2018-04-28 09:52:00'),(2,1,2,'hihi','2018-05-02 21:24:26'),(3,1,2,'haha','2018-05-02 21:31:26'),(5,1,2,'ahaha','2018-05-02 21:48:45'),(6,2,2,'.','2018-05-02 21:57:07'),(7,1,2,'ahaha','2018-05-02 21:48:45'),(8,1,2,'tbt','2018-05-02 22:06:22'),(9,1,2,'haha','2018-05-02 22:10:26'),(11,1,3,'haha','2018-05-03 07:22:43'),(12,1,1,'haha','2018-05-03 07:24:11'),(13,1,4,'haha','2018-05-03 07:28:44'),(14,1,1,'hihi','2018-05-03 07:34:47'),(15,1,5,'hihi','2018-05-03 07:35:19'),(16,1,4,'giảm giá chút bạn ơi','2018-05-03 07:38:50'),(17,1,6,'.','2018-05-03 07:41:35'),(18,1,2,'hello','2018-05-12 20:21:17'),(19,1,2,'hello','2018-05-12 20:21:18'),(20,1,2,'demo','2018-05-17 21:05:51'),(21,1,2,'hehe','2018-05-17 09:19:24'),(22,1,1,'mien phi ha ban','2018-06-06 12:06:34');
 /*!40000 ALTER TABLE `binhluan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-03 16:42:20
+-- Dump completed on 2018-06-06 13:59:24

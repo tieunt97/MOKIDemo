@@ -5,7 +5,13 @@
 		// $ham = $_GET["ham"];
 
 		switch ($ham) {
-			case 'layDSSanPhamMuaBan':
+			case 'layDSDonHangMua':
+				$ham();
+				break;
+			case 'layDSDonHangBan':
+				$ham();
+				break;
+			case 'layDSSanPhamBan':
 				$ham();
 				break;
 			case 'layThongTinKhachHang':
@@ -67,7 +73,15 @@
 			$thoiGian = $_POST["thoiGian"];
 		}
 
-		$sql = "INSERT INTO hoadon(idKhachHang, idSanPham, ngayDatHang, trangThai) VALUES('$idKhachHang', '$idSanPham', '$thoiGian', 1)";
+		if (isset($_POST["soDT"])) {
+			$soDT = $_POST["soDT"];
+		}
+
+		if (isset($_POST["diaChi"])) {
+			$diaChi = $_POST["diaChi"];
+		}
+
+		$sql = "INSERT INTO hoadon(idKhachHang, idSanPham, ngayDatHang, trangThai, soDT, diaChi) VALUES('$idKhachHang', '$idSanPham', '$thoiGian', 1, '$soDT', '$diaChi')";
 		$ketqua = mysqli_query($conn, $sql);
 		if ($ketqua) {
 			echo json_encode(array('response' => 1));
@@ -472,45 +486,161 @@
 		echo "}";
 	}
 
-	function layDSSanPhamMuaBan(){
+	function layDSDonHangMua(){
 		global $conn;
 		if(isset($_POST["idKhachHang"]))
 			$idKhachHang = $_POST["idKhachHang"];
-		if(isset($_GET["idKhachHang"]))
-			$idKhachHang = $_GET["idKhachHang"];
 		
 		if (isset($_POST["limit"])) {
 			$limit = $_POST["limit"];
 		}
-		if(isset($_POST["loaiSanPham"])){
-			$loaisanpham = $_POST["loaiSanPham"];
-		}
+
 		if(isset($_POST["trangThai"])){
 			$trangThai = $_POST["trangThai"];
 		}
-		//lấy sản phẩm bán
-		if($loaisanpham == 1){
-			// 1 - đã đặt hàng, 2 - đang giao hàng, 3 - giao hàng hủy, 4 - giao hàng thành công
-			if($trangThai == 0){
-				//lấy sản phẩm bán
-				$sql = "SELECT * FROM sanpham WHERE idNguoiBan = ".$idKhachHang." limit ".$limit.", 10";
-			}else if($trangThai == 1){
-				//lấy sản phẩm bán và trong trạng thái đang xử lý
-				$sql = "SELECT sp.*  FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idNguoiBan = '$idKhachHang' and (hd.trangThai = 1 or hd.trangThai = 2) group by idSanPham limit ".$limit.", 10";
-			}else if($trangThai == 2){
-				//lấy sản phẩm bán và đăng bán thành công
-				$sql = "SELECT sp.*  FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idNguoiBan = '$idKhachHang' and hd.trangThai = 4 group by idSanPham limit ".$limit.", 10";
-			}
+
+		if($trangThai == 0){
+			//lấy sản phẩm bán và trong trạng thái đang xử lý
+			$sql = "SELECT sp.*, hd.soDT, hd.diaChi, hd.ngayDatHang, hd.ngayGiaoHang FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idKhachHang = '$idKhachHang' and (hd.trangThai = 1 or hd.trangThai = 2) limit ".$limit.", 10";
 		}else{
-			if($trangThai == 1){
-				//lấy sản phẩm mua và trong trạng thái đang xử lý
-				$sql = "SELECT sp.*  FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idKhachHang = '$idKhachHang' and (hd.trangThai = 1 or hd.trangThai = 2) group by idSanPham limit ".$limit.", 10";
-			}else if($trangThai == 2){
-				//lấy sản phẩm mua và đăng bán thành công
-				$sql = "SELECT sp.*  FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idKhachHang = '$idKhachHang' and hd.trangThai = 4 group by idSanPham limit ".$limit.", 10";
+			//lấy sản phẩm bán và đăng bán thành công
+			$sql = "SELECT sp.*, hd.soDT, hd.diaChi, hd.ngayDatHang, hd.ngayGiaoHang FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idKhachHang = '$idKhachHang' and hd.trangThai = 4 limit ".$limit.", 10";
+		}
+
+		$ketqua = mysqli_query($conn, $sql);
+		$chuoijson = array();
+
+		echo "{";
+    	echo "\"danhsachdonhang\":";
+
+		if($ketqua){
+			while($dong = mysqli_fetch_array($ketqua)){
+				$sqlYeuThich = "SELECT COUNT(idYeuThich) soLuotThich FROM yeuthich WHERE idSanPham = ".$dong["idSanPham"];
+				$ketQuaThich = mysqli_query($conn, $sqlYeuThich);
+				$dongThich = mysqli_fetch_array($ketQuaThich);
+
+				$sqlBinhLuan = "SELECT COUNT(idBinhLuan) soBinhLuan FROM binhluan WHERE idSanPham = ".$dong["idSanPham"];
+				$ketQuaBinhLuan = mysqli_query($conn, $sqlBinhLuan);
+				$dongBinhLuan = mysqli_fetch_array($ketQuaBinhLuan);
+
+				$chuoijsonkhachhang = array();
+
+				$ketQuaKH = layThongTinCoBanNguoiBan($conn, $dong["idNguoiBan"]);
+				if ($ketQuaKH) {
+					while ($dongKH = mysqli_fetch_array($ketQuaKH)) {
+						array_push($chuoijsonkhachhang, array("idKhachHang" => $dongKH["idKhachHang"], "tenKhachHang" => $dongKH["tenKhachHang"], "anhInfoKH" => $dongKH["anhInfoKH"], "diemTinCay" => $dongKH["diemTinCay"], "soSanPham" => $dongKH["soSanPham"]));
+					}
+				}
+
+				$sqlNoiBan = "SELECT diaChi FROM diachikhachhang WHERE idKhachHang = ".$dong["idNguoiBan"]." AND macDinh = 1";
+				$ketQuaDC = mysqli_query($conn, $sqlNoiBan);
+				$dongNoiBan = mysqli_fetch_array($ketQuaDC);
+
+				$chuoijsonloaisp = array();
+				$ketQua = layDanhSachLoaiSanPham($conn, $dong["idLoaiSP"]);
+				if ($ketQua) {
+					while ($dongLoaiSP  = mysqli_fetch_array($ketQua)) {
+						array_push($chuoijsonloaisp, array("idLoaiSP" => $dongLoaiSP["idLoaiSP"], "tenLoaiSP" => $dongLoaiSP["tenLoaiSP"], "idLoaiSPCha" => $dongLoaiSP["idLoaiSPCha"]));
+					}
+				}
+
+				$yeuthich =  "false";
+				$sqlSanPhamYeuThich = "SELECT *  FROM yeuthich WHERE idKhachHang = '$idKhachHang' AND idSanPham = ".$dong["idSanPham"];
+				$ketQuaYT = mysqli_query($conn, $sqlSanPhamYeuThich);
+				if(mysqli_num_rows($ketQuaYT) > 0) 
+						$yeuthich = "true";
+				array_push($chuoijson, array("soDT" => $dong["soDT"], "diaChi" => $dong["diaChi"], "ngayDat" => $dong["ngayDatHang"], "ngayGiao" => $dong["ngayGiaoHang"], "idSanPham" => $dong["idSanPham"], "thongTinNguoiBan" => $chuoijsonkhachhang, "tenSanPham" => $dong["tenSanPham"], "giaChuan" => $dong["giaChuan"], "moTa" => $dong["moTa"], "hinhLon" => "http://".$_SERVER["SERVER_NAME"].":8080/webmoki".$dong["hinhLon"], "hinhNho" => $dong["hinhNho"], "soBinhLuan" => $dongBinhLuan["soBinhLuan"], "soLuotThich" => $dongThich["soLuotThich"], "khoiLuong" => $dong["khoiLuong"], "kichThuoc" => $dong["kichThuoc"], "trangThai" => $dong["trangThai"], "loaiSP" => $chuoijsonloaisp, "noiBan" => $dongNoiBan["diaChi"], "yeuThich" => $yeuthich));
 			}
 		}
 
+		echo json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
+		echo "}";
+
+	}
+
+
+	function layDSDonHangBan(){
+		global $conn;
+		if(isset($_POST["idKhachHang"]))
+			$idKhachHang = $_POST["idKhachHang"];
+		
+		if (isset($_POST["limit"])) {
+			$limit = $_POST["limit"];
+		}
+
+		if(isset($_POST["trangThai"])){
+			$trangThai = $_POST["trangThai"];
+		}
+
+		if($trangThai == 0){
+			//lấy sản phẩm bán và trong trạng thái đang xử lý
+			$sql = "SELECT sp.*, hd.soDT, hd.diaChi, hd.ngayDatHang, hd.ngayGiaoHang FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idNguoiBan = '$idKhachHang' and (hd.trangThai = 1 or hd.trangThai = 2) limit ".$limit.", 10";
+		}else{
+			//lấy sản phẩm bán và đăng bán thành công
+			$sql = "SELECT sp.*, hd.soDT, hd.diaChi, hd.ngayDatHang, hd.ngayGiaoHang FROM sanpham sp, hoadon hd where sp.idSanPham = hd.idSanPham and idNguoiBan = '$idKhachHang' and hd.trangThai = 4 limit ".$limit.", 10";
+		}
+
+		$ketqua = mysqli_query($conn, $sql);
+		$chuoijson = array();
+
+		echo "{";
+    	echo "\"danhsachdonhang\":";
+
+		if($ketqua){
+			while($dong = mysqli_fetch_array($ketqua)){
+				$sqlYeuThich = "SELECT COUNT(idYeuThich) soLuotThich FROM yeuthich WHERE idSanPham = ".$dong["idSanPham"];
+				$ketQuaThich = mysqli_query($conn, $sqlYeuThich);
+				$dongThich = mysqli_fetch_array($ketQuaThich);
+
+				$sqlBinhLuan = "SELECT COUNT(idBinhLuan) soBinhLuan FROM binhluan WHERE idSanPham = ".$dong["idSanPham"];
+				$ketQuaBinhLuan = mysqli_query($conn, $sqlBinhLuan);
+				$dongBinhLuan = mysqli_fetch_array($ketQuaBinhLuan);
+
+				$chuoijsonkhachhang = array();
+
+				$ketQuaKH = layThongTinCoBanNguoiBan($conn, $dong["idNguoiBan"]);
+				if ($ketQuaKH) {
+					while ($dongKH = mysqli_fetch_array($ketQuaKH)) {
+						array_push($chuoijsonkhachhang, array("idKhachHang" => $dongKH["idKhachHang"], "tenKhachHang" => $dongKH["tenKhachHang"], "anhInfoKH" => $dongKH["anhInfoKH"], "diemTinCay" => $dongKH["diemTinCay"], "soSanPham" => $dongKH["soSanPham"]));
+					}
+				}
+
+				$sqlNoiBan = "SELECT diaChi FROM diachikhachhang WHERE idKhachHang = ".$dong["idNguoiBan"]." AND macDinh = 1";
+				$ketQuaDC = mysqli_query($conn, $sqlNoiBan);
+				$dongNoiBan = mysqli_fetch_array($ketQuaDC);
+
+				$chuoijsonloaisp = array();
+				$ketQua = layDanhSachLoaiSanPham($conn, $dong["idLoaiSP"]);
+				if ($ketQua) {
+					while ($dongLoaiSP  = mysqli_fetch_array($ketQua)) {
+						array_push($chuoijsonloaisp, array("idLoaiSP" => $dongLoaiSP["idLoaiSP"], "tenLoaiSP" => $dongLoaiSP["tenLoaiSP"], "idLoaiSPCha" => $dongLoaiSP["idLoaiSPCha"]));
+					}
+				}
+
+				$yeuthich =  "false";
+				$sqlSanPhamYeuThich = "SELECT *  FROM yeuthich WHERE idKhachHang = '$idKhachHang' AND idSanPham = ".$dong["idSanPham"];
+				$ketQuaYT = mysqli_query($conn, $sqlSanPhamYeuThich);
+				if(mysqli_num_rows($ketQuaYT) > 0) 
+						$yeuthich = "true";
+				array_push($chuoijson, array("soDT" => $dong["soDT"], "diaChi" => $dong["diaChi"], "ngayDat" => $dong["ngayDatHang"], "ngayGiao" => $dong["ngayGiaoHang"], "idSanPham" => $dong["idSanPham"], "thongTinNguoiBan" => $chuoijsonkhachhang, "tenSanPham" => $dong["tenSanPham"], "giaChuan" => $dong["giaChuan"], "moTa" => $dong["moTa"], "hinhLon" => "http://".$_SERVER["SERVER_NAME"].":8080/webmoki".$dong["hinhLon"], "hinhNho" => $dong["hinhNho"], "soBinhLuan" => $dongBinhLuan["soBinhLuan"], "soLuotThich" => $dongThich["soLuotThich"], "khoiLuong" => $dong["khoiLuong"], "kichThuoc" => $dong["kichThuoc"], "trangThai" => $dong["trangThai"], "loaiSP" => $chuoijsonloaisp, "noiBan" => $dongNoiBan["diaChi"], "yeuThich" => $yeuthich));
+			}
+		}
+
+		echo json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
+		echo "}";
+
+	}
+
+	function layDSSanPhamBan(){
+		global $conn;
+		if(isset($_POST["idKhachHang"]))
+			$idKhachHang = $_POST["idKhachHang"];
+		
+		if (isset($_POST["limit"])) {
+			$limit = $_POST["limit"];
+		}
+		
+		$sql = "SELECT * FROM sanpham WHERE idNguoiBan = ".$idKhachHang." limit ".$limit.", 10";
 		
 		$ketqua = mysqli_query($conn, $sql);
 		$chuoijson = array();

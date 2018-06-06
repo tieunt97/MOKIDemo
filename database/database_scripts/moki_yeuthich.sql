@@ -31,7 +31,7 @@ CREATE TABLE `yeuthich` (
   KEY `keyYeuThich_SanPham_idx` (`idSanPham`),
   CONSTRAINT `keyYeuThich_KhachHang` FOREIGN KEY (`idKhachHang`) REFERENCES `khachhang` (`idKhachHang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `keyYeuThich_SanPham` FOREIGN KEY (`idSanPham`) REFERENCES `sanpham` (`idSanPham`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `yeuthich` (
 
 LOCK TABLES `yeuthich` WRITE;
 /*!40000 ALTER TABLE `yeuthich` DISABLE KEYS */;
-INSERT INTO `yeuthich` VALUES (1,2,2),(2,1,2),(3,1,3),(5,1,7);
+INSERT INTO `yeuthich` VALUES (1,2,2),(3,1,3),(5,1,7),(6,1,1);
 /*!40000 ALTER TABLE `yeuthich` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-03 16:42:20
+-- Dump completed on 2018-06-06 13:59:24
