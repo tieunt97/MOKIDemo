@@ -43,7 +43,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView imgHinhA;
     private FrameLayout camera_view;
     private ToggleButton tgFlash;
-    private int IMG_GALLERY_REQUEST = 1;
+    public static final int IMG_GALLERY_REQUEST = 1;
     private int cameraID;
     int position = -1, dem = 0;
     private byte[] byteImage;
@@ -182,35 +182,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private void onImageGalleryClicked(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
-        startActivityForResult(intent, IMG_GALLERY_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK){
-            if(requestCode == IMG_GALLERY_REQUEST){
-                Uri uri = data.getData();
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                        /*Nếu lấy quality quá lớn sẽ có một số ảnh dung lượng lớn gây tràn bộ nhớ*/
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bStream);
-                    byteImage = bStream.toByteArray();
-                    if(position == -1){
-                        Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
-                        iThemSanPham.putExtra("image", byteImage);
-                        iThemSanPham.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(iThemSanPham);
-                    }else{
-                        finish();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        startActivity(intent);
     }
 
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {

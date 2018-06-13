@@ -3,13 +3,16 @@ package com.example.tieu_nt.mokidemo.View.TrangChu;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +31,9 @@ import com.example.tieu_nt.mokidemo.R;
 import com.example.tieu_nt.mokidemo.View.TrangChu.CameraTrangChu.CameraActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +57,8 @@ ViewBanSanPham{
     private DanhMuc danhMuc;
     private String trangThai, khoiLuong = "", kichThuoc = "", noiBan;
     private PresenterLogicBanSanPham presenterLogicBanSanPham;
+    private NumberFormat numberFormat = new DecimalFormat("###,###");
+    private int gia = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -261,12 +269,9 @@ ViewBanSanPham{
                         trangThai = null;
                     }
                 }
-                for(int i = 0; i < bitmaps.size(); i++){
-                    bitmaps.remove(0);
-                }
+                bitmaps.clear();
                 setImageCapture(0);
                 setPosition(0);
-                dsImgView.get(0).setOnClickListener(this);
                 alertDialog.dismiss();
             }
         });
@@ -325,7 +330,8 @@ ViewBanSanPham{
     private void setImageNull(int position){
         dsImgView.get(position).setImageDrawable(null);
         dsImgView.get(position).setBackgroundColor(getResources().getColor(R.color.colorWhite));
-        dsImgView.get(position).setOnClickListener(null);
+        if(position != 0)
+            dsImgView.get(position).setOnClickListener(null);
     }
 
     @Override
@@ -333,20 +339,42 @@ ViewBanSanPham{
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == this.position ){
+                Bitmap bitmap;
                 byte[] byteImage = data.getByteArrayExtra("image");
-                Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
-                if(requestCode > bitmaps.size() - 1){
-                    //thêm bimap vào dsBitmap
-                    bitmaps.add(bitmap);
-                    setActionImageView();
-                    if(requestCode < 3){
-                        setImageCapture(requestCode + 1);
+                if(byteImage == null){
+                    Uri uri = data.getData();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        if(requestCode > bitmaps.size() - 1){
+                            //thêm bimap vào dsBitmap
+                            bitmaps.add(bitmap);
+                            setActionImageView();
+                            if(requestCode < 3){
+                                setImageCapture(requestCode + 1);
+                            }
+                        }else{
+                            //thay bitmap vào vị trí yêu cầu chỉnh sửa
+                            bitmaps.set(requestCode, bitmap);
+                        }
+                        setImageBitMap(requestCode);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }else{
-                    //thay bitmap vào vị trí yêu cầu chỉnh sửa
-                    bitmaps.set(requestCode, bitmap);
+                    bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+                    if(requestCode > bitmaps.size() - 1){
+                        //thêm bimap vào dsBitmap
+                        bitmaps.add(bitmap);
+                        setActionImageView();
+                        if(requestCode < 3){
+                            setImageCapture(requestCode + 1);
+                        }
+                    }else{
+                        //thay bitmap vào vị trí yêu cầu chỉnh sửa
+                        bitmaps.set(requestCode, bitmap);
+                    }
+                    setImageBitMap(requestCode);
                 }
-                setImageBitMap(requestCode);
             }else if (requestCode == REQUEST_DANHMUC){
                 danhMuc = (DanhMuc) data.getSerializableExtra("danhMuc");
                 if (danhMuc  != null)
@@ -368,14 +396,41 @@ ViewBanSanPham{
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
 
     }
 
+    private int getSo(char ch){
+        switch (ch){
+            case '0':
+                return 0;
+            case '1':
+                return 1;
+            case '2':
+                return 2;
+            case '3':
+                return 3;
+            case '4':
+                return 5;
+            case '5':
+                return 5;
+            case '6':
+                return 6;
+            case '7':
+                return 7;
+            case '8':
+                return 8;
+            case '9':
+                return 9;
+            default: return -1;
+        }
+    }
+
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
         if (edtGiaBan.getText().hashCode() == charSequence.hashCode()){
-            if(charSequence.toString().indexOf("0") == 0){
+            int length = charSequence.length();
+            if(length == 1 && charSequence.toString().indexOf('0') == 0){
                 edtGiaBan.setText("");
             }
         }
@@ -383,7 +438,7 @@ ViewBanSanPham{
 
     @Override
     public void afterTextChanged(Editable editable) {
-
+        
     }
 
     @Override

@@ -43,7 +43,8 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".View.TrangChu.CameraTrangChu.CameraActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
 
         <activity android:name=".View.DangNhapDangKy.QuenMatKhauActivity"
             android:screenOrientation="portrait"/>

@@ -51,7 +51,7 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="54dp">
+            android:layout_marginBottom="60dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -508,7 +508,8 @@
                         android:drawableLeft="@drawable/price"
                         android:gravity="center_vertical"
                         android:drawablePadding="8dp"
-                        android:layout_centerVertical="true"/>
+                        android:layout_centerVertical="true"
+                        android:textSize="14sp"/>
 
                     <EditText
                         android:id="@+id/edtGiaBan"
@@ -518,7 +519,9 @@
                         android:hint="Giá không tính vận chuyển"
                         android:inputType="number"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"/>
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/custom_edt"
+                        android:maxLength="9"/>
 
                 </RelativeLayout>
 

@@ -1,7 +1,10 @@
 package com.example.tieu_nt.mokidemo.View.TrangChu;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -51,6 +54,8 @@ import com.example.tieu_nt.mokidemo.View.TrangChu.Fragment.FragmentSanPhamKhac;
 import com.example.tieu_nt.mokidemo.View.TrangChu.Fragment.FragmentTatCa;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,7 +306,7 @@ LocSanPham{
                     Toast.makeText(this, "Bạn cần đăng nhập để đăng bán sản phẩm", Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(TrangChuActivity.this, CameraActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, CameraActivity.IMG_GALLERY_REQUEST);
                 }
                 break;
         }
@@ -518,5 +523,28 @@ LocSanPham{
     @Override
     public void locSanPham(int idLoaiSP, int giaThap, int giaCao) {
         getFragment(position).locSanPham(idLoaiSP, giaThap, giaCao);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == CameraActivity.IMG_GALLERY_REQUEST){
+                Uri uri = data.getData();
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                        /*Nếu lấy quality quá lớn sẽ có một số ảnh dung lượng lớn gây tràn bộ nhớ*/
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bStream);
+                    byte[] byteImage = bStream.toByteArray();
+                    Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
+                    iThemSanPham.putExtra("image", byteImage);
+//                    iThemSanPham.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(iThemSanPham);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
