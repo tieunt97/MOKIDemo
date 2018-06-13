@@ -78,6 +78,17 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
+
+        edtThongTin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!visible){
+                    visible = !visible;
+                    tvSoKyTu.setText(String.valueOf(edtThongTin.getText().toString().length()));
+                    relaXong.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void anhXa(){
@@ -97,16 +108,6 @@ public class TrangCuaToiActivity extends AppCompatActivity implements View.OnCli
         tvXong.setOnClickListener(this);
         tvChinhSuaAnhBia = (TextView) findViewById(R.id.tvChinhSuaAnhBia);
         tvChinhSuaAnhBia.setOnClickListener(this);
-        edtThongTin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(!visible){
-                    visible = !visible;
-                    tvSoKyTu.setText(edtThongTin.getText().toString().length());
-                    relaXong.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 
     private String imageToString(Bitmap bitmap){

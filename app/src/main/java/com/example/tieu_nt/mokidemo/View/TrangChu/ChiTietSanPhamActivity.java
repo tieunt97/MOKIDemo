@@ -335,12 +335,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
             tvDots[i] = new TextView(this);
             tvDots[i].setText(Html.fromHtml("&#8226"));
             tvDots[i].setTextSize(30);
-            tvDots[i].setTextColor(getIdColor(R.color.colorWhite));
+            tvDots[i].setTextColor(getIdColor(R.color.colorBlack));
 
             layoutDots.addView(tvDots[i]);
         }
 
-        tvDots[viTriHienTai].setTextColor(getIdColor(R.color.colorBlack));
+        tvDots[viTriHienTai].setTextColor(getIdColor(R.color.colorWhite));
     }
 
     private int getIdColor(int idcolor){
@@ -358,9 +358,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements View.On
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         for (int i = 0; i < tvDots.length; i++){
             if (i == position) continue;
-            tvDots[i].setTextColor(getIdColor(R.color.colorWhite));
+            tvDots[i].setTextColor(getIdColor(R.color.colorBlack));
         }
-        tvDots[position].setTextColor(getIdColor(R.color.colorBlack));
+        tvDots[position].setTextColor(getIdColor(R.color.colorWhite));
     }
 
     @Override

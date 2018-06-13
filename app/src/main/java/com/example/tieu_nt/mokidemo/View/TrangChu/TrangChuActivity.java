@@ -297,8 +297,12 @@ LocSanPham{
                 Toast.makeText(TrangChuActivity.this, "Xung", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fab:
-                Intent intent = new Intent(TrangChuActivity.this, CameraActivity.class);
-                startActivity(intent);
+                if(DangNhap.getInstance().getKhachHang() == null){
+                    Toast.makeText(this, "Bạn cần đăng nhập để đăng bán sản phẩm", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(TrangChuActivity.this, CameraActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

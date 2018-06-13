@@ -1,5 +1,7 @@
 package com.example.tieu_nt.mokidemo.Model.Data;
 
+import android.util.Log;
+
 import com.example.tieu_nt.mokidemo.ConnectInternet.DownloadJSON;
 import com.example.tieu_nt.mokidemo.Model.BinhLuan;
 import com.example.tieu_nt.mokidemo.Model.ChiTietSanPham;
@@ -477,6 +479,7 @@ public class ModelKhachHang {
             khachHang.setTenKhachHang(objectKhachHang.getString("tenKhachHang"));
             khachHang.setAnhInfoKH(objectKhachHang.getString("anhInfoKH"));
             khachHang.setAnhBia(objectKhachHang.getString("anhBia"));
+            Log.d("anhKH: ", khachHang.getAnhInfoKH() + " - " + khachHang.getAnhBia());
             khachHang.setDiemTinCay(objectKhachHang.getInt("diemTinCay"));
             khachHang.setMoTa(objectKhachHang.getString("moTa"));
             khachHang.setThoiGianOnline(objectKhachHang.getString("thoiGianOnline"));

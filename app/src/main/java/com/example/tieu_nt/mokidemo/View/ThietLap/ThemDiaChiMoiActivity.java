@@ -103,7 +103,7 @@ public class ThemDiaChiMoiActivity extends AppCompatActivity implements View.OnC
         if(themDiaChi) {
             boolean b = modelKhachHang.capNhatDiaChi("themDiaChi", DangNhap.getInstance().getKhachHang().getIdKhachHang(), "", diaChi.getDiaChi(), diaChi.getTrangThai());
             if(b){
-                ((KhachHang) getIntent().getSerializableExtra("khachHang")).getDsDiaChi().add(diaChi);
+                DangNhap.getInstance().getKhachHang().getDsDiaChi().add(diaChi);
                 finish();
             }
         }else{

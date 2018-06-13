@@ -201,6 +201,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     if(position == -1){
                         Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
                         iThemSanPham.putExtra("image", byteImage);
+                        iThemSanPham.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(iThemSanPham);
                     }else{
                         finish();
@@ -308,6 +309,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             if(position == -1){
                 Intent iThemSanPham = new Intent(this, ThemSanPhamActivity.class);
                 iThemSanPham.putExtra("image", byteImage);
+                iThemSanPham.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(iThemSanPham);
             }else{
                 finish();
