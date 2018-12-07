@@ -433,12 +433,13 @@ ViewBanSanPham{
             if(length == 1 && charSequence.toString().indexOf('0') == 0){
                 edtGiaBan.setText("");
             }
+            Log.d("TEXTCHANGE", "start: before: " + before + " - count: " + count + " - gia: " + gia);
         }
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
-        
+
     }
 
     @Override

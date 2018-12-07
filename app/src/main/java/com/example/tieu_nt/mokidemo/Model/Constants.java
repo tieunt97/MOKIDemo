@@ -20,7 +20,7 @@ public class Constants {
     public static final int ID_BEKHOEANTOAN = 7;
 
     //may tinh ca nhan
-    public static final String SERVER = "http://192.168.1.110:8080/webmoki";
+    public static final String SERVER = "http://10.0.3.2:8080/webmoki";
     public static final String SERVER_NAME_SANPHAM = SERVER + "/laydssanpham.php";
     public static final String SERVER_NAME_DANGNHAP_DANGKY = SERVER + "/dangnhap_dangky.php";
     public static final String SERVER_NAME_KHACHHANG = SERVER + "/khachhang.php";
